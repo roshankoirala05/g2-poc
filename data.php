@@ -1,14 +1,45 @@
 <?php
-   
-echo "Name : ". $_POST["firstName"]."<br/>";
-echo "City : ".$_POST["cityName"]."<br/>";
-echo "State : ".$_POST["stateName"]."<br/>";
-echo "Zipcode : ".$_POST["zipCode"]."<br/>";
-echo "No. in party : ".$_POST["noInParty"]."<br/>";
+include 'Database.php';
+include 'DatabaseConnection.php';
+$name= $_POST["firstName"];
+$city= $_POST["cityName"];
+$state=$_POST["stateName"];
+$zipcode=$_POST["zipCode"];
+$country=$_POST["countryName"];
+$noinparty=$_POST["noInParty"];
+$travelingfor=$_POST["TravelingFor"];
+$howdidyouhear=$_POST["HowDidYouHear"];
+$didyoustay=$_POST["DidYouStay"];
+$email=null;
+$time = date("Y-m-d");
 
-echo "Traveling For : ".$_POST["TravelingFor"]."<br/>";
+/**************************************************************************************
+       Inserting Database
+ **************************************************************************************/
+   $query1 = "INSERT INTO VISITOR VALUES('$name', '$city','$state','$zipcode','$country','$noinparty','$travelingfor','$howdidyouhear','$didyoustay','$email','$time')";
+    $raj= new DatabaseConnection();
+    $raj->insertDatabase($query1);
 
-echo "How did you hear about the Monroe-West Monroe CVB ?".$_POST["HowDidYouHear"]."<br/>";
+/**************************************************************
+          Retriving query
+ **************************************************************/
+   $query = "SELECT COUNT(*) FROM VISITOR";
+  // $query = "SELECT * FROM VISITOR ORDER BY Name";
+   $result= $raj->returnQuery($query);
 
-echo "Did you stay in a Monroe-West Monroe Hotel? ".$_POST["DidYouStay"]."<br/>";
+   if ($result->num_rows > 0) {
+
+    while($row = $result->fetch_assoc())
+    {
+        echo "" . $row["COUNT(*)"].  "<br>";
+    }
+ }
+/************************************************************************/
+
+  /**********************************************************************************************
+
+  // $databaseValues = new Form($name, $city,$state,$zipcode,$country,$noinparty,$travelingfor,$howdidyouhear,$didyoustay,$email);
+
+  ****************************************************************************************************************************/
+
 ?>

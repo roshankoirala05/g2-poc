@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <title>Form Fill: Home</title>
-    <link rel="stylesheet" href="form.css" />
-    <script type="text/javaScript" src="formValidation.js">
-    </script>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <title>Form Fill</title>
+        <link rel="stylesheet" href="form.css" />
+        <script type="text/JavaScript" src="formValidation.js"></script>
 
-<body>
-    <form action="data.php" method="post" style="width:720px" onsubmit="return FormValidation();" onchange="return FormValidation();">
-        <fieldset class="Main">
-            <legend>Registration</legend>
-            <table>
-                <tr>
-                    <td>Name: </td>
-                    <td>
-                        <input type="text" id='firstname' name="firstName" size=20 value="">
-                        <br>
-                    </td>
-                </tr>
-                <tr>
-                    <td> City: </td>
-                    <td>
-                        <input type="text" name="cityName" value="">
-                        <br>
-                    </td>
-                </tr>
-                <tr>
-                    <td>State: </td>
-                    <td>
-                        <select name="stateName">
+
+    </head>
+
+    <body>
+        <form name="myForm" action="data.php" id=" loginForm" onsubmit="return FormValidation();" method="post" style="width:720px">
+            <fieldset class="Main">
+                <legend>Registration</legend>
+                <table>
+                    <tr>
+                        <td>Name: </td>
+                        <td>
+                            <input type="text" name="firstName" id="firstName" value="">
+                            <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> City: </td>
+                        <td>
+                            <input type="text" name="cityName" id="cityName" value="">
+                            <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>State: </td>
+                        <td>
+                            <select name="stateName">
 
                             <option value="" size=30 selected> Chose a State</option>
                             <option value="AL">Alabama</option>
@@ -88,85 +89,93 @@
                             <option value="WI">Wisconsin</option>
                             <option value="WY">Wyoming</option>
                         </select>
-                        <br>
-                    </td>
-                </tr>
+                            <br>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>Zipcode:</td>
-                    <td>
-                        <input type="text" name="zipCode" value="">
-                        <br>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>Zipcode:</td>
+                        <td>
+                            <input type="text" name="zipCode" value="">
+                            <br>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>No. in Party:</td>
-                    <td>
-                        <input type="text" name="noInParty" value="">
-                        <br>
-                    </td>
-                </tr>
-            </table>
-            <div id="fieldName">
-                <fieldset class="TravelingFor">
+                    <tr>
+                        <td>Country:</td>
+                        <td>
+                            <input type="text" name="countryName" value="">
+                            <br>
+                        </td>
+                    </tr>
 
-                    <legend>Traveling for :</legend>
-                    <div class="containerTravelingFor">
+                    <tr>
+                        <td>No. in Party:</td>
+                        <td>
+                            <input type="text" name="noInParty" value="">
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+                <div id="fieldName">
+                    <fieldset class="TravelingFor">
 
-                        <label class="radio-inline">
+                        <legend>Traveling for :</legend>
+                        <div class="containerTravelingFor">
+
+                            <label class="radio-inline">
                             <input type="radio" name="TravelingFor" value="Business" checked>Business
                         </label>
-                        <label class="radio-inline">
+                            <label class="radio-inline">
                             <input type="radio" name="TravelingFor" value="Pleasure">Pleasure
                         </label>
-                        <label class="radio-inline">
+                            <label class="radio-inline">
                             <input type="radio" name="TravelingFor" value="convention">Convention
                         </label>
-                        <label class="radio-inline">
+                            <label class="radio-inline">
                             <input type="radio" name="TravelingFor" value="Other">Other
                         </label>
-                    </div>
-                </fieldset>
-                <fieldset class="HowDidYouHear">
+                        </div>
+                    </fieldset>
+                    <fieldset class="HowDidYouHear">
 
-                    <legend>How did you hear about the Monroe West Monroe CVB?</legend>
-                    <div class="containerHowDid">
-                        <label class="radio-inline">
+                        <legend>How did you hear about the Monroe West Monroe CVB?</legend>
+                        <div class="containerHowDid">
+                            <label class="radio-inline">
                             <input type="radio" name="HowDidYouHear" value="Billboard" checked>Billboard
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="HowDidYouHear" value="Pleasure">Interstate Sings
+                            <label class="radio-inline">
+                            <input type="radio" name="HowDidYouHear" value="Interstate Signs">Interstate Signs
                         </label>
-                        <label class="radio-inline">
+                            <label class="radio-inline">
                             <input type="radio" name="HowDidYouHear" value="Others"> Others
                         </label>
-                    </div>
-                </fieldset>
+                        </div>
+                    </fieldset>
 
-                <fieldset class="DidYouStayMonroe">
+                    <fieldset class="DidYouStayMonroe" style="text-align:center">
 
-                    <legend> Did you stay in a Monroe-West Monroe hotel? </legend>
-                    <div class="DidYouStay" style="text-align:center">
-                        <label class="radio-inline">
+                        <legend> Did you stay in a Monroe-West Monroe hotel? </legend>
+                        <div class="DidYouStay">
+                            <label class="radio-inline">
                             <input type="radio" name="DidYouStay" value="Yes" checked> Yes
                         </label>
-                        <label class="radio-inline">
+                            <label class="radio-inline">
                             <input type="radio" name="DidYouStay" value="No" /> No
                         </label>
 
-                    </div>
-                </fieldset>
-            </div>
+                        </div>
+                    </fieldset>
+                </div>
 
-            <div style="text-align:center">
-                <input type="submit" style="background: green; width:100px" onclick="FormValidation()"></input> 
-                <input type="reset" style="background: red; width: 100px" value="Clear Form" class="rounded">
-            </div>
+                <div style="text-align:center">
+                    <input type="submit" style="background: green; width:100px" onclick="FormValidation();" />
+                    <input type="reset" style="background: red; width: 100px" value="Clear Form" class="rounded">
+                </div>
 
-        </fieldset>
-    </form>
+            </fieldset>
+        </form>
 
-</body>
+    </body>
 
 </html>
