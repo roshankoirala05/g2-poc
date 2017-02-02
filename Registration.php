@@ -96,7 +96,7 @@
                     <tr>
                         <td>Zipcode:</td>
                         <td>
-                            <input type="text" name="zipCode" value="">
+                            <input type="text" name="zipCode" id="zipCode" value="">
                             <br>
                         </td>
                     </tr>
@@ -112,7 +112,7 @@
                     <tr>
                         <td>No. in Party:</td>
                         <td>
-                            <input type="text" name="noInParty" value="">
+                            <input type="text" name="noInParty" id="noInParty" value="">
                             <br>
                         </td>
                     </tr>
