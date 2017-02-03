@@ -1,3 +1,4 @@
+
 <?php
 include 'Database.php';
 include 'DatabaseConnection.php';
@@ -5,7 +6,7 @@ $name= $_POST["firstName"];
 $city= $_POST["cityName"];
 $state=$_POST["stateName"];
 $zipcode=$_POST["zipCode"];
-$country=$_POST["countryName"];
+$country=strtoupper($_POST["countryName"]);
 $noinparty=$_POST["noInParty"];
 $travelingfor=$_POST["TravelingFor"];
 $howdidyouhear=$_POST["HowDidYouHear"];
@@ -23,15 +24,17 @@ $time = date("Y-m-d");
 /**************************************************************
           Retriving query
  **************************************************************/
-   $query = "SELECT COUNT(*) FROM VISITOR";
-  // $query = "SELECT * FROM VISITOR ORDER BY Name";
+  // $query = "SELECT COUNT(*) FROM VISITOR";
+   $query = "SELECT * FROM VISITOR ORDER BY Name";
    $result= $raj->returnQuery($query);
-
+   echo "" . "Name".  "<br>";
    if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc())
     {
-        echo "" . $row["COUNT(*)"].  "<br>";
+       // echo "" . $row["COUNT(*)"].  "<br>";
+      // echo "" . "Name".  "<br>";
+       echo "" . $row["Name"].  "<br>";
     }
  }
 /************************************************************************/

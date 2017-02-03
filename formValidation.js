@@ -1,13 +1,13 @@
 function FormValidation() {
   var fieldValue = document.getElementById("firstName").value;
-  if (fieldValue == "" || fieldValue == null) {
-    alert('Please Enter First Name');
+  if (fieldValue == "" || fieldValue == null || (!(fieldValue.match(/^[a-zA-Z\s]*$/)))) {
+    alert('Please Enter Your Name');
     document.getElementById("firstName").style.borderColor = "red";
     return false;
   }
 
   var fieldCity = document.getElementById("cityName").value;
-  if (fieldCity == "" || fieldCity == null) {
+  if (fieldCity == "" || fieldCity == null || (!(fieldCity.match(/^[a-zA-Z\s]*$/)))) {
     alert('Please Enter City Name');
     document.getElementById('cityName').style.borderColor = "red";
     return false;
@@ -21,6 +21,13 @@ function FormValidation() {
       document.getElementById("zipCode").style.borderColor = "red";
       return false;
     }
+  }
+
+  var fieldCountryName = document.getElementById("countryName").value;
+  if (fieldCountryName == "" || fieldCountryName == null || (!(fieldCountryName.match(/^[a-zA-Z\s]*$/)))) {
+    alert('Please Enter Country Name');
+    document.getElementById('cityName').style.borderColor = "red";
+    return false;
 
   }
 

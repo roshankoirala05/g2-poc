@@ -19,6 +19,12 @@ class DatabaseConnection
       $this ->dbname = "REGISTRATION";
       $this->port = 3306;
       $this->connection= mysqli_connect($this->localhost, $this->username, $this->password, $this->dbname, $this->port);
+      $error = mysqli_connect_errno();
+      if ($error !=null)
+      {
+        $output="<p>Unable to connect database<p>" . $error;
+        exit($output);
+      }
     }
 
 public function insertDatabase ($query)

@@ -104,7 +104,7 @@
                     <tr>
                         <td>Country:</td>
                         <td>
-                            <input type="text" name="countryName" value="">
+                            <input type="text" name="countryName" id="countryName" value="">
                             <br>
                         </td>
                     </tr>
