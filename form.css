@@ -1,23 +1,23 @@
 #fieldName {
     display: block;
     float: right;
-    margin: -225px 0px 0px 0px;
+    margin: -250px 0px 0px 0px;
 }
 
 .TravelingFor {
-   padding: 3px;
+    padding: 5px;
     width: 380px;
     line-height: 1.8;
 }
 
 .HowDidYouHear {
-   padding: 3px;
+    padding: 5px;
     width: 380px;
     line-height: 1.8;
 }
 
 .DidYouStayMonroe {
-    padding: 3px;
+    padding: 5px;
     width: 380px;
     line-height: 1.8;
 }

@@ -16,12 +16,20 @@
                 <legend>Registration</legend>
                 <table>
                     <tr>
-                        <td>Name: </td>
+                        <td>First Name: </td>
                         <td>
                             <input type="text" name="firstName" id="firstName" value="">
                             <br>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Last Name: </td>
+                        <td>
+                            <input type="text" name="lastName" id="lastName" value="">
+                            <br>
+                        </td>
+                    </tr>
+
                     <tr>
                         <td> City: </td>
                         <td>

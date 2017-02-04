@@ -1,7 +1,8 @@
 <?php
 class Form
 {
-    public $name;
+    public $firstname;
+     public $lastname;
     private $cityName;
     private $stateName;
     private $zipCode;
@@ -15,7 +16,8 @@ class Form
 public function __construct($name, $cityName, $stateName, $zipCode, $countryName, $noInParty, $travelingFor, $howDidYouHear, $didYouStay, $email=null )
 {
 
-   $this-> setName($name);
+   $this-> setFirstName($firstname);
+    $this-> setLastName($lastname);
    $this-> setCityName($cityName);
    $this-> setStateName($stateName);
    $this-> setZipCode($zipCode);
@@ -28,7 +30,8 @@ public function __construct($name, $cityName, $stateName, $zipCode, $countryName
 
 }
 
- public function getName() { return $this->name; }
+ public function getFirstName() { return $this->firstname; }
+  public function getLastName() { return $this->lastname; }
  public function getCityName() { return $this->cityName; }
  public function getStateName() { return $this->stateName; }
  public function getZipCode() { return $this->zipCode; }
@@ -42,7 +45,11 @@ public function __construct($name, $cityName, $stateName, $zipCode, $countryName
 
 public function setName ($name)
 {
-    $this->name=$name;
+    $this->firstname=$lastname;
+}
+public function setLastName ($lastname)
+{
+    $this->lastname=$lastname;
 }
 
 public function setCityName ($cityName)

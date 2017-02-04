@@ -18,6 +18,10 @@ class DatabaseConnection
       $this ->password = "";
       $this ->dbname = "REGISTRATION";
       $this->port = 3306;
+      $this-> connectDatabase();
+    }
+     public function connectDatabase()
+     {
       $this->connection= mysqli_connect($this->localhost, $this->username, $this->password, $this->dbname, $this->port);
       $error = mysqli_connect_errno();
       if ($error !=null)
@@ -36,16 +40,6 @@ public function insertDatabase ($query)
  {
 
   $result =mysqli_query($this->connection,$query);
-
-
-   /* echo "Here are the list of visitors from Monroe"."<br>"."<br>";
-    if ($result->num_rows > 0) {
-
-    while($row = $result->fetch_assoc())
-    {
-        echo "" . $row["Name"].  "<br>";
-    }
- }*/
  return $result;
 }
 }

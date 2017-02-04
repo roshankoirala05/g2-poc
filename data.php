@@ -1,8 +1,8 @@
-
 <?php
 include 'Database.php';
 include 'DatabaseConnection.php';
-$name= $_POST["firstName"];
+$firstname= $_POST["firstName"];
+$lastname= $_POST["lastName"];
 $city= $_POST["cityName"];
 $state=$_POST["stateName"];
 $zipcode=$_POST["zipCode"];
@@ -12,37 +12,51 @@ $travelingfor=$_POST["TravelingFor"];
 $howdidyouhear=$_POST["HowDidYouHear"];
 $didyoustay=$_POST["DidYouStay"];
 $email=null;
-$time = date("Y-m-d");
+$count;
+date_default_timezone_set('America/Chicago');
+$date = date('Y/m/d h:i:s a', time());
+
+/**********************************************************************************
+            Checking How many times he visited. If he already visited
+            then system update his no of visit.
+**********************************************************************************/
+   $raj= new DatabaseConnection();
+   $queryCheckCount= "SELECT Vcount FROM VISITOR WHERE Fname='$firstname' AND Lname='$lastname' AND  Zipcode='$zipcode' AND City='$city'";
+   $result=$raj->returnQuery($queryCheckCount);
+   $row = $result->fetch_assoc();
+    if($row["Vcount"] ==0)
+        {
+            $count=1;
+            $query = "INSERT INTO VISITOR VALUES('$firstname','$lastname', '$city','$state',
+                                                   '$zipcode','$country','$noinparty','$travelingfor','$howdidyouhear','$didyoustay','$email','$date','$count')";
+            $raj->insertDatabase($query);
+        }
+
+        else
+        {
+            $count=$row["Vcount"]+1;
+            $query="UPDATE VISITOR SET Vcount=$count WHERE Fname='$firstname' AND Lname='$lastname' AND  Zipcode='$zipcode' AND City='$city'";
+            $raj->insertDatabase($query);
+        }
+/***************************************************************************************************************************************************/
+
+
+
 
 /**************************************************************************************
-       Inserting Database
- **************************************************************************************/
-   $query1 = "INSERT INTO VISITOR VALUES('$name', '$city','$state','$zipcode','$country','$noinparty','$travelingfor','$howdidyouhear','$didyoustay','$email','$time')";
-    $raj= new DatabaseConnection();
-    $raj->insertDatabase($query1);
+       Inserting Database class if we need
+ **************************************************************************************
 
-/**************************************************************
-          Retriving query
- **************************************************************/
-  // $query = "SELECT COUNT(*) FROM VISITOR";
-   $query = "SELECT * FROM VISITOR ORDER BY Name";
-   $result= $raj->returnQuery($query);
-   echo "" . "Name".  "<br>";
-   if ($result->num_rows > 0) {
-
-    while($row = $result->fetch_assoc())
-    {
-       // echo "" . $row["COUNT(*)"].  "<br>";
-      // echo "" . "Name".  "<br>";
-       echo "" . $row["Name"].  "<br>";
-    }
- }
-/************************************************************************/
-
-  /**********************************************************************************************
-
-  // $databaseValues = new Form($name, $city,$state,$zipcode,$country,$noinparty,$travelingfor,$howdidyouhear,$didyoustay,$email);
-
-  ****************************************************************************************************************************/
+   $databaseValues = new Form($name,$lastname, $city,$state,$zipcode,$country,$noinparty,$travelingfor,$howdidyouhear,$didyoustay,$email,$count);
+  /****************************************************************************************************************************/
 
 ?>
+<!DOCTYPE html>
+<html>
+    <body>
+        <form method="post" action="index.php">
+
+            <input type="submit" value="Exit"/>
+        </form>
+    </body>
+</html>
