@@ -1,10 +1,18 @@
 function FormValidation() {
-  var fieldValue = document.getElementById("firstName").value;
-  if (fieldValue == "" || fieldValue == null || (!(fieldValue.match(/^[a-zA-Z\s]*$/)))) {
+  var fieldFirstName = document.getElementById("firstName").value;
+  if (fieldFirstName == "" || fieldFirstName == null || (!(fieldFirstName.match(/^[a-zA-Z\s]*$/)))) {
     alert('Please Enter Your Name');
     document.getElementById("firstName").style.borderColor = "red";
     return false;
   }
+  var fieldLastName = document.getElementById("lastName").value;
+  if (fieldLastName == "" || fieldLastName == null || (!(fieldLastName.match(/^[a-zA-Z\s]*$/)))) {
+    alert('Please Enter Your Name');
+    document.getElementById("firstName").style.borderColor = "red";
+    return false;
+  }
+
+
 
   var fieldCity = document.getElementById("cityName").value;
   if (fieldCity == "" || fieldCity == null || (!(fieldCity.match(/^[a-zA-Z\s]*$/)))) {

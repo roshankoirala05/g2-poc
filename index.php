@@ -1,4 +1,3 @@
-
 <html>
 <body>
 <h1 align="center">Welcome to Monroe West-Monroe Visitor Center !!</h1>
@@ -25,7 +24,6 @@ var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
 
         <br><br>
-
         <a href="admin.php">Admin</a>
 
 

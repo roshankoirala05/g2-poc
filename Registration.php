@@ -13,7 +13,7 @@
     <body>
         <form name="myForm" action="data.php" id=" loginForm" onsubmit="return FormValidation();" method="post" style="width:720px">
             <fieldset class="Main">
-                <legend>Registration</legend>
+                <legend align="middle">Registration</legend>
                 <table>
                     <tr>
                         <td>First Name: </td>
@@ -128,7 +128,7 @@
                 <div id="fieldName">
                     <fieldset class="TravelingFor">
 
-                        <legend>Traveling for :</legend>
+                        <legend align="middle">Traveling for :</legend>
                         <div class="containerTravelingFor">
 
                             <label class="radio-inline">

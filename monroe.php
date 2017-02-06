@@ -21,7 +21,7 @@ $query = "SELECT * FROM VISITOR ORDER BY Fname, Lname";
  ?>
 
  <!DOCTYPE html>
-<html>
+ <html>
     <body>
         <form method="post" action="index.php">
 
