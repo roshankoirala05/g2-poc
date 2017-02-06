@@ -1,62 +1,61 @@
 <?php
- $servername="localhost";
-$username = "roshankoirala05";
-$password="";
-$dbname="c9";
+include 'Database.php';
+include 'DatabaseConnection.php';
+$firstname= $_POST["firstName"];
+$lastname= $_POST["lastName"];
+$city= $_POST["cityName"];
+$state=$_POST["stateName"];
+$zipcode=$_POST["zipCode"];
+$country=strtoupper($_POST["countryName"]);
+$noinparty=$_POST["noInParty"];
+$travelingfor=$_POST["TravelingFor"];
+$howdidyouhear=$_POST["HowDidYouHear"];
+$didyoustay=$_POST["DidYouStay"];
+$email=null;
+$count;
+date_default_timezone_set('America/Chicago');
+$date = date('Y/m/d h:i:s a', time());
+
+/**********************************************************************************
+            Checking How many times he visited. If he already visited
+            then system update his no of visit.
+**********************************************************************************/
+   $raj= new DatabaseConnection();
+   $queryCheckCount= "SELECT Vcount FROM VISITOR WHERE Fname='$firstname' AND Lname='$lastname' AND  Zipcode='$zipcode' AND City='$city'";
+   $result=$raj->returnQuery($queryCheckCount);
+   $row = $result->fetch_assoc();
+    if($row["Vcount"] ==0)
+        {
+            $count=1;
+            $query = "INSERT INTO VISITOR VALUES('$firstname','$lastname', '$city','$state',
+                                                   '$zipcode','$country','$noinparty','$travelingfor','$howdidyouhear','$didyoustay','$email','$date','$count')";
+            $raj->insertDatabase($query);
+        }
+
+        else
+        {
+            $count=$row["Vcount"]+1;
+            $query="UPDATE VISITOR SET Vcount=$count WHERE Fname='$firstname' AND Lname='$lastname' AND  Zipcode='$zipcode' AND City='$city'";
+            $raj->insertDatabase($query);
+        }
+/***************************************************************************************************************************************************/
 
 
-//Creating Connection
-$conn = new mysqli($servername, $username, $password,$dbname);
-
-//Check connection
-if($conn->connect_error){
-    
-    die("Connection failed: ".$conn->connect_error);
-}
 
 
-/*$sql = "CREATE TABLE MyGuests(
-        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(30) NOT NULL,
-        city VARCHAR(30) NOT NULL,
-        zipCode INT(6) NOT NULL
-        
-    
-    )   ";
-    
-    if($conn->query($sql) === TRUE){
-        echo"Table MYGuests created successfully"."<br>";
-    }
-    else{
-        echo "Error creating table:".$conn->error."<br>";
-        
-    } */
+/**************************************************************************************
+       Inserting Database class if we need
+ **************************************************************************************
 
- $sql = "INSERT INTO MyGuests (name, city, zipCode) VALUES ('".$_POST["firstName"]."','".$_POST["cityName"]."',".$_POST["zipCode"].")";
+   $databaseValues = new Form($name,$lastname, $city,$state,$zipcode,$country,$noinparty,$travelingfor,$howdidyouhear,$didyoustay,$email,$count);
+  /****************************************************************************************************************************/
 
-
-if ($conn->query($sql) === TRUE) {
-    echo "Thank You for submitting your information. Your record has been stored in our database"."<br>";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error."<br>";
-}
-
-/*echo "Name: ". $_POST["firstName"]."<br/>";
-echo "City: ".$_POST["cityName"]."<br/>";
-echo "State: ".$_POST["stateName"]."<br/>";
-echo "Zipcode: ".$_POST["zipCode"]."<br/>";
-echo "No. in party: ".$_POST["noInParty"]."<br/>";
-
-echo "Traveling For: "; */
-
-$conn->close(); 
 ?>
-
 <!DOCTYPE html>
 <html>
     <body>
         <form method="post" action="index.php">
-            
+
             <input type="submit" value="Exit"/>
         </form>
     </body>
