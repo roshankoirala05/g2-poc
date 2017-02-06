@@ -1,0 +1,36 @@
+#fieldName {
+    display: block;
+    float: right;
+    margin: -250px 0px 0px 0px;
+}
+
+.TravelingFor {
+    padding: 5px;
+    width: 380px;
+    line-height: 1.8;
+}
+
+.HowDidYouHear {
+    padding: 5px;
+    width: 380px;
+    line-height: 1.8;
+}
+
+.DidYouStayMonroe {
+    padding: 5px;
+    width: 380px;
+    line-height: 1.8;
+}
+
+div {
+    margin: 3px;
+}
+
+td {
+    padding: 7.5px;
+    margin: 1.8px;
+}
+
+.Main {
+    border-color: blue;
+}
