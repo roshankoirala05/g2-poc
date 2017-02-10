@@ -1,11 +1,13 @@
 <?php
+    // commenting test
+    
     $servername="localhost";
     $username = "roshankoirala05";
     $password="";
     $dbname="c9";
     
     
-    //Creating Connection
+    //Creating Conn
     $conn = new mysqli($servername, $username, $password,$dbname);
     
     //Check connection
