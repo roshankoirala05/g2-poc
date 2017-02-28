@@ -1,0 +1,38 @@
+section#contact {
+    background-color: #385e40;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px;
+}
+legend {
+    padding-left: 160px;
+    color:#890f19;
+    font-weight: 600;
+    border-bottom-width: 5px;
+    border-style: solid;
+    border-bottom-color: #2b2828;
+}
+label.control-label
+{
+    color: #385e40;
+}
+fieldset
+{
+  margin:30px;  
+  border-style: dotted;
+}
+ul
+{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+li {
+    display: inline-block;
+    padding-right:25px;
+}
+#success_message{
+    color: #383d5e;
+    display: none;
+    
+}
