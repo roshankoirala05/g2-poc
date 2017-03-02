@@ -1,6 +1,11 @@
 function geocodeAddres(geocoder, resultsMap) {
   //  var address = document.getElementById('Nepal').value;
-  var address = "Nepal";
+  // From here program didn't execute//
+  var address = $.post("MarkerQuery.php", {
+    zip_code: geocoder
+  });
+  alert(address);
+  /////////////////////////////////////////////////////////////////
   geocoder.geocode({
     'address': address
   }, function (results, status) {

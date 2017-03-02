@@ -15,12 +15,12 @@
         jQuery(document).ready(function($) {
 
             //Initialize the Google Maps
-            var  geocoder = new google.maps.Geocoder();
+            var geocoder;
             var marker;
             var infowindow = new google.maps.InfoWindow();
             var encodedString;
             var stringArray = [];
-
+            var contentString = "";
 
             var map = new google.maps.Map(document.getElementById('map_canvas'), {
                 zoom: 4,
@@ -38,24 +38,35 @@
             for (x = 0; x < stringArray.length; x = x + 1) {
                 var addressDetails = [];
                 addressDetails = stringArray[x].split("ZIPCODE");
-                setMarker(map, addressDetails);
+                contentString = addressDetails[0];
+                setMarker(map, addressDetails, contentString);
             }
 
-            function setMarker(map, addressDetails) {
-                 var lat = new google.maps.LatLng(addressDetails[1], addressDetails[2]);
-                //Create a new marker and info window
-                marker = new google.maps.Marker({
-                      map: map,
-                      position: lat,
-                    //Content is what will show up in the info window
-                    content: addressDetails[0]
-                });
+            function setMarker(map, addressDetails, contentString) {
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode({
+                    'address': addressDetails[1]
+                }, function(results, status) {
+
+                    if (status === 'OK') {
+                        /*
+                        This will load the final position of map
+                        */
+                        //  map.setCenter(results[0].geometry.location);
+                        marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location,
+                            content: contentString
+                        });
                         google.maps.event.addListener(marker, "click", function() {
                             infowindow.setContent(this.content);
                             infowindow.open(map, this);
                         });
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
                     }
-
+                });
+            }
             google.maps.event.addListener(map, 'click', function(event) {
                 getReverseGeocodingData(event.latLng);
             });
@@ -85,27 +96,24 @@
                     if (status == google.maps.GeocoderStatus.OK) {
                         console.log(results);
                         var address = (results[0].formatted_address);
-                     // window.location.href = "pass.php?name="+address;
-                  // alert(latlng);
-                  // alert(latlng.lat());
+                   //   window.location.href = "pass.php?name="+address;
                         placeMarker(latlng, address);
                     }
                 });
             }
             /********************* Address ***************************************/
             document.getElementById('addressSubmit').addEventListener('click', function() {
-
-                addressLocation(geocoder, map);
+                geocodeAddress(geocoder, map);
             });
 
-            function addressLocation(geocoder, resultsMap) {
+            function geocodeAddress(geocoder, resultsMap) {
                 var address = document.getElementById('address').value;
                 geocoder.geocode({
                     'address': address
                 }, function(results, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         resultsMap.setCenter(results[0].geometry.location);
-                        resultsMap.setZoom(9);
+                        resultsMap.setZoom(8);
                     } else {
                         alert('Geocode was not successful for the following reason: ' + status);
                     }
@@ -116,7 +124,6 @@
      /********************* Marker ***************************************/
             document.getElementById('markerSubmit').addEventListener('click', function() {
                 geocodeAddress(geocoder, map);
-                $('#marker').val('');
             });
 
             function geocodeAddress(geocoder, resultsMap) {
@@ -128,7 +135,7 @@
                         /*
                         This will load the final position of map
                         */
-                     map.setCenter(results[0].geometry.location);
+                        //  map.setCenter(results[0].geometry.location);
                         marker = new google.maps.Marker({
                             map: map,
                             position: results[0].geometry.location,
@@ -143,7 +150,6 @@
                     }
                 });
             }
-
     /********************************************************************************/
             // Setup the click event listener - zoomIn
   google.maps.event.addDomListener(document.getElementById('zoomIn'), 'click', function() {
@@ -154,7 +160,6 @@
     map.setZoom(map.getZoom() - 1);
   });
         });
-
     </script>
 </head>
 
@@ -163,7 +168,7 @@
         <?php
          include 'DatabaseConnection.php';
            $raj= new DatabaseConnection();
-         $query = "SELECT * FROM STATELATLONG";
+         $query = "SELECT * FROM VISITOR";
          $result= $raj->returnQuery($query);
 
          $encodedString = "";
@@ -177,22 +182,7 @@
          }
          $encodedString = $encodedString . $separator .
          $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ".$row[4]." ".$row[5].
-         "ZIPCODE".$row[13]."ZIPCODE".$row[14];;
-         $x = $x + 1;
-         }
-           $query = "SELECT * FROM STATECSS";
-         $result= $raj->returnQuery($query);
-         $x= 0;
-
-         while ($row = $result->fetch_array()) {
-         if ($x == 0) {
-         $separator = "";
-         } else {
-         $separator = "END";
-         }
-         $encodedString = $encodedString . $separator .
-         $row[0].
-         "ZIPCODE".$row[1]."ZIPCODE".$row[2].
+         "ZIPCODE".$row[4];
          $x = $x + 1;
          }
          ?>
@@ -217,7 +207,7 @@
                 <a href="Registration.php" class="btn btn-warning" role="button">Registration Button</a>
             </div>
             <div id="floating-pane3">
-                <a href="ADMINPAGE.php" class="btn btn-info" role="button">Admin Login</a>
+                <a href="admin.php" class="btn btn-info" role="button">Admin Login</a>
             </div>
              <div id="floating-pane4">
                <input id="zoomIn" type="button" value="Zoom In">

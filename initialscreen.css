@@ -1,0 +1,21 @@
+#map_canvas {
+    height: 80%;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 0px;
+}
+
+html,
+body {
+    background-color: #388c5d;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    vertical-align: middle;
+    font-weight: 600;
+    padding: 35px;
+    float: left;
+}
