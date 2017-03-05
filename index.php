@@ -179,9 +179,9 @@
          "ZIPCODE".$row[13]."ZIPCODE".$row[14];;
          $x = $x + 1;
          }
-         
+         $encodedString = $encodedString."END";
          // Retrive states that Dr. Smith provided 
-           $query = "SELECT * FROM STATE";
+          $query = "SELECT * FROM STATE";
          $result= $raj->returnQuery($query);
          $x= 0;
 

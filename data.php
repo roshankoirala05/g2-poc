@@ -71,11 +71,13 @@ $date = date('Y/m/d h:i:s a', time());
     <!DOCTYPE html>
     <html>
 
-    <body>
+    <body style="background-color:#3498DB">
+        <div style="margin: 0px 150px 100px 0px">
+        <h1 style="text-align:center;">Thank you for visiting the Monroe-West Monroe CVB!</h1>
+        <p style="text-align:center;">Visit our front desk if you'd like more information.</p>
         <form method="post" action="index.php">
 
-            <input type="submit" value="Exit" />
-        </form>
+            <input type="submit" value="Exit" style="float: right" />
     </body>
 
     </html>

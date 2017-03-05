@@ -11,7 +11,7 @@
             firstName: {
                 validators: {
                      stringLength: {
-                        min: 2,
+                        min: 1,
                         message: 'Please Enter your First Name'
                     },
                     notEmpty: {
@@ -26,7 +26,7 @@
              lastName: {
                 validators: {
                      stringLength: {
-                        min: 2,
+                        min: 1,
                          message: 'Please Enter Your Last Name'
                     },
                     notEmpty: {
@@ -81,13 +81,14 @@
                     }
                 }
             },
-            stateName: {
+           /* stateName: {
                 validators: {
                     notEmpty: {
                         message: 'Please select your state'
                     }
                 }
             },
+            */
             countryName: {
                 validators: {
                     notEmpty: {
@@ -95,7 +96,7 @@
                     }
                 }
             },
-            /*TravelingFor: {
+            TravelingFor: {
                 validators: {
                     notEmpty: {
                         message: 'The job position is required'
@@ -116,12 +117,9 @@
                     }
                 }
             },
-            */
+            
             zipCode: {
                 validators: {
-                    notEmpty: {
-                        message: 'Please supply your zip code'
-                    },
                     zipCode: {
                         country: 'US',
                         message: 'Please supply a vaild zip code'
