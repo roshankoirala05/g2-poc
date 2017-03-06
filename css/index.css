@@ -1,0 +1,113 @@
+#map_canvas {
+    height: 80%;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 0px;
+}
+
+html,
+body {
+    background-color: #388c5d;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+/***Registration****/
+
+#floating-pane2 {
+    position: absolute;
+    top: -50px;
+    left: 0%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+#floating-pane3 {
+    position: absolute;
+    top: 10px;
+    left: 175%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+
+/*********Zoom out****/
+
+#floating-pane5 {
+    position: absolute;
+    top: -50px;
+    left: -15%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+
+/**********Zoom In********/
+
+#floating-pane4 {
+    position: absolute;
+    top: -50px;
+    left: -30%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+
+/**** Location****/
+
+#floating-panel {
+    position: absolute;
+    top: -50px;
+    left: 25%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+
+/*** Marker*****/
+
+#floating-pane6 {
+    position: absolute;
+    top: -50px;
+    left: 60%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
