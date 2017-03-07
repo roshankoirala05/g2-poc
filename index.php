@@ -181,7 +181,7 @@
          }
          $encodedString = $encodedString."END";
          // Retrive states that Dr. Smith provided 
-          $query = "SELECT * FROM STATE";
+         /* $query = "SELECT * FROM STATE";
          $result= $raj->returnQuery($query);
          $x= 0;
 
@@ -196,6 +196,7 @@
          "ZIPCODE".$row[1]."ZIPCODE".$row[2].
          $x = $x + 1;
          }
+         */
          ?>
             <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString;?>" />
     </div>

@@ -14,7 +14,7 @@ $didyoustay=$_POST["DidYouStay"];
 $email=null;
 $count;
 date_default_timezone_set('America/Chicago');
-$date = date('Y/m/d h:i:s a', time());
+$date = time();
 
 /********************************************************************************************
  * Converting the Latitude and longitude for the address
@@ -38,7 +38,7 @@ $date = date('Y/m/d h:i:s a', time());
         }
 
 /**********************************************************************************
-            Checking How many times he visited. If he already visited
+            Checking How many times he visited. If he has salready visited
             then system update his no of visit.
 **********************************************************************************/
    $raj= new DatabaseConnection();

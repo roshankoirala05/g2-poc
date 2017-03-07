@@ -7,11 +7,12 @@
 <br> <br>
 
 <form method ="post" action = "admin.php">
-    City <input type="text" name="city"/>
-    State <input type="text" name="state"/>
-    Zip <input type="text" name="zip"/>
-    Date <input type = "text" name="date"/>
+    City <input type="text" name="city" value="<?php echo $_POST["city"];?>"/>
+    State <input type="text" name="state" value="<?php echo $_POST["state"];?>"/>
+    Zip <input type="text" name="zip" value="<?php echo $_POST["zip"];?>"/>
+    Date <input type = "text" name="date" value="<?php echo $_POST["date"];?>"/>
     <input type="submit" value="Submit"/>
+    
 </form>
  <br>
 
@@ -20,117 +21,61 @@ include 'DatabaseConnection.php';
  $raj= new DatabaseConnection();
 $query = "SELECT * FROM VISITOR";
 
+$city = trim($_POST["city"]);
+$state = trim($_POST["state"]);
+$zip = trim($_POST["zip"]);
+$date = trim($_POST["date"]);
 
+if( $city!="" || $state !="" || $zip !="" || $date!="" ){
+    $query.=" WHERE ";
+    
+    if ( $city!=""){
+        $query.="City = '".$city."'";
+        
+    }
+    if($state !=""){
+        if (strpos($query,"=")===false){
+            $query.=" State = '".$state."'";
+        }
+        else {
+                 
+            $query.=" AND State = '".$state."'";
+        }
+        
+    }
+    
+    if($zip !=""){
+        if (strpos($query,"=")===false){
+            $query.=" Zipcode = '".$zip."'";
+        }
+        else {
+                 
+            $query.=" AND Zipcode = '".$zip."'";
+        }
+        
+    }
+    if($date!=""){
+        if (strpos($query,"=")===false){
+            $query.=" Time = '".$date."'";
+        }
+        else {
+                 
+            $query.=" AND Time = '".$date."'";
+        }
+        
+    }
+    
+    
+    
+}
+else{
+    $query.=" LIMIT 30 ";
+}
 
 /**************************************************************
           Retriving query
  **************************************************************/
 
-if(! empty($_POST['city'])){
-
-    $city=$_POST['city'];
-
-$cityQuery = "City ='".$city."'";
- $query.=" WHERE ".$cityQuery;
-
-    if(! empty($_POST['state'])){
-
-    $state=$_POST['state'];
-    $stateQuery = "State ='".$state."'";
-    $query.=" AND ".$stateQuery;
-
-        if(! empty($_POST['zip'])){
-
-            $zip=$_POST['zip'];
-             $zipQuery = "Zipcode ='".$zip."'";
-             $query.=" AND ".$zipQuery;
-
-             if(! empty($_POST['date'])){
-
-                $date=$_POST['date'];
-                 $dateQuery = "Time ='".$date."'";
-                 $query.=" AND ".$dateQuery;
-                }
-        }
-          if ( !(empty($_POST['date'])) && empty($_POST['zip'])){
-
-          $date=$_POST['date'];
-          $dateQuery = "Time ='".$date."'";
-          $query.=" AND ".$dateQuery;
-          }
-
-    }
-
-    if( empty($_POST['state']) && !(empty($_POST['zip']))){
-
-        $zip=$_POST['zip'];
-             $zipQuery = "Zipcode ='".$zip."'";
-             $query.=" AND ".$zipQuery;
-             if(! empty($_POST['date'])){
-
-                $date=$_POST['date'];
-                 $dateQuery = "Time ='".$date."'";
-                 $query.=" AND ".$dateQuery;
-                }
-    }
-
-    if( empty($_POST['state']) && empty($_POST['zip']) && ! (empty($_POST['date']))){
-        $date=$_POST['date'];
-         $dateQuery = "Time ='".$date."'";
-          $query.=" AND ".$dateQuery;
-
-        }
-}
-
-if(empty($_POST['city']) && !(empty($_POST['state']))){
-    $state=$_POST['state'];
-    $stateQuery = "State ='".$state."'";
- $query.=" WHERE ".$stateQuery;
-
-     if(! empty($_POST['zip'])){
-
-            $zip=$_POST['zip'];
-             $zipQuery = "Zipcode ='".$zip."'";
-             $query.=" AND ".$zipQuery;
-
-             if(! empty($_POST['date'])){
-
-                $date=$_POST['date'];
-                 $dateQuery = "Time ='".$date."'";
-                 $query.=" AND ".$dateQuery;
-                }
-     }
-
-          if( empty($_POST['zip']) && !(empty($_POST['date']))){
-
-              $date=$_POST['date'];
-                 $dateQuery = "Time ='".$date."'";
-                 $query.=" AND ".$dateQuery;
-          }
-
-
-}
-
-if(empty($_POST['city']) && empty($_POST['state']) && !( empty($_POST['zip']))){
-            $zip=$_POST['zip'];
-             $zipQuery = "Zipcode ='".$zip."'";
-             $query.=" WHERE ".$zipQuery;
-
-             if(! empty($_POST['date'])){
-
-                $date=$_POST['date'];
-                 $dateQuery = "Time ='".$date."'";
-                 $query.=" AND ".$dateQuery;
-                }
-
-
-}
-
-if(empty($_POST['city']) && empty($_POST['state']) &&  empty($_POST['zip']) && !(empty($_POST['date']))){
-                $date=$_POST['date'];
-                 $dateQuery = "Time ='".$date."'";
-                 $query.=" WHERE ".$dateQuery;
-}
 
 
 
@@ -141,16 +86,10 @@ if(empty($_POST['city']) && empty($_POST['state']) &&  empty($_POST['zip']) && !
 
     while($row = $result->fetch_assoc())
     {
-       // echo "" . $row["COUNT(*)"].  "<br>";
        echo "" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Zipcode"]." ".$row["No. in Party"]."<br>";
-      //foreach($row as $cname => $cvalue){
-        //print "$cname: $cvalue\t";
-      //  echo"<br>";
-    //}
-    //echo"<br>";
+      
     }
  }
- /**********************************************************************/
  ?>
 
 
