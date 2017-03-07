@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
         LIMIT 1";
     $result       = $raj->returnQuery($query);
     if ($result->num_rows == 1) {
-        header("Location: users_page.php");
+        header("Location: admin.php");
         exit;
     } else {
 

@@ -30,7 +30,6 @@
 
              encodedString = document.getElementById("encodedString").value;
              stringArray = encodedString.split("END");
-
              var x;
              for (x = 0; x < stringArray.length; x = x + 1)
              {
@@ -61,11 +60,18 @@
              infowindow.open(map, this);
          });
                      }
-                     else {
+                     else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+                setTimeout(function () {
+                    //Recursively calling spotPosition method for lost addresses
+                    setMarker(map,addressDetails,contentString);
+                }, 1000);
+                     }
+                       else {
                          alert('Geocode was not successful for the following reason: ' + status);
                      }
                  });
-             }
+
+            }
          });
       </script>
    </head>
@@ -90,7 +96,25 @@
          "ZIPCODE".$row[4];
          $x = $x + 1;
          }
+          $query = "SELECT * FROM STATE";
+         $result= $raj->returnQuery($query);
+         $x= 0;
+
+         while ($row = $result->fetch_array()) {
+         if ($x == 0) {
+         $separator = "";
+         } else {
+         $separator = "END";
+         }
+         $encodedString = $encodedString . $separator .
+         $row[0].
+         "ZIPCODE".$row[0];
+         $x = $x + 1;
+         }
+
          ?>
+
+
          <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString;?>"/>
       </div>
       <h1 align="center">Welcome to Monroe West-Monroe  Convention and Vistor Bureau </h1>

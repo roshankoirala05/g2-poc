@@ -504,7 +504,7 @@
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-success">Send <span class="glyphicon glyphicon-send"></span></button>
                                 <button type="reset" style="width:90px" class="btn btn-danger">Reset <span class="glyphicon glyphicon-refresh"></span></button>
-                                <a href="initilizemap.php" class="btn btn-warning"><span class="glyphicon glyphicon-step-backward"></span> Return Home </a>
+                                <a href="prototypeMap.php" class="btn btn-warning"><span class="glyphicon glyphicon-step-backward"></span> Return Home </a>
                             </div>
                         </div>
             </div>
