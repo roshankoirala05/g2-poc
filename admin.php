@@ -1,8 +1,20 @@
+<?php
 
-<!DOCTYPE html>
+session_start();
+if(! (isset($_SESSION['name']))){
+header ('location:adminpage.php');
+}
+?>
 <html>
     <body>
-<h1>Type one or more filters !</h1>
+
+     
+<h1>Welcome <?php  echo $_SESSION['name'];?></h1>
+<form action="adminpage.php" method="POST">
+    
+    <input type="submit" name="submit" Value="Log out">
+</form>
+<h3>Type one or more filters !</h3>
 
 <br> <br>
 
@@ -18,7 +30,7 @@
 
  <?php
 include 'DatabaseConnection.php';
- $raj= new DatabaseConnection();
+$conn= new DatabaseConnection();
 $query = "SELECT * FROM VISITOR";
 
 $city = trim($_POST["city"]);
@@ -80,7 +92,7 @@ else{
 
 
  
-   $result= $raj->returnQuery($query);
+   $result= $conn->returnQuery($query);
    echo "<br>";
    if ($result->num_rows > 0) {
 
