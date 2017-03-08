@@ -69,7 +69,7 @@ if( $city!="" || $state !="" || $zip !="" || $date!="" ){
     
 }
 else{
-    $query.=" LIMIT 30 ";
+    $query.=" ORDER BY Time DESC LIMIT 30 ";
 }
 
 /**************************************************************
@@ -79,14 +79,14 @@ else{
 
 
 
- //$query = "SELECT COUNT(*) FROM VISITOR";
+ 
    $result= $raj->returnQuery($query);
    echo "<br>";
    if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc())
     {
-       echo "" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Zipcode"]." ".$row["No. in Party"]."<br>";
+       echo "" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Country"]." ".$row["Zipcode"]." ".$row["Party"]." ".date('m/d/Y', $row["Time"])."<br>";
       
     }
  }

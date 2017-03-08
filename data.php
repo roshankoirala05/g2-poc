@@ -11,7 +11,7 @@ $noinparty=$_POST["noInParty"];
 $travelingfor=$_POST["TravelingFor"];
 $howdidyouhear=$_POST["HowDidYouHear"];
 $didyoustay=$_POST["DidYouStay"];
-$email=null;
+$email=$_POST["email"];
 $count;
 date_default_timezone_set('America/Chicago');
 $date = time();
@@ -48,7 +48,7 @@ $date = time();
     if($row["Vcount"] ==0)
         {
             $count=1;
-            $query = "INSERT INTO VISITOR VALUES('$firstname','$lastname', '$city','$state',
+            $query = "INSERT INTO VISITOR (Fname,Lname,City,State,Zipcode,Country,Party,Purpose,Hear,Hotel,Email,Time,Vcount,Lat,Lng) VALUES('$firstname','$lastname', '$city','$state',
                                                    '$zipcode','$country','$noinparty','$travelingfor','$howdidyouhear','$didyoustay','$email','$date','$count','$latitude','$longitude')";
             $raj->insertDatabase($query);
         }
