@@ -14,8 +14,9 @@
         window.onload = function() {
 
             // Initialize variables
-            var encodedString, address, marker, markerCluster, x;
+            var encodedString, address, markerCluster, marker, x;
             var stringArray, markers = [];
+            var userMarker = [];
             var clusterClicked = false;
             var gm = google.maps;
             var summaryPanel = document.getElementById('Output');
@@ -86,10 +87,11 @@
             function setMarker(map, addressDetails) {
                 var lat = new gm.LatLng(addressDetails[1], addressDetails[2]);
                 bounds.extend(lat);
-                var marker = new gm.Marker({
+                marker = new gm.Marker({
                     map: map,
                     position: lat,
-                    content: addressDetails[0]
+                    content: addressDetails[0],
+                    title:addressDetails[0]
                 });
                 marker.desc = addressDetails[0];
                 oms.addMarker(marker);
@@ -103,15 +105,15 @@
                 imagePath: 'images/m'
             };
 
-            markerCluster = new MarkerClusterer(map, markers, mcOptions);
+            var markerCluster = new MarkerClusterer(map, markers, mcOptions);
             /******************************************************************************/
 
 
 
             /********************* Pin Mark on map form the Pin Mark Button*******************************/
             document.getElementById('markerSubmit').addEventListener('click', function() {
+
                 clearMarkers(null);
-                markerCluster.clearMarkers(null);
                 geocodeAddress(geocoder);
                 $('#address').val('');
             });
@@ -127,16 +129,17 @@
                         This will load the final position of map
                         */
                         map.setCenter(results[0].geometry.location);
-                        var marker = new gm.Marker({
+                        marker = new gm.Marker({
                             map: map,
                             position: results[0].geometry.location,
                             content: results[0].formatted_address,
+                            title:results[0].formatted_address,
                             icon: 'images/iconMarker.png'
                         });
                         summaryPanel.innerHTML = "Your address was marked in map. If it is not correct click the marker that you pin to unmark it";
                         marker.desc = results[0].formatted_address;
                         oms.addMarker(marker);
-                        markers.push(marker);
+                        userMarker.push(marker);
                         timerMessage();
                     } else {
                         summaryPanel.innerHTML = 'Address is not available form that pale to pin on map';
@@ -234,16 +237,17 @@
             }
 
             function placeMarker(location, address) {
-                var marker = new gm.Marker({
+                marker = new gm.Marker({
                     position: location,
                     map: map,
                     content: address,
+                    title:address,
                     icon: 'images/iconMarker.png'
                 });
                 summaryPanel.innerHTML = "Your address was successfully marked on map. If it is not correct, then mark on correct address ";
                 marker.desc = address;
                 oms.addMarker(marker);
-                markers.push(marker);
+                userMarker.push(marker);
                 timerMessage();
 
             }
@@ -254,10 +258,9 @@
                 // setTimeout to relay the map click event to be the last thing javascript should execute
                 setTimeout(function() {
                     if (!clusterClicked) {
-                        // remove all the marker
+                        // remove  the last marker
                         clearMarkers(null);
-                        // remove all the MarkerCluster
-                        markerCluster.clearMarkers(null);
+
                         // call the function to pin on map
                         getReverseGeocodingData(event.latLng);
                         clusterClicked = false;
@@ -270,8 +273,8 @@
 
             /******************** Clear all marker from Map ********************************/
             function clearMarkers(map) {
-                for (var i = 0; i < markers.length; i++) {
-                    markers[i].setMap(map);
+                for (var i = 0; i < userMarker.length; i++) {
+                    userMarker[i].setMap(map);
                 }
             }
 
@@ -279,9 +282,10 @@
                  Click event for MarkerCluster. If click on MarkerCluster then it will zoom on
                             Markercluster insted of mark on Map
              **************************************************************************************/
-            gm.event.addListener(markerCluster, "clusterclick", function() {
+            gm.event.addListener(markerCluster, "clusterclick", function(cluster) {
                 clusterClicked = true;
             });
+
 
             //  map.fitBounds(bounds);
         };
