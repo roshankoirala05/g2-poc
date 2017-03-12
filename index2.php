@@ -127,7 +127,7 @@
                         This will load the final position of map
                         */
                         map.setCenter(results[0].geometry.location);
-                       var marker = new google.maps.Marker({
+                        var marker = new google.maps.Marker({
                             map: map,
                             position: results[0].geometry.location,
                             content: results[0].formatted_address,
@@ -135,9 +135,9 @@
                         });
                         summaryPanel.innerHTML = "Your address was marked in map. If it is not correct click the marker that you pin to unmark it";
                         marker.desc = results[0].formatted_address;
-                oms.addMarker(marker);
-                 markers.push(marker);
-                timerMessage();
+                        oms.addMarker(marker);
+                        markers.push(marker);
+                        timerMessage();
                     } else {
                         summaryPanel.innerHTML = 'Address is not available form that pale to pin on map';
                         timerMessage();
@@ -216,7 +216,7 @@
                                        Mark on the Map
              ***********************************************************************************************/
             function getReverseGeocodingData(latlng) {
-               // summaryPanel.innerHTML = "";
+                // summaryPanel.innerHTML = "";
                 geocoder = new gm.Geocoder();
                 geocoder.geocode({
                     'latLng': latlng
@@ -236,7 +236,7 @@
             }
 
             function placeMarker(location, address) {
-              var  marker = new gm.Marker({
+                var marker = new gm.Marker({
                     position: location,
                     map: map,
                     content: address,
@@ -245,8 +245,8 @@
                 summaryPanel.innerHTML = "Your address was successfully marked on map. If it is not correct, then mark on correct address ";
                 marker.desc = address;
                 oms.addMarker(marker);
-                 markers.push(marker);
-                 timerMessage();
+                markers.push(marker);
+                timerMessage();
 
             }
             /*******************************************************************************/
