@@ -138,12 +138,29 @@ if( $city!="" || $state !="" || $zip !="" || $date!="" ){
         
     }
     if($state !=""){
+        
+        
+          $stateString;  
+          
+          $stateArray = explode(" ", $state);
+        
+        foreach ($stateArray as $value) {
+            $stateString.="'".$value."',";
+         } 
+        
+        $stateString = substr($stateString, 0, -1);     
+        
+        
+        
+        
+        
+        
         if (strpos($query,"=")===false){
-            $query.=" State = '".$state."'";
+            $query.=" State in (".$stateString.")";
         }
         else {
                  
-            $query.=" AND State = '".$state."'";
+            $query.=" AND State in (".$stateString.")";
         }
         
     }
