@@ -127,7 +127,7 @@
                         This will load the final position of map
                         */
                         map.setCenter(results[0].geometry.location);
-                        var marker = new google.maps.Marker({
+                        var marker = new gm.Marker({
                             map: map,
                             position: results[0].geometry.location,
                             content: results[0].formatted_address,
@@ -208,8 +208,6 @@
                 }, 5000);
 
             }
-
-
 
 
             /***********************************************************************************************
