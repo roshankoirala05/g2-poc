@@ -12,34 +12,27 @@
     <link rel="stylesheet" href="css/index.css" />
     <script>
         jQuery(document).ready(function($) {
-
             //Initialize the Google Maps
             var  geocoder = new google.maps.Geocoder();
             var marker;
             var infowindow = new google.maps.InfoWindow();
             var encodedString;
             var stringArray = [];
-
-
             var map = new google.maps.Map(document.getElementById('map_canvas'), {
                 zoom: 4,
                 center: {
                     lat: 39.81528751808606,
                     lng: -99.5625000167638
                 },
-
             });
-
             encodedString = document.getElementById("encodedString").value;
             stringArray = encodedString.split("END");
-
             var x;
             for (x = 0; x < stringArray.length; x = x + 1) {
                 var addressDetails = [];
                 addressDetails = stringArray[x].split("ZIPCODE");
                 setMarker(map, addressDetails);
             }
-
             function setMarker(map, addressDetails) {
                  var lat = new google.maps.LatLng(addressDetails[1], addressDetails[2]);
                 //Create a new marker and info window
@@ -54,12 +47,10 @@
                             infowindow.open(map, this);
                         });
                     }
-
              // Click Pin Function 
             google.maps.event.addListener(map, 'click', function(event) {
                 getReverseGeocodingData(event.latLng);
             });
-
             function placeMarker(location, address) {
                 marker = new google.maps.Marker({
                     position: location,
@@ -70,9 +61,7 @@
                     infowindow.setContent(this.content);
                     infowindow.open(map, this);
                 });
-
             }
-
             function getReverseGeocodingData(latlng) {
                 geocoder = new google.maps.Geocoder();
                 geocoder.geocode({
@@ -94,10 +83,8 @@
             }
             /********************* Address ***************************************/
             document.getElementById('addressSubmit').addEventListener('click', function() {
-
                 addressLocation(geocoder, map);
             });
-
             function addressLocation(geocoder, resultsMap) {
                 var address = document.getElementById('address').value;
                 geocoder.geocode({
@@ -110,14 +97,12 @@
                         alert('Geocode was not successful for the following reason: ' + status);
                     }
                 });
-
             }
      /********************* Marker From Input box ***************************************/
             document.getElementById('markerSubmit').addEventListener('click', function() {
                 geocodeAddress(geocoder, map);
                 $('#marker').val('');
             });
-
             function geocodeAddress(geocoder, resultsMap) {
                 var address = document.getElementById('marker').value;
                 geocoder.geocode({
@@ -142,7 +127,6 @@
                     }
                 });
             }
-
     /********************************************************************************/
             // Setup the click event listener - zoomIn
   google.maps.event.addDomListener(document.getElementById('zoomIn'), 'click', function() {
@@ -153,7 +137,6 @@
     map.setZoom(map.getZoom() - 1);
   });
         });
-
     </script>
 </head>
 
@@ -164,10 +147,8 @@
            $raj= new DatabaseConnection();
          $query = "SELECT * FROM VISITOR";
          $result= $raj->returnQuery($query);
-
          $encodedString = "";
          $x= 0;
-
          while ($row = $result->fetch_array()) {
          if ($x == 0) {
          $separator = "";
@@ -175,16 +156,15 @@
          $separator = "END";
          }
          $encodedString = $encodedString . $separator .
-         $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ".$row[4]." ".$row[5].
-         "ZIPCODE".$row[13]."ZIPCODE".$row[14];;
+         $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ".$row[4]." ".$row[5]." ".$row[6].
+         "ZIPCODE".$row[14]."ZIPCODE".$row[15];;
          $x = $x + 1;
          }
          $encodedString = $encodedString."END";
          // Retrive states that Dr. Smith provided 
-          $query = "SELECT * FROM STATE";
+         /* $query = "SELECT * FROM STATE";
          $result= $raj->returnQuery($query);
          $x= 0;
-
          while ($row = $result->fetch_array()) {
          if ($x == 0) {
          $separator = "";
@@ -196,6 +176,7 @@
          "ZIPCODE".$row[1]."ZIPCODE".$row[2].
          $x = $x + 1;
          }
+         */
          ?>
             <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString;?>" />
     </div>
