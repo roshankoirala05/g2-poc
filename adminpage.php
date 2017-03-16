@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>ADMIN</title>
+    <title>LOG IN</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
 
@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="js/adminpage.js" />
 </head>
 <body>
+    <?php
+    session_start();
+   
+    session_unset();
+    
+    ?>
+    
     <div class="container">
         <div class="card card-container">
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
