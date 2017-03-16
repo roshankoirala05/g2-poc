@@ -39,6 +39,7 @@ header ('location:adminpage.php');
                 }
             }
             
+            
         </script>
     </head>
     
@@ -113,9 +114,10 @@ header ('location:adminpage.php');
          
  </div> 
  </div>
-    Zip <input type="text" name="zip" value="<?php echo $_POST["zip"];?>"/>
-    Date <input type = "text" name="date" value="<?php echo $_POST["date"];?>"/>
+    Zip <input type="number" min="0" max="99999" name="zip" value="<?php echo $_POST["zip"];?>"/>
+    From <input type = "date" name="date" value="<?php echo $_POST["date"];?>"/> To <input type = "date" name="date" value="<?php echo $_POST["date"];?>"/>
     <input type="submit" value="Submit"/>
+    <input type="reset" value="Reset" />
     
 </form>
  <br>
@@ -207,7 +209,7 @@ else{
 
     while($row = $result->fetch_assoc())
     {
-       echo "" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Country"]." ".$row["Zipcode"]." ".$row["Party"]." ".date('m/d/Y', $row["Time"])."<br>";
+       echo "<a href='visitor.php'>" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Country"]." ".$row["Zipcode"]." ".$row["Party"]." ".date('m/d/Y', $row["Time"])." ".$row["Purpose"]." ".$row["Hear"]." ".$row["Hotel"]." ".$row["Email"]."</a><br>";
       
     }
  }
