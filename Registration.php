@@ -50,16 +50,7 @@
                         </div>
                     </div>
 
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">E-Mail(Optional)</label>
-                        <div class="col-md-4 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input name="email" placeholder="E-Mail Address" class="form-control" type="text">
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- Text input-->
 
                     <div class="form-group">
@@ -79,7 +70,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                <div id="city_wrap"> <input name="cityName" id="cityName" placeholder="City" class="form-control" type="text"></div>
+                                <div id="city_dropdown"> <input name="cityName" id="cityName" placeholder="City" class="form-control" type="text"></div>
                             </div>
                         </div>
                     </div>
@@ -421,6 +412,17 @@
                         </div>
                     </div>
 
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">E-Mail(Optional)</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="email" placeholder="E-Mail Address (Optional)" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- radio checks -->
                     <div class="form-group">
                         <label class="col-md-4 control-label">Traveling for?</label>
@@ -442,24 +444,22 @@
                                     </div>
                                 </li>
                             </ul>
-                            <ul>
-                                <li>
-                                    <div class="radio-inline">
-                                        <label>
+                            <div class="radio-inline">
+                                <label>
                                             <input type="radio" name="TravelingFor" value="Convention" /> Convention
                                         </label>
-                                    </div>
+                            </div>
 
-                                    <div class="radio-inline">
-                                        <label>
+                            <div class="radio-inline">
+                                <label>
                                             <input type="radio" name="TravelingFor" value="Others" /> Others
                                         </label>
-                                    </div>
+                            </div>
                         </div>
                     </div>
                     <!-- radio checks -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label">How did you hear about the Monroe West Monroe CVB??</label>
+                        <label class="col-md-4 control-label">How did you hear about the Monroe West Monroe CVB?</label>
                         <div class="col-md-4">
                             <div class="radio-inline">
                                 <label>
@@ -471,18 +471,23 @@
                                 <label>
                                     <input type="radio" name="HowDidYouHear" value="Interstate Signs" /> Interstate Signs
                                 </label>
+                                <br>
                             </div>
-                            <div class="radio-inline">
-                                <label>
+                            <ul class="firstrow">
+                                <li>
+                                    <div class="radio-inline">
+                                        <label>
                                     <input type="radio" name="HowDidYouHear" value="Others" /> Others
                                 </label>
-                            </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
                     <!-- radio checks -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label">Did you stay in a Monroe-West Monroe hotel??</label>
+                        <label class="col-md-4 control-label">Did you stay in a Monroe-West Monroe hotel?</label>
                         <div class="col-md-4">
                             <div class="radio-inline">
                                 <label>
@@ -496,32 +501,89 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Button -->
                     <div class="form-group">
                         <label class="col-md-4 control-label"></label>
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-success">Send <span class="glyphicon glyphicon-send"></span></button>
-                            <button type="reset" style="width:90px" class="btn btn-danger">Reset <span class="glyphicon glyphicon-refresh"></span></button>
-                            <a href="index.php" class="btn btn-warning"><span class="glyphicon glyphicon-step-backward"></span> Return Home </a>
+                            <div id="floating-pane1">
+                                <button type="submit" class="btn btn-success btn-lg">Submit Registration <span class="glyphicon glyphicon-send"></span></button>
+                            </div>
+                            <div id="floating-pane2">
+                                <button type="reset" class="btn btn-danger btn-lg">Reset Form <span class="glyphicon glyphicon-refresh"></span></button>
+                            </div>
+                            <div id="floating-pane3">
+                                <a href="index.php" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-step-backward"></span> Return Home </a>
+                            </div>
                         </div>
                     </div>
-
                 </fieldset>
             </form>
         </div>
     </section>
     <script>
         $(document).ready(function() {
-            //when the user clicks off of the zip field:
+            var address = '';
+            var query = window.location.search.substring(1);
+            if (query) {
+                var address = query.replace(/%20/g, " ");
+                if (address.substring(0, 13) == "Unnamed Road,") {
+                    address = address.substring(13);
+                }
+            }
+            var city = '';
+            var state = '';
+            var country = '';
+            var zipcode = '';
+            //make a request to the google geocode api
+            $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + address)
+                .success(function(response) {
+                    //find the city and state
+                    var address_components = response.results[0].address_components;
+                    $.each(address_components, function(index, component) {
+                        var types = component.types;
+                        $.each(types, function(index, type) {
+                            if (type == 'locality') {
+                                city = component.long_name;
+                            }
+                            if (type == 'administrative_area_level_1') {
+                                state = component.short_name;
+                            }
+                            if (type == 'country') {
+                                country = component.short_name;
+                            }
+                            if (type == 'postal_code') {
+                                zipcode = component.short_name;
+                            }
+                        });
+                    });
+
+                    $('#cityName').val(city);
+                    document.getElementById("cityName").style.color = '#700404';
+
+                    $('#zipCode').val(zipcode);
+                    document.getElementById("zipCode").style.color = '#700404';
+
+                    $('#stateName').val(state);
+                    document.getElementById("stateName").style.color = '#700404';
+                    $('#countryName').val(country);
+                    document.getElementById("countryName").style.color = '#700404';
+
+
+                });
+            //  }
+            //    });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
             $('#zipCode').keyup(function() {
-                if ($(this).val().length == 5) {
-                    var zip = $(this).val();
+                if ($(this).val().length >= 5) {
                     var city = '';
                     var state = '';
                     var country = '';
+                    var zipcode = $(this).val();;
                     //make a request to the google geocode api
-                    $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + zip)
+                    $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipcode)
                         .success(function(response) {
                             //find the city and state
                             var address_components = response.results[0].address_components;
@@ -536,6 +598,9 @@
                                     }
                                     if (type == 'country') {
                                         country = component.short_name;
+                                    }
+                                    if (type == 'postal_code') {
+                                        zipcode = component.short_name;
                                     }
                                 });
                             });
@@ -555,15 +620,19 @@
                                     $select.append($option);
                                 });
                                 $select.attr('id', 'cityName');
-                                $('#city_wrap').html($select);
+                                $('#city_dropdown').html($select);
                             } else {
                                 $('#cityName').val(city);
-                                 document.getElementById("cityName").style.color = '#700404';
+                                document.getElementById("cityName").style.color = '#700404';
                             }
+
                             $('#stateName').val(state);
                             document.getElementById("stateName").style.color = '#700404';
                             $('#countryName').val(country);
                             document.getElementById("countryName").style.color = '#700404';
+                            $('#zipCode').val(zipcode);
+                            document.getElementById("zipCode").style.color = '#700404';
+
 
 
                         });
@@ -571,6 +640,7 @@
             });
         });
     </script>
+
     <!-- /.container -->
     <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNOpboPQgboMUStdCcaODSa-l0b7UcfUU&libraries=places&callback=initAutocomplete" async defer></script-->
 

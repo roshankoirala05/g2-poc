@@ -143,8 +143,14 @@
             });
             /********************************************************************************/
             document.getElementById('submit').addEventListener('click', function() {
-                window.location.href = "Registration.php?" + address;
-                 // window.location.href = "Registration.php?" + document.getElementById('address').value;
+                if (!address)
+                {
+               window.location.href = "Registration.php?" + document.getElementById('address').value;
+                }
+                else
+                {
+                  window.location.href = "Registration.php?" + address;
+                }
             });
             /************************** Map Location search Box ******************************/
             // Create the search box and link it to the UI element(address div).

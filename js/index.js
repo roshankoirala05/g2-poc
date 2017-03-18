@@ -93,28 +93,28 @@ $(document).ready(function () {
                         }
                     }
                 },
-                /*TravelingFor: {
+                TravelingFor: {
                     validators: {
                         notEmpty: {
-                            message: 'The job position is required'
+                            message: 'Please provide why you are traveling ?'
                         }
                     }
                 },
                 HowDidYouHear: {
                     validators: {
                         notEmpty: {
-                            message: 'The job position is required'
+                            message: 'Please provide how did you hear about us ?'
                         }
                     }
                 },
                 DidYouStay: {
                     validators: {
                         notEmpty: {
-                            message: 'The job position is required'
+                            message: 'Did you stay in MWM Hotel?'
                         }
                     }
                 },
-                */
+                /*
                 zipCode: {
                     validators: {
                         zipCode: {
@@ -123,6 +123,7 @@ $(document).ready(function () {
                         }
                     }
                 },
+                */
                 noInParty: {
                     validators: {
                         integer: {
@@ -154,7 +155,6 @@ $(document).ready(function () {
 
             // Get the BootstrapValidator instance
             var bv = $form.data('bootstrapValidator');
-
             // Use Ajax to submit form data
             $.post($form.attr('action'), $form.serialize(), function (result) {
                 console.log(result);

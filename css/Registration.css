@@ -2,7 +2,7 @@ section#contact {
     background-color: #385e40;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 120px;
+    padding: 60px;
 }
 
 legend {
@@ -16,7 +16,7 @@ legend {
 
 label.control-label {
     color: #385e40;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 fieldset {
@@ -37,11 +37,55 @@ li {
 input[type="text"] {
     height: 50px;
     width: 50px;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 select[type="selectBox"] {
     height: 50px;
     width: 50px;
-    font-size: 18px;
+    font-size: 20px;
+}
+
+.radio-inline label {
+    font-size: 20px;
+}
+
+
+/* Radio button Circle size */
+
+input[type="radio"] {
+    height: 18px;
+    width: 18px;
+}
+
+#floating-pane1 {
+    position: absolute;
+    top: 0px;
+    left: -30%;
+    z-index: 5;
+    background-color: #fff;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 50px;
+}
+
+#floating-pane2 {
+    position: absolute;
+    top: 0px;
+    left: 40%;
+    z-index: 5;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 50px;
+}
+
+#floating-pane3 {
+    position: absolute;
+    top: 0px;
+    left: 90%;
+    z-index: 5;
+    background-color: #eeefed;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
 }
