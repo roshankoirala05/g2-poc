@@ -15,10 +15,11 @@ $email=$_POST["email"];
 $count;
 date_default_timezone_set('America/Chicago');
 $date = time();
+$address = $city+$state+$zipcode+$country;
 /********************************************************************************************
  * Converting the Latitude and longitude for the address
  ********************************************************************************************/
-        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=$city,+$state,+$zipcode,+$country&sensor=false";
+        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=$address&sensor=false";
         $google_api_response =file_get_contents( $url );
         $results = json_decode( $google_api_response);
         $results = (array) $results;

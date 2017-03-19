@@ -45,7 +45,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="lastName" placeholder="Last Name" class="form-control" type="text" width="100">
+                                <input name="lastName" placeholder="Last Name" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,9 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                <div id="city_dropdown"> <input name="cityName" id="cityName" placeholder="City" class="form-control" type="text"></div>
+                                <div id="city_dropdown">
+                                    <input name="cityName" id="cityName" placeholder="City" class="form-control" type="text">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -446,14 +448,14 @@
                             </ul>
                             <div class="radio-inline">
                                 <label>
-                                            <input type="radio" name="TravelingFor" value="Convention" /> Convention
-                                        </label>
+                                    <input type="radio" name="TravelingFor" value="Convention" /> Convention
+                                </label>
                             </div>
 
                             <div class="radio-inline">
                                 <label>
-                                            <input type="radio" name="TravelingFor" value="Others" /> Others
-                                        </label>
+                                    <input type="radio" name="TravelingFor" value="Others" /> Others
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -477,8 +479,8 @@
                                 <li>
                                     <div class="radio-inline">
                                         <label>
-                                    <input type="radio" name="HowDidYouHear" value="Others" /> Others
-                                </label>
+                                            <input type="radio" name="HowDidYouHear" value="Others" /> Others
+                                        </label>
                                     </div>
                                 </li>
                             </ul>
@@ -502,18 +504,18 @@
                         </div>
                     </div>
                     <!-- Button -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"></label>
-                        <div class="col-md-4">
-                            <div id="floating-pane1">
-                                <button type="submit" class="btn btn-success btn-lg">Submit Registration <span class="glyphicon glyphicon-send"></span></button>
-                            </div>
-                            <div id="floating-pane2">
-                                <button type="reset" class="btn btn-danger btn-lg">Reset Form <span class="glyphicon glyphicon-refresh"></span></button>
-                            </div>
-                            <div id="floating-pane3">
-                                <a href="index.php" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-step-backward"></span> Return Home </a>
-                            </div>
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <div id="floating-pane1">
+                            <button type="submit" class="btn btn-success btn-lg">Submit Registration <span class="glyphicon glyphicon-send"></span>
+                            </button>
+                        </div>
+                        <div id="floating-pane2">
+                            <button type="reset" class="btn btn-danger btn-lg">Reset Form <span class="glyphicon glyphicon-refresh"></span>
+                            </button>
+                        </div>
+                        <div id="floating-pane3">
+                            <a href="index.php" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-step-backward"></span> Return Home </a>
                         </div>
                     </div>
                 </fieldset>
@@ -539,6 +541,10 @@
                 .success(function(response) {
                     //find the city and state
                     var address_components = response.results[0].address_components;
+                    var lat = response.results[0].geometry.location.lat;
+                    var lng = response.results[0].geometry.location.lng;
+                    // alert(lat);
+                    //alert(lng);
                     $.each(address_components, function(index, component) {
                         var types = component.types;
                         $.each(types, function(index, type) {
@@ -568,10 +574,7 @@
                     $('#countryName').val(country);
                     document.getElementById("countryName").style.color = '#700404';
 
-
                 });
-            //  }
-            //    });
         });
     </script>
     <script>
@@ -632,7 +635,6 @@
                             document.getElementById("countryName").style.color = '#700404';
                             $('#zipCode').val(zipcode);
                             document.getElementById("zipCode").style.color = '#700404';
-
 
 
                         });

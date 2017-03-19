@@ -17,6 +17,7 @@ legend {
 label.control-label {
     color: #385e40;
     font-size: 20px;
+    width: 400;
 }
 
 fieldset {
