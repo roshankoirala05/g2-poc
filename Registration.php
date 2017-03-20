@@ -565,14 +565,31 @@
 
                     $('#cityName').val(city);
                     document.getElementById("cityName").style.color = '#700404';
+                     if (document.getElementById("cityName").value)
+                                   {
+                                   document.getElementById("cityName").style.backgroundColor = '#c4ad2b';
+                                   }
 
                     $('#zipCode').val(zipcode);
                     document.getElementById("zipCode").style.color = '#700404';
+                     if (document.getElementById("zipCode").value)
+                                   {
+                                   document.getElementById("zipCode").style.backgroundColor = '#c4ad2b';
+                                   }
+
 
                     $('#stateName').val(state);
                     document.getElementById("stateName").style.color = '#700404';
+                     if (document.getElementById("stateName").value)
+                                   {
+                                   document.getElementById("stateName").style.backgroundColor = '#c4ad2b';
+                                   }
                     $('#countryName').val(country);
                     document.getElementById("countryName").style.color = '#700404';
+                    if (document.getElementById("countryName").value)
+                                   {
+                                   document.getElementById("countryName").style.backgroundColor = '#c4ad2b';
+                                   }
 
                 });
         });
@@ -626,15 +643,33 @@
                                 $('#city_dropdown').html($select);
                             } else {
                                 $('#cityName').val(city);
-                                document.getElementById("cityName").style.color = '#700404';
+                                   document.getElementById("cityName").style.color = '#700404';
+                                   if (document.getElementById("cityName").value)
+                                   {
+                                   document.getElementById("cityName").style.backgroundColor = '#c4ad2b';
+                                   }
+
                             }
 
                             $('#stateName').val(state);
                             document.getElementById("stateName").style.color = '#700404';
+                            if (document.getElementById("stateName").value)
+                                   {
+                                   document.getElementById("stateName").style.backgroundColor = '#c4ad2b';
+                                   }
+
                             $('#countryName').val(country);
                             document.getElementById("countryName").style.color = '#700404';
+                            if (document.getElementById("countryName").value)
+                                   {
+                                   document.getElementById("countryName").style.backgroundColor = '#c4ad2b';
+                                   }
                             $('#zipCode').val(zipcode);
                             document.getElementById("zipCode").style.color = '#700404';
+                            if (document.getElementById("zipCode").value)
+                                   {
+                                   document.getElementById("zipCode").style.backgroundColor = '#c4ad2b';
+                                   }
 
 
                         });

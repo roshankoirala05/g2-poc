@@ -55,7 +55,7 @@
             /*************** Show multiple marker of same place**********/
             oms.addListener('spiderfy', function(markers) {
                 for (var i = 0; i < markers.length; i++) {
-                    markers[i].setIcon('images/iconRed.png');
+                    markers[i].setIcon('images/defultMarker.png');
                     markers[i].setShadow(null);
                 }
                 iw.close();
@@ -63,7 +63,7 @@
             /********** Closed Multiple marker of same place *******/
             oms.addListener('unspiderfy', function(markers) {
                 for (var i = 0; i < markers.length; i++) {
-                    markers[i].setIcon("images/default.png");
+                    markers[i].setIcon("images/unspiderfyMarker.png");
                     markers[i].setShadow(shadow);
                 }
             });
@@ -119,7 +119,7 @@
                             position: results[0].geometry.location,
                             content: results[0].formatted_address,
                             title:results[0].formatted_address,
-                            icon: 'images/iconMarker.png'
+                            icon: 'images/visitorMarker.png'
                         });
                         summaryPanel.innerHTML = "Your address was marked in map. If it is not correct click the marker that you pin to unmark it";
                         marker.desc = results[0].formatted_address;
@@ -127,7 +127,7 @@
                         userMarker.push(marker);
                         timerMessage();
                     } else {
-                        summaryPanel.innerHTML = 'Address is not available form that pale to pin on map';
+                        summaryPanel.innerHTML = 'Address is not available form that place to pin on map';
                         timerMessage();
                     }
                 });
@@ -217,7 +217,7 @@
                     map: map,
                     content: address,
                     title:address,
-                    icon: 'images/iconMarker.png'
+                    icon: 'images/visitorMarker.png'
                 });
                 summaryPanel.innerHTML = "Your address was successfully marked on map. If it is not correct, then mark on correct address ";
                 marker.desc = address;
