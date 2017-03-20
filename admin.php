@@ -115,7 +115,7 @@ header ('location:adminpage.php');
  </div> 
  </div>
     Zip <input type="number" min="0" max="99999" name="zip" value="<?php echo $_POST["zip"];?>"/>
-    From <input type = "date" name="date" value="<?php echo $_POST["date"];?>"/> To <input type = "date" name="date" value="<?php echo $_POST["date"];?>"/>
+    From <input type = "date" name="from" value="<?php echo $_POST["date"];?>"/> To <input type = "date" name="to" value="<?php echo $_POST["date"];?>"/>
     <input type="submit" value="Submit"/>
     <input type="reset" value="Reset" />
     
@@ -130,7 +130,11 @@ $query = "SELECT * FROM VISITOR";
 $city = trim($_POST["city"]);
 $state = trim($_POST["state"]);
 $zip = trim($_POST["zip"]);
-$date = trim($_POST["date"]);
+$from = trim($_POST["from"]);
+$to =  trim($_POST["to"]);
+$date= trim($from.$to); 
+
+
 
 if( $city!="" || $state !="" || $zip !="" || $date!="" ){
     $query.=" WHERE ";
@@ -178,12 +182,17 @@ if( $city!="" || $state !="" || $zip !="" || $date!="" ){
         
     }
     if($date!=""){
+        $convertedFrom = new DateTime($from);
+        $date1 = $convertedFrom->getTimestamp();
+
+        $convertedTo = new DateTime($to);
+        $date2 = $convertedTo->getTimestamp();
         if (strpos($query,"=")===false){
-            $query.=" Time = '".$date."'";
+            $query.=" Time > ".$date1." AND Time < ".$date2;
         }
         else {
                  
-            $query.=" AND Time = '".$date."'";
+            $query.=" AND Time > ".$date1." AND Time < ".$date2;
         }
         
     }
