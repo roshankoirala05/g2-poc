@@ -56,7 +56,7 @@ header ('location:adminpage.php');
 <br> <br>
 
 <form method ="post" action = "admin.php">
-    City <input type="text" name="city" value="<?php echo $_POST["city"];?>"/>
+     City <input type="text" name="city" value="<?php echo $_POST["city"];?>"/>
    <div id="state" onmouseover="show()" onmouseout="hide()">
    State <input id="statename" type="text" name="state" readonly value="<?php echo $_POST["state"];?>"/>
     <div id="ScrollCB"> 
@@ -114,8 +114,9 @@ header ('location:adminpage.php');
          
  </div> 
  </div>
+
     Zip <input type="number" min="0" max="99999" name="zip" value="<?php echo $_POST["zip"];?>"/>
-    From <input type = "date" name="from" value="<?php echo $_POST["date"];?>"/> To <input type = "date" name="to" value="<?php echo $_POST["date"];?>"/>
+    From <input type = "date" name="from" value="<?php echo $_POST["from"];?>"/> To <input type = "date" name="to" value="<?php echo $_POST["to"];?>"/>
     <input type="submit" value="Submit"/>
     <input type="reset" value="Reset" />
     
@@ -218,7 +219,7 @@ else{
 
     while($row = $result->fetch_assoc())
     {
-       echo "<a href='visitor.php'>" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Country"]." ".$row["Zipcode"]." ".$row["Party"]." ".date('m/d/Y', $row["Time"])." ".$row["Purpose"]." ".$row["Hear"]." ".$row["Hotel"]." ".$row["Email"]."</a><br>";
+       echo "<a href='visitor.php?id={$row["id"]}'>" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Country"]." ".$row["Zipcode"]." ".$row["Party"]." ".date('d F Y H:i:s', $row["Time"])." ".$row["Purpose"]." ".$row["Hear"]." ".$row["Hotel"]." ".$row["Email"]."</a><br>";
       
     }
  }
