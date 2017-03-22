@@ -6,12 +6,9 @@
     <title>Registration </title>
     <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
     <script src="js/Registration.js"></script>
-
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
     <!--link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'-->
-
-
     <link rel="stylesheet" href="css/Registration.css">
 
 </head>

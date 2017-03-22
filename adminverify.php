@@ -10,6 +10,7 @@ if (isset($_POST['submit'])) {
         LIMIT 1";
     $result = $conn->returnQuery($query);
     if ($result->num_rows == 1) {
+
         session_start();
 
         $_SESSION["username"] = $useremail;

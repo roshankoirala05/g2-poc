@@ -275,7 +275,7 @@
          $separator = "END";
          }
          $encodedString = $encodedString . $separator .
-         $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ".$row[4]." ".$row[5]." ".$row[6].
+         $row[1]." ".$row[2]." ".$row[3]." ".$row[4]." ".$row[5]." ".$row[6].
          "ZIPCODE".$row[14]."ZIPCODE".$row[15];;
          $x = $x + 1;
          }

@@ -1,0 +1,26 @@
+#state{
+  height:150;
+  width:200px;
+  display: inline;
+  position: relative;
+}
+
+#ScrollCB{
+  left:10;
+  height:150;
+  width:200px;
+  overflow:auto;
+   position: absolute;
+  visibility: hidden;
+  z-index:1;
+  background-color: white;
+  border: 1px solid gray;
+
+
+}
+
+
+body,
+html {
+  background: linear-gradient(to bottom, #207cca 0%,#7db9e8 0%,#207cca 63%,#1e5799 100%);
+}
