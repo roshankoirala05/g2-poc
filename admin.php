@@ -7,7 +7,14 @@ header ('location:adminpage.php');
 ?>
 <html>
     <head>
+        <title>Admin Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="css/admin.css" rel="stylesheet">
+        
         <script >
             
             
@@ -44,7 +51,7 @@ header ('location:adminpage.php');
     </head>
     
     <body>
-
+<div class="container"> 
      
 <h1>Welcome <?php  echo $_SESSION['name'];?></h1>
 <form action="adminpage.php" method="POST">
@@ -216,19 +223,56 @@ else{
    $result= $conn->returnQuery($query);
    echo "<br>";
    if ($result->num_rows > 0) {
-
+    echo"
+    <table border=1 >
+    <tr>
+    <th>First Name </th>
+    <th>Last Name </th>
+    <th>City </th>
+    <th>State </th>
+    <th>Email </th>
+    <th>Submission Date </th>
+    </tr>
+    
+    ";
+   $csvdata = array();
+   
     while($row = $result->fetch_assoc())
     {
-       echo "<a href='visitor.php?id={$row["id"]}'>" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Country"]." ".$row["Zipcode"]." ".$row["Party"]." ".date('d F Y H:i:s', $row["Time"])." ".$row["Purpose"]." ".$row["Hear"]." ".$row["Hotel"]." ".$row["Email"]."</a><br>";
-      
+      // echo "<a href='visitor.php?id={$row["id"]}'>" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Country"]." ".$row["Zipcode"]." ".$row["Party"]." ".date('d F Y H:i:s', $row["Time"])." ".$row["Purpose"]." ".$row["Hear"]." ".$row["Hotel"]." ".$row["Email"]."</a><br>";
+     $csvdata[]=array($row["Fname"],$row["Lname"],$row["City"],$row["State"],$row["Email"],date('d F Y H:i:s', $row["Time"])) ;
+    echo"
+    <tr>
+    <td><a href='visitor.php?id={$row["id"]}'>{$row["Fname"]}</a></td>
+    <td>{$row["Lname"]}</td>
+    <td>{$row["City"]}</td>
+    <td>{$row["State"]}</td>
+    <td>{$row["Email"]}</td>
+    
+    <td>".date('d F Y H:i:s', $row["Time"])."</td>
+    </tr>
+    ";
+        
     }
+    
+    
+    
+    echo"</table>";
+    
  }
+ //var_dump($csvdata);
+ $_SESSION["report"] = $csvdata; 
+ 
+ 
+
+ 
+ 
  ?>
 
 
-<form method="post" action="index.php">
 
-            <input type="submit" value="Exit"/>
-        </form>
+<a href = "Report.php"><button>Generate Report</button></a>
+        
+    </div>
         </body>
 </html>
