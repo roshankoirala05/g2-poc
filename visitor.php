@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(! (isset($_SESSION['name']))){
+header ('location:adminpage.php');
+}
+?>
 <html>
     <head>
 
@@ -56,15 +62,15 @@ if ($result->num_rows > 0) {
  ?>
  <div class="well">
     <h1>Visitor's Profile</h1>
-    <p>Visitor's Id : <?php echo $id; ?></p>
-     <p>Name : <?php echo $fname.' '.$lname; ?></p>
-      <p>Address : <?php echo $city.' '.$state.' '.$zipcode.' '.$country; ?></p>
-       <p>Email : <?php echo $email; ?></p>
-        <p>No. in Party : <?php echo $party; ?></p>
-         <p>Date : <?php echo $date; ?></p>
-          <p>Purpose : <?php echo $purpose; ?></p>
-           <p>How Did they hear ? : <?php echo $hear; ?></p>
-            <p>Did they stay in a hotel ? : <?php echo $hotel; ?></p>
+    <p><b>Visitor's Id :</b> <?php echo $id; ?></p>
+     <p><b>Name :</b> <?php echo $fname.' '.$lname; ?></p>
+      <p><b>Address :</b> <?php echo $city.' '.$state.' '.$zipcode.' '.$country; ?></p>
+       <p><b>Email :</b> <?php echo $email; ?></p>
+        <p><b>No. in Party :</b> <?php echo $party; ?></p>
+         <p><b>Date :</b> <?php echo $date; ?></p>
+          <p><b>Purpose :</b> <?php echo $purpose; ?></p>
+           <p><b>How Did they hear ? :</b> <?php echo $hear; ?></p>
+            <p><b>Did they stay in a hotel ? :</b> <?php echo $hotel; ?></p>
   </div>
 
   <div class="page-header">
@@ -80,8 +86,8 @@ if ($result2->num_rows > 0) {
     while($row2 = $result2->fetch_assoc())
     {
         echo"
-        <div class='well'>
-        <p>submitted by ".$row2["Commenter"]." on ".date('d F Y H:i:s', $row2["Time"])."</p><p>"
+        <div class='well well-sm'>
+        <p><font size='1'>submitted by ".$row2["Commenter"]." on ".date('d F Y H:i:s', $row2["Time"])."</font></p><p>"
         .$row2["Comment"]."</p></div>";
 
     }
@@ -96,7 +102,7 @@ if ($result2->num_rows > 0) {
   <textarea rows='4' cols='50' name='comment' placeholder='Enter your comment'></textarea>
   <input type='submit'>
 </form>
-    <a href='admin.php'><button type='button' >Go Back</button></a>
+    <a href='admin.php'><button class="btn btn-success" type='button' >Go Back</button></a>
 
 
 

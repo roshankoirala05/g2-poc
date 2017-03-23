@@ -53,10 +53,10 @@ header ('location:adminpage.php');
 <div class="container">
 
 <h1>Welcome <?php  echo $_SESSION['name'];?></h1>
-<form action="adminpage.php" method="POST">
 
-    <input type="submit" name="submit" Value="Log out">
-</form>
+<a href = "adminpage.php"><button class="btn btn-danger btn-md">Log Out</button></a>
+
+
 <h3>Type one or more filters !</h3>
 
 <br> <br>
@@ -213,12 +213,14 @@ else{
    echo "<br>";
    if ($result->num_rows > 0) {
     echo"
-    <table border=1 >
+    <div class='table-responsive'>
+    <table class='table table-hover table-condensed'>
     <tr>
     <th>First Name </th>
     <th>Last Name </th>
     <th>City </th>
     <th>State </th>
+    <th>Country </th>
     <th>Email </th>
     <th>Submission Date </th>
     </tr>
@@ -236,6 +238,7 @@ else{
     <td>{$row["Lname"]}</td>
     <td>{$row["City"]}</td>
     <td>{$row["State"]}</td>
+    <td>{$row["Country"]}</td>
     <td>{$row["Email"]}</td>
 
     <td>".date('d F Y H:i:s', $row["Time"])."</td>
@@ -246,7 +249,7 @@ else{
 
 
 
-    echo"</table>";
+    echo"</table></div>";
 
  }
  //var_dump($csvdata);
@@ -259,8 +262,8 @@ else{
 
 
 
-<a href = "Report.php"><button>Generate Report</button></a>
-
+<a href = "Report.php"><button class="btn btn-primary btn-lg">Generate Report</button></a>
+  <br><br> <br>
     </div>
         </body>
 </html>
