@@ -16,8 +16,8 @@
 
     <body>
         <section id="contact">
-            <div class="container">
-
+            <div id="overlay" class="container">
+                <a class="close" href="#">&times;</a>
                 <form class="well form-horizontal" action="data.php" method="post" id="contact_form">
                     <fieldset>
 

@@ -1,26 +1,63 @@
 #map_canvas {
     height: 80%;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 0px;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    margin-top: 0%;
+    border: 2px solid red;
+    border-bottom-color: red;
 }
 
-html,
-body {
-    background-color: #388c5d;
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to bottom, #207cca 0%,#7db9e8 0%,#207cca 63%,#1e5799 100%);
 }
 
+.form-group{
+    margin-left: 20%;
+    margin-right: 20%;
+    
+}
 
 /***Registration****/
 
-#floating-pane2 {
-    position: absolute;
-    top: -50px;
-    left: 0%;
-    z-index: 5;
+.button{
+    background-color: #4CAF50;
+    border-width: medium;
+    border-radius: 5px;
+    border-style: outset;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    
+}
+
+.button:hover{
+    background: red;
+}
+/**** Location****
+
+#locate_place {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    border-radius: 2px;
+}
+**/
+
+/*** Marker*****
+
+#manual_pin {
+    position: relative;
     background-color: #fff;
     padding: 5px;
     border: 1px solid #999;
@@ -28,86 +65,76 @@ body {
     font-family: 'Roboto', 'sans-serif';
     line-height: 30px;
     padding-left: 10px;
+    border-radius: 2px;
+}
+*/
+h1{
+    font-weight: bold;
+    color: Black;
+    
 }
 
-#floating-pane3 {
-    position: absolute;
-    top: 10px;
-    left: 175%;
-    z-index: 5;
-    background-color: #fff;
+input[type=textbox]:focus {
+    color: Black;
+    text-transform: uppercase;
+    border: 2px;
+    border-style: inset;
+    border-radius: 5px;
+    background-color: #F5F5DC;
+}
+
+input[type=button]{
+    background-color: #4CAF50;
+    border-width: medium;
+    border-radius: 2px;
+    border-style: outset;
+    color: white;
     padding: 5px;
-    border: 1px solid #999;
     text-align: center;
-    font-family: 'Roboto', 'sans-serif';
-    line-height: 30px;
-    padding-left: 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    
+}
+input[type=button]:hover{
+    background:red;
 }
 
-
-/*********Zoom out****/
-
-#floating-pane5 {
-    position: absolute;
-    top: -50px;
-    left: -15%;
-    z-index: 5;
-    background-color: #fff;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-    font-family: 'Roboto', 'sans-serif';
-    line-height: 30px;
-    padding-left: 10px;
+/*hover section**/
+/*whole registration page*/
+.container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
 }
 
-
-/**********Zoom In********/
-
-#floating-pane4 {
-    position: absolute;
-    top: -50px;
-    left: -30%;
-    z-index: 5;
-    background-color: #fff;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-    font-family: 'Roboto', 'sans-serif';
-    line-height: 30px;
-    padding-left: 10px;
+.container:target{
+  visibility: visible;
+  opacity: 1;
 }
 
-
-/**** Location****/
-
-#floating-panel {
-    position: absolute;
-    top: -50px;
-    left: 25%;
-    z-index: 5;
-    background-color: #fff;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-    font-family: 'Roboto', 'sans-serif';
-    line-height: 30px;
-    padding-left: 10px;
+/*close button*/
+.container .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
 }
 
-
-/*** Marker*****/
-
-#floating-pane6 {
-    position: absolute;
-    top: -50px;
-    left: 60%;
-    z-index: 5;
-    background-color: #fff;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-    font-family: 'Roboto', 'sans-serif';
-    line-height: 30px;
-    padding-left: 10px;
+/*close color*/
+.popup .close:hover {
+  color: #06D85F;
 }
+

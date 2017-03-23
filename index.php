@@ -22,10 +22,10 @@
 
 
             var map = new google.maps.Map(document.getElementById('map_canvas'), {
-                zoom: 4,
+                zoom: 3,
                 center: {
-                    lat: 39.81528751808606,
-                    lng: -99.5625000167638
+                    lat: 13.143678,
+                    lng: 18.808594
                 },
 
             });
@@ -199,35 +199,37 @@
          ?>
             <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString;?>" />
     </div>
+    
     <h1 align="center">Welcome to Monroe West-Monroe  Convention and Vistor Bureau </h1>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNOpboPQgboMUStdCcaODSa-l0b7UcfUU&callback=initMap"></script>
     <div id="map_canvas"></div>
+    
     <div class="form-group">
-        <label class="col-md-4 control-label"></label>
-        <div class="col-md-4">
+        
+        
 
-            <div id="floating-panel">
-                <input id="address" type="textbox" placeholder="Enter Zip or City,State" value="" required autofocus>
-                <input id="addressSubmit" type="button" value="Enter">
-            </div>
-            <div id="floating-pane6">
-                <input id="marker" type="textbox" placeholder="Enter Zip or City,State" value="" required autofocus>
-                <input id="markerSubmit" type="button" value="Pin Mark">
-            </div>
-            <div id="floating-pane2">
-                <a href="Registration.php" class="btn btn-warning" role="button">Registration Button</a>
-            </div>
-            <div id="floating-pane3">
-                <a href="adminpage.php" class="btn btn-info" role="button">Admin Login</a>
-            </div>
-             <div id="floating-pane4">
-               <input id="zoomIn" type="button" value="Zoom In">
-            </div>
-             <div id="floating-pane5">
-                <input id="zoomOut" type="button" value="Zoom Out">
-            </div>
+            <span id="locate_place">
+                <input id="address" type="textbox" placeholder="Enter Zip, City or State" value="" required autofocus>
+                <input id="addressSubmit" type="button" value="ENTER">
+            </span>
+            <span id="manual_pin">
+                <input id="marker" type="textbox" placeholder="Enter Zip, City or State" value="" required autofocus>
+                <input id="markerSubmit" type="button" value="PIN MARK">
+            </span>
+            
+            <!-- Register button -->
+            <a href="Registration.php#overlay" class="button">REGISTER</a>
+            
+            <!--Zoom In button-->
+            <button id= zoomIn class="button">ZOOM IN</button>
+        
+            <!--Zoom Out button-->
+            <button id= zoomOut class="button">ZOOM OUT</button>
+            
+            <!--Admin page link-->
+            <a href="adminpage.php" class="button">ADMIN</a>
 
-        </div>
+        
     </div>
 </body>
 
