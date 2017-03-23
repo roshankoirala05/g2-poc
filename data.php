@@ -19,7 +19,7 @@ $date = time();
 /********************************************************************************************
  * Converting the Latitude and longitude for the address
  ********************************************************************************************/
-        $address = $city+$state+$zipcode+$country;
+        $address = urlencode($city." ,".$state.", ".$zipcode.", ".$country);
         $url = "http://maps.googleapis.com/maps/api/geocode/json?address=$address&sensor=false";
         $google_api_response =file_get_contents( $url );
         $results = json_decode( $google_api_response);

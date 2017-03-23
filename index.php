@@ -295,7 +295,7 @@
 
             </div>
             <div id="floating-pane2">
-                <button id="submit" type="submit" class="btn btn-warning btn-lg">Registratio Button</button>
+                <button id="submit" type="submit" class="btn btn-warning btn-lg">Registration Button</button>
             </div>
             <div id="floating-pane3">
                 <a href="admin.php" class="btn btn-info" role="button">Admin Login</a>
