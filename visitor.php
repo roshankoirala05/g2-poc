@@ -1,5 +1,6 @@
 <?php
 session_start();
+$visitorId =  $_GET['id'];
 if(! (isset($_SESSION['name']))){
 header ('location:adminpage.php');
 }
@@ -16,12 +17,11 @@ header ('location:adminpage.php');
 
 </head>
 <body>
-<div class="container">
+
+
 <?php
-session_start();
 include 'DatabaseConnection.php';
 $conn= new DatabaseConnection();
-$visitorId =  $_GET['id'];
 $query1 = "SELECT * FROM VISITOR WHERE id =".$visitorId;
 $result= $conn->returnQuery($query1);
 if ($result->num_rows > 0) {
@@ -52,6 +52,7 @@ if ($result->num_rows > 0) {
  if(!empty($_POST["comment"])){
      $commenter = $_SESSION["username"];
      $comment = $_POST["comment"];
+     date_default_timezone_set("America/Chicago");
      $time = time();
      $id = $visitorId;
 
@@ -60,6 +61,18 @@ if ($result->num_rows > 0) {
  }
 
  ?>
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+
+    <ul class="nav navbar-nav">
+
+      <li class="active"><a href="#">View</a></li>
+      <li><a href="edit.php?id=<?php echo $visitorId ; ?>">Edit</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
  <div class="well">
     <h1>Visitor's Profile</h1>
     <p><b>Visitor's Id :</b> <?php echo $id; ?></p>
@@ -87,7 +100,7 @@ if ($result2->num_rows > 0) {
     {
         echo"
         <div class='well well-sm'>
-        <p><font size='1'>submitted by ".$row2["Commenter"]." on ".date('d F Y H:i:s', $row2["Time"])."</font></p><p>"
+        <p><font size='1'>submitted by ".$row2["Commenter"]." on ".date('d F Y h:i a', $row2["Time"])."</font></p><p>"
         .$row2["Comment"]."</p></div>";
 
     }
