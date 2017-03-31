@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <title>Registration </title>
-    <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+session_start();
+$visitorId =  $_GET['id'];
+if(! (isset($_SESSION['name']))){
+header ('location:adminpage.php');
+}
+?>
+<html>
+    <head>
+        
+        <title>Visitor Profile</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
     <script src="js/Registration.js"></script>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
@@ -12,16 +20,58 @@
     <link rel="stylesheet" href="css/Registration.css">
 
 </head>
-
 <body>
-    <section id="contact">
-        <div class="container">
+    
+    
+    
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    
+    <ul class="nav navbar-nav">
+      
+      <li class="active"><a href="visitor.php?id=<?php echo $visitorId;?>">View</a></li>
+      <li><a href="#">Edit</a></li>
+    </ul>
+  </div>
+</nav> 
+<div class = "container" >
+<?php 
 
-            <form class="well form-horizontal" action="data.php" method="post" id="contact_form">
+include 'DatabaseConnection.php';
+$conn= new DatabaseConnection();
+
+$query1 = "SELECT * FROM VISITOR WHERE id =".$visitorId;
+
+$result= $conn->returnQuery($query1);
+if ($result->num_rows > 0) {
+
+    while($row = $result->fetch_assoc())
+    {
+       $id = $row["id"];
+       $fname = $row["Fname"];
+       $lname= $row["Lname"];  
+       $city = $row["City"];
+       $state = $row["State"];
+       $country = $row["Country"];
+       $zipcode = $row["Zipcode"];
+       $party = $row["Party"];
+       $date = date('d F Y H:i:s', $row["Time"]);
+       $purpose = $row["Purpose"];
+       $hear = $row["Hear"];
+       $hotel = $row["Hotel"];
+       $email = $row["Email"];
+       
+
+    }
+ 
+ }
+?>
+
+<form class="well form-horizontal" action="updateVisitor.php?id=<?php echo $id;?>" method="post" id="contact_form">
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Monroe-West Monroe Convention and Visitors Bureau (CVB)</legend>
+                    <legend>Please update and submit the form</legend>
 
                     <!-- Text input-->
 
@@ -30,7 +80,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="firstName" placeholder="First Name" class="form-control" type="text">
+                                <input name="firstName" value="<?php echo $fname; ?>" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -42,7 +92,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="lastName" placeholder="Last Name" class="form-control" type="text">
+                                <input name="lastName" value="<?php echo $lname; ?>" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -55,7 +105,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                <input name="zipCode" id="zipCode" placeholder="Zip Code" class="form-control" type="text">
+                                <input name="zipCode" id="zipCode" value="<?php echo $zipcode; ?>" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -68,7 +118,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                 <div id="city_dropdown">
-                                    <input name="cityName" id="cityName" placeholder="City" class="form-control" type="text">
+                                    <input name="cityName" id="cityName" value="<?php echo $city; ?>" class="form-control" type="text">
                                 </div>
                             </div>
                         </div>
@@ -82,7 +132,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
                                 <select name="stateName" id="stateName" class="form-control selectpicker" type="selectBox">
-                                    <option value="">Chose a State</option>
+                                    <option value="<?php echo $state; ?>"><?php echo $state; ?></option>
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
                                     <option value="AZ">Arizona</option>
@@ -145,7 +195,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
                                 <select name="countryName" id="countryName" class="form-control selectpicker" type="selectBox">
-                                    <option value="">Select your Country</option>
+                                    <option value="<?php echo $country; ?>"><?php echo $country; ?></option>
                                     <option value="US">United States</option>
                                     <option value="AF">Afghanistan</option>
                                     <option value="AX">Åland Islands</option>
@@ -406,7 +456,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                                <input name="noInParty" placeholder="Enter the Number" class="form-control" type="text">
+                                <input name="noInParty" value="<?php echo $party; ?>" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -417,7 +467,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input name="email" placeholder="E-Mail Address (Optional)" class="form-control" type="text">
+                                <input name="email" value="<?php echo $email; ?>" class="form-control" type="text">
                             </div>
                         </div>
                     </div>
@@ -430,14 +480,14 @@
                                 <li>
                                     <div class="radio-inline">
                                         <label>
-                                            <input type="radio" name="TravelingFor" value="business" Checked/> Business
+                                            <input type="radio" name="TravelingFor" value="business" <?php if ($purpose=='business'){echo 'Checked';}?>/> Business
                                         </label>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="radio-inline">
                                         <label>
-                                            <input type="radio" name="TravelingFor" value="Pleasure" /> Pleasure
+                                            <input type="radio" name="TravelingFor" value="Pleasure" <?php if ($purpose=='Pleasure'){echo 'Checked';}?>/> Pleasure
                                         </label>
                                         <br>
                                     </div>
@@ -445,13 +495,13 @@
                             </ul>
                             <div class="radio-inline">
                                 <label>
-                                    <input type="radio" name="TravelingFor" value="Convention" /> Convention
+                                    <input type="radio" name="TravelingFor" value="Convention" <?php if ($purpose=='Convention'){echo 'Checked';}?>/> Convention
                                 </label>
                             </div>
 
                             <div class="radio-inline">
                                 <label>
-                                    <input type="radio" name="TravelingFor" value="Others" /> Others
+                                    <input type="radio" name="TravelingFor" value="Others" <?php if ($purpose=='Others'){echo 'Checked';}?>/> Others
                                 </label>
                             </div>
                         </div>
@@ -462,13 +512,13 @@
                         <div class="col-md-4">
                             <div class="radio-inline">
                                 <label>
-                                    <input type="radio" name="HowDidYouHear" value="Billboard" Checked/> Billboard
+                                    <input type="radio" name="HowDidYouHear" value="Billboard" <?php if ($hear=='Billboard'){echo 'Checked';}?>/> Billboard
                                 </label>
 
                             </div>
                             <div class="radio-inline">
                                 <label>
-                                    <input type="radio" name="HowDidYouHear" value="Interstate Signs" /> Interstate Signs
+                                    <input type="radio" name="HowDidYouHear" value="Interstate Signs" <?php if ($hear=='Interstate'){echo 'Checked';}?>/> Interstate Signs
                                 </label>
                                 <br>
                             </div>
@@ -476,7 +526,7 @@
                                 <li>
                                     <div class="radio-inline">
                                         <label>
-                                            <input type="radio" name="HowDidYouHear" value="Others" /> Others
+                                            <input type="radio" name="HowDidYouHear" value="Others" <?php if ($hear=='Others'){echo 'Checked';}?>/> Others
                                         </label>
                                     </div>
                                 </li>
@@ -490,12 +540,12 @@
                         <div class="col-md-4">
                             <div class="radio-inline">
                                 <label>
-                                    <input type="radio" name="DidYouStay" value="yes" Checked/> Yes
+                                    <input type="radio" name="DidYouStay" value="yes" <?php if ($hotel=='yes'){echo 'Checked';}?>/> Yes
                                 </label>
                             </div>
                             <div class="radio-inline">
                                 <label>
-                                    <input type="radio" name="DidYouStay" value="no" /> No
+                                    <input type="radio" name="DidYouStay" value="no" <?php if ($hotel=='no'){echo 'Checked';}?> /> No
                                 </label>
                             </div>
                         </div>
@@ -504,185 +554,16 @@
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-4">
                         <div id="floating-pane1">
-                            <button type="submit" class="btn btn-success btn-lg">Submit Registration <span class="glyphicon glyphicon-send"></span>
+                            <button type="submit" class="btn btn-success btn-lg">Save and Return
                             </button>
                         </div>
-                        <div id="floating-pane2">
-                            <button type="reset" class="btn btn-danger btn-lg">Reset Form <span class="glyphicon glyphicon-refresh"></span>
-                            </button>
-                        </div>
-                        <div id="floating-pane3">
-                            <a href="index.php" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-step-backward"></span> Return Home </a>
-                        </div>
+                        
                     </div>
                 </fieldset>
             </form>
-        </div>
-    </section>
-    <script>
-        $(document).ready(function() {
-            var address = '';
-            var query = window.location.search.substring(1);
-            if (query) {
-                var address = query.replace(/%20/g, " ");
-                if (address.substring(0, 13) == "Unnamed Road,") {
-                    address = address.substring(13);
-                }
-            }
-            var city = '';
-            var state = '';
-            var country = '';
-            var zipcode = '';
-            //make a request to the google geocode api
-            $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + address)
-                .success(function(response) {
-                    //find the city and state
-                    var address_components = response.results[0].address_components;
-                    var lat = response.results[0].geometry.location.lat;
-                    var lng = response.results[0].geometry.location.lng;
-                    // alert(lat);
-                    //alert(lng);
-                    $.each(address_components, function(index, component) {
-                        var types = component.types;
-                        $.each(types, function(index, type) {
-                            if (type == 'locality') {
-                                city = component.long_name;
-                            }
-                            if (type == 'administrative_area_level_1') {
-                                state = component.short_name;
-                            }
-                            if (type == 'country') {
-                                country = component.short_name;
-                            }
-                            if (type == 'postal_code') {
-                                zipcode = component.short_name;
-                            }
-                        });
-                    });
-
-                    $('#cityName').val(city);
-                    document.getElementById("cityName").style.color = '#700404';
-                     if (document.getElementById("cityName").value)
-                                   {
-                                   document.getElementById("cityName").style.backgroundColor = '#c4ad2b';
-                                   }
-
-                    $('#zipCode').val(zipcode);
-                    document.getElementById("zipCode").style.color = '#700404';
-                     if (document.getElementById("zipCode").value)
-                                   {
-                                   document.getElementById("zipCode").style.backgroundColor = '#c4ad2b';
-                                   }
-
-
-                    $('#stateName').val(state);
-                    document.getElementById("stateName").style.color = '#700404';
-                     if (document.getElementById("stateName").value)
-                                   {
-                                   document.getElementById("stateName").style.backgroundColor = '#c4ad2b';
-                                   }
-                    $('#countryName').val(country);
-                    document.getElementById("countryName").style.color = '#700404';
-                    if (document.getElementById("countryName").value)
-                                   {
-                                   document.getElementById("countryName").style.backgroundColor = '#c4ad2b';
-                                   }
-
-                });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#zipCode').keyup(function() {
-                if ($(this).val().length >= 5) {
-                    var city = '';
-                    var state = '';
-                    var country = '';
-                    var zipcode = $(this).val();;
-                    //make a request to the google geocode api
-                    $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipcode)
-                        .success(function(response) {
-                            //find the city and state
-                            var address_components = response.results[0].address_components;
-                            $.each(address_components, function(index, component) {
-                                var types = component.types;
-                                $.each(types, function(index, type) {
-                                    if (type == 'locality') {
-                                        city = component.long_name;
-                                    }
-                                    if (type == 'administrative_area_level_1') {
-                                        state = component.short_name;
-                                    }
-                                    if (type == 'country') {
-                                        country = component.short_name;
-                                    }
-                                    if (type == 'postal_code') {
-                                        zipcode = component.short_name;
-                                    }
-                                });
-                            });
-                            //pre-fill the city ,state and country
-                            var cities = response.results[0].postcode_localities;
-                            if (cities) {
-                                //turn city into a dropdown if necessary
-                                var $select = $(document.createElement('select'));
-                                console.log(cities);
-                                $.each(cities, function(index, locality) {
-                                    var $option = $(document.createElement('option'));
-                                    $option.html(locality);
-                                    $option.attr('value', locality);
-                                    if (city == locality) {
-                                        $option.attr('selected', 'selected');
-                                    }
-                                    $select.append($option);
-                                });
-                                $select.attr('id', 'cityName');
-                                $('#city_dropdown').html($select);
-                            } else {
-                                $('#cityName').val(city);
-                                   document.getElementById("cityName").style.color = '#700404';
-                                   if (document.getElementById("cityName").value)
-                                   {
-                                   document.getElementById("cityName").style.backgroundColor = '#c4ad2b';
-                                   }
-
-                            }
-
-                            $('#stateName').val(state);
-                            document.getElementById("stateName").style.color = '#700404';
-                            if (document.getElementById("stateName").value)
-                                   {
-                                   document.getElementById("stateName").style.backgroundColor = '#c4ad2b';
-                                   }
-
-                            $('#countryName').val(country);
-                            document.getElementById("countryName").style.color = '#700404';
-                            if (document.getElementById("countryName").value)
-                                   {
-                                   document.getElementById("countryName").style.backgroundColor = '#c4ad2b';
-                                   }
-                            $('#zipCode').val(zipcode);
-                            document.getElementById("zipCode").style.color = '#700404';
-                            if (document.getElementById("zipCode").value)
-                                   {
-                                   document.getElementById("zipCode").style.backgroundColor = '#c4ad2b';
-                                   }
-
-
-                        });
-                }
-            });
-        });
-    </script>
-
-    <!-- /.container -->
-    <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNOpboPQgboMUStdCcaODSa-l0b7UcfUU&libraries=places&callback=initAutocomplete" async defer></script-->
-
-    <!--script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script-->
-    <script src='js/bootstrapvalidator.min.js'></script>
-    <script src="js/index.js"></script>
-    <!--script src='js/jquery-3.1.1.min.js'></script-->
-
+ 
+ 
+ 
+</div>
 </body>
-
 </html>
