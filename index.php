@@ -30,8 +30,25 @@
                 center: {
                     lat: 39.81528751808606,
                     lng: -99.5625000167638
-                }
+                },
+               styles: [
+              {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+              {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+
+              {
+                featureType: 'water',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#0e5b55'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#0c23a0'}]
+              }
+          ]
+
             });
+
 
             /*********************************/
             // Initialize variables
@@ -63,7 +80,7 @@
             /********** Closed Multiple marker of same place *******/
             oms.addListener('unspiderfy', function(markers) {
                 for (var i = 0; i < markers.length; i++) {
-                    markers[i].setIcon("images/unspiderfyMarker.png");
+                    markers[i].setIcon("images/iconRed.png");
                     markers[i].setShadow(shadow);
                 }
             });
@@ -98,7 +115,7 @@
              markerCluster = new MarkerClusterer(map, markers, mcOptions);
             /******************************************************************************/
             /********************* Pin Mark on map form the Pin Mark Button*******************************/
-            document.getElementById('markerSubmit').addEventListener('click', function() {
+            document.getElementById('markerSubmit').addEventListener('click',  function() {
                 clearMarkers(null);
                 geocodeAddress(geocoder);
                // $('#address').val('');
@@ -119,6 +136,7 @@
                             position: results[0].geometry.location,
                             content: results[0].formatted_address,
                             title:results[0].formatted_address,
+                              animation: gm.Animation.DROP,
                             icon: 'images/visitorMarker.png'
                         });
                         summaryPanel.innerHTML = "Your address was marked in map. If it is not correct click the marker that you pin to unmark it";
@@ -216,6 +234,7 @@
                     position: location,
                     map: map,
                     content: address,
+                    animation: gm.Animation.DROP,
                     title:address,
                     icon: 'images/visitorMarker.png'
                 });
@@ -255,6 +274,15 @@
                 clusterClicked = true;
             });
             //  map.fitBounds(bounds);
+
+            function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+      }
+
         };
     </script>
 </head>
