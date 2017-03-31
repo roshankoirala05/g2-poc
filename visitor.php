@@ -57,16 +57,7 @@ if ($result->num_rows > 0) {
     
  }
  
- if(!empty($_POST["comment"])){
-     $commenter = $_SESSION["username"];
-     $comment = $_POST["comment"];
-     date_default_timezone_set("America/Chicago");
-     $time = time();
-     $id = $visitorId;
-     
-     $query3 = "INSERT INTO COMMENT (Comment,Commenter,Time,id) VALUES('$comment','$commenter', '$time','$id')";
-     $conn->insertDatabase($query3);
- }
+ 
  
  ?>
  <nav class="navbar navbar-inverse">
@@ -108,7 +99,7 @@ if ($result2->num_rows > 0) {
     {
         echo"
         <div class='well well-sm'>
-        <p><font size='1'>submitted by ".$row2["Commenter"]." on ".date('d F Y h:i a', $row2["Time"])."</font></p><p>"
+        <p><font size='1'>submitted by ".$row2["Commenter"]." on ".date('d F Y h:i a', $row2["Time"])."<a style='float:right' href ='deleteComment.php?id=".$visitorId."&commentId=".$row2["Serialno"]."'>Delete</a></font></p><p>"
         .$row2["Comment"]."</p></div>";
         
     }
@@ -119,7 +110,7 @@ if ($result2->num_rows > 0) {
     
    <br>
    
-   <form action='visitor.php?id=<?php echo $visitorId;?>'  method='post'>
+   <form action='insertComment.php?id=<?php echo $visitorId;?>'  method='post'>
   <textarea rows='4' cols='50' name='comment' placeholder='Enter your comment'></textarea>
   <input type='submit'>
 </form>
