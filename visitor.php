@@ -64,8 +64,8 @@ if ($result->num_rows > 0) {
   <div class="container-fluid">
     
     <ul class="nav navbar-nav">
-      
-      <li class="active"><a href="#">View</a></li>
+      <li class ="active" ><a href="admin.php">Home</a></li>
+      <li> <a href="#">View</a></li>
       <li><a href="edit.php?id=<?php echo $visitorId ; ?>">Edit</a></li>
     </ul>
   </div>

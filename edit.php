@@ -28,8 +28,8 @@ header ('location:adminpage.php');
   <div class="container-fluid">
     
     <ul class="nav navbar-nav">
-      
-      <li class="active"><a href="visitor.php?id=<?php echo $visitorId;?>">View</a></li>
+      <li class ="active" ><a href="admin.php">Home</a></li>
+      <li><a href="visitor.php?id=<?php echo $visitorId;?>">View</a></li>
       <li><a href="#">Edit</a></li>
     </ul>
   </div>

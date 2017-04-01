@@ -9,7 +9,7 @@ $conn= new DatabaseConnection();
 
 
 
-if(!empty($_POST["comment"])){
+//if(!empty($_POST["comment"])){
      $commenter = $_SESSION["username"];
      $comment = $_POST["comment"];
      date_default_timezone_set("America/Chicago");
@@ -18,6 +18,6 @@ if(!empty($_POST["comment"])){
      
      $query3 = "INSERT INTO COMMENT (Comment,Commenter,Time,id) VALUES('$comment','$commenter', '$time','$id')";
      $conn->insertDatabase($query3);
- }
+// }
  
  header ('location:visitor.php?id='.$visitorId);

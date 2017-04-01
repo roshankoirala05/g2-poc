@@ -61,7 +61,7 @@ header ('location:adminpage.php');
 <h3>Type one or more filters !</h3>
 
 <br> <br>
-
+<div class = "well">
 <form method ="post" action = "admin.php">
      City <input type="text" name="city" value="<?php echo $_POST["city"];?>"/>
    <div id="state" onmouseover="show()" onmouseout="hide()">
@@ -128,6 +128,7 @@ header ('location:adminpage.php');
     <input type="reset" value="Reset" />
     
 </form>
+</div>
  <br>
 
  <?php
