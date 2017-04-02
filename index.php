@@ -18,6 +18,9 @@
             var markerCluster;
             var marker;
             var x;
+            var positionArray=[];
+            var result=[];
+            var markerMoved=false;
             var stringArray, markers = [];
             var userMarker = [];
             var clusterClicked = false;
@@ -31,10 +34,7 @@
                     lat: 39.81528751808606,
                     lng: -99.5625000167638
                 },
-               styles: [
-              {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
-              {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
-
+               /*styles: [
               {
                 featureType: 'water',
                 elementType: 'geometry.fill',
@@ -46,10 +46,8 @@
                 stylers: [{color: '#0c23a0'}]
               }
           ]
-
+*/
             });
-
-
             /*********************************/
             // Initialize variables
             var geocoder = new gm.Geocoder();
@@ -116,17 +114,18 @@
             /******************************************************************************/
             /********************* Pin Mark on map form the Pin Mark Button*******************************/
             document.getElementById('markerSubmit').addEventListener('click',  function() {
-                clearMarkers(null);
+               // clearMarkers(null);
                 geocodeAddress(geocoder);
-               // $('#address').val('');
+               // $('#address').val('');s
             });
             function geocodeAddress(geocoder) {
-                var address = document.getElementById('address').value;
+                address = document.getElementById('address').value;
                 geocoder.geocode({
                     'address': address
                 }, function(results, status) {
                     if (status === 'OK') {
-                        address = (results[0].formatted_address);
+                         if(!markerMoved)
+                        {
                         /*
                         This will load the final position of map
                         */
@@ -139,12 +138,22 @@
                               animation: gm.Animation.DROP,
                             icon: 'images/visitorMarker.png'
                         });
+
+                        positionArray=[results[0].geometry.location.lat(), results[0].geometry.location.lng()] ;
                         summaryPanel.innerHTML = "Your address was marked in map. If it is not correct click the marker that you pin to unmark it";
                         marker.desc = results[0].formatted_address;
                         oms.addMarker(marker);
                         userMarker.push(marker);
                         timerMessage();
-                    } else {
+                         markerMoved=true;
+                        }
+                        else
+                        {
+                           result=[results[0].geometry.location.lat(), results[0].geometry.location.lng()];
+                           transition(result);
+                        }
+                    }
+                        else {
                         summaryPanel.innerHTML = 'Address is not available form that place to pin on map';
                         timerMessage();
                     }
@@ -225,7 +234,19 @@
                     if (status == gm.GeocoderStatus.OK) {
                         console.log(results);
                         address = (results[0].formatted_address);
-                        placeMarker(latlng, address);
+                        if(!markerMoved)
+                        {
+                          placeMarker(latlng, address);
+                           positionArray=[latlng.lat(),latlng.lng()];
+                           markerMoved=true;
+                        }
+                        else
+                        {
+                               result = [latlng.lat(),latlng.lng()];
+                                transition(result);
+                        }
+
+
                     }
                 });
             }
@@ -251,9 +272,9 @@
                 setTimeout(function() {
                     if (!clusterClicked) {
                         // remove  the last marker
-                        clearMarkers(null);
+                      //  clearMarkers(null);
                         // call the function to pin on map
-                        getReverseGeocodingData(event.latLng);
+                       getReverseGeocodingData(event.latLng);
                         clusterClicked = false;
                     } else {
                         clusterClicked = false;
@@ -266,6 +287,7 @@
                     userMarker[i].setMap(map);
                 }
             }
+
             /**************************************************************************************
                  Click event for MarkerCluster. If click on MarkerCluster then it will zoom on
                             Markercluster insted of mark on Map
@@ -275,13 +297,45 @@
             });
             //  map.fitBounds(bounds);
 
-            function toggleBounce() {
-        if (marker.getAnimation() !== null) {
-          marker.setAnimation(null);
-        } else {
-          marker.setAnimation(google.maps.Animation.BOUNCE);
+
+    var numDeltas = 100;
+    var delay = 10; //milliseconds
+    var i = 1;
+    var deltaLat;
+    var deltaLng;
+    function transition(result){
+        i = 0;
+        deltaLat = (result[0] - positionArray[0])/numDeltas;
+        deltaLng = (result[1] - positionArray[1])/numDeltas;
+        moveMarker();
+    }
+
+    function moveMarker(){
+        positionArray[0] += deltaLat;
+        positionArray[1] += deltaLng;
+        var latlng = new google.maps.LatLng(positionArray[0], positionArray[1]);
+         marker.setPosition(latlng);
+        if(i==numDeltas)
+        {
+            clearMarkers(null);
+       marker = new gm.Marker({
+                    position: latlng,
+                    map: map,
+                    content: address,
+                    title:address,
+                    icon: 'images/visitorMarker.png'
+                });
+               summaryPanel.innerHTML = "Your address was successfully marked on map. If it is not correct, then mark on correct address ";
+               marker.desc = address;
+               oms.addMarker(marker);
+               userMarker.push(marker);
+               timerMessage();
         }
-      }
+        if(i!=numDeltas){
+            i++;
+            setTimeout(moveMarker, delay);
+        }
+    }
 
         };
     </script>
