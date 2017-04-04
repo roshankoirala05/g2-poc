@@ -16,8 +16,7 @@ legend {
 
 label.control-label {
     color: #385e40;
-    font-size: 20px;
-    width: 400;
+    font-size: 18px;
 }
 
 fieldset {
@@ -25,7 +24,8 @@ fieldset {
     border-style: dotted;
 }
 
-ul {
+
+/*ul {
     list-style-type: none;
     padding-left: 0px;
 }
@@ -34,10 +34,10 @@ li {
     display: inline-block;
     padding-right: 25px;
 }
+*/
 
 input[type="text"] {
     height: 50px;
-    width: 50px;
     font-size: 20px;
 }
 
@@ -51,13 +51,25 @@ select[type="selectBox"] {
     font-size: 20px;
 }
 
+.checkbox {
+    font-size: 20px;
+}
+
 
 /* Radio button Circle size */
 
 input[type="radio"] {
-    height: 18px;
-    width: 18px;
+    height: 16px;
+    width: 16px;
 }
+
+input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+}
+
+
+/* Submit Button */
 
 #floating-pane1 {
     position: absolute;
@@ -70,6 +82,9 @@ input[type="radio"] {
     line-height: 50px;
 }
 
+
+/* Reset */
+
 #floating-pane2 {
     position: absolute;
     top: 0px;
@@ -79,6 +94,9 @@ input[type="radio"] {
     font-family: 'Roboto', 'sans-serif';
     line-height: 50px;
 }
+
+
+/* Return Home */
 
 #floating-pane3 {
     position: absolute;

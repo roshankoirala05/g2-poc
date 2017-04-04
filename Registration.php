@@ -23,36 +23,11 @@
                     <!-- Form Name -->
                     <legend>Monroe-West Monroe Convention and Visitors Bureau (CVB)</legend>
 
-                    <!-- Text input-->
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">First Name</label>
-                        <div class="col-md-4 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="firstName" placeholder="First Name" class="form-control" type="text">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Last Name</label>
-                        <div class="col-md-4 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="lastName" placeholder="Last Name" class="form-control" type="text">
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- Text input-->
+                     <!-- Text input-->
 
                     <div class="form-group">
                         <label for="zipCode" class="col-md-4 control-label">Zip Code</label>
-                        <div class="col-md-4 inputGroupContainer">
+                        <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                 <input name="zipCode" id="zipCode" placeholder="Zip Code" class="form-control" type="text">
@@ -64,7 +39,7 @@
 
                     <div class="form-group">
                         <label for="cityName" class="col-md-4 control-label">City</label>
-                        <div class="col-md-4 inputGroupContainer">
+                        <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                 <div id="city_dropdown">
@@ -78,7 +53,7 @@
 
                     <div class="form-group">
                         <label for="stateName" class="col-md-4 control-label">State</label>
-                        <div class="col-md-4 selectContainer">
+                        <div class="col-md-5 selectContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
                                 <select name="stateName" id="stateName" class="form-control selectpicker" type="selectBox">
@@ -141,7 +116,7 @@
 
                     <div class="form-group">
                         <label for="countryName" class="col-md-4 control-label">Country</label>
-                        <div class="col-md-4 selectContainer">
+                        <div class="col-md-5 selectContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
                                 <select name="countryName" id="countryName" class="form-control selectpicker" type="selectBox">
@@ -402,8 +377,31 @@
 
                     <!-- Text input-->
                     <div class="form-group">
+                        <label class="col-md-4 control-label">First Name</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input name="firstName" placeholder="First Name" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Last Name</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input name="lastName" placeholder="Last Name" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
                         <label class="col-md-4 control-label">Number In Party</label>
-                        <div class="col-md-4 inputGroupContainer">
+                        <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                                 <input name="noInParty" placeholder="Enter the Number" class="form-control" type="text">
@@ -414,7 +412,7 @@
                     <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-4 control-label">E-Mail(Optional)</label>
-                        <div class="col-md-4 inputGroupContainer">
+                        <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                 <input name="email" placeholder="E-Mail Address (Optional)" class="form-control" type="text">
@@ -425,24 +423,17 @@
                     <!-- radio checks -->
                     <div class="form-group">
                         <label class="col-md-4 control-label">Traveling for?</label>
-                        <div class="col-md-4">
-                            <ul class="firstrow">
-                                <li>
+                        <div class="col-md-6">
                                     <div class="radio-inline">
                                         <label>
                                             <input type="radio" name="TravelingFor" value="business" Checked/> Business
                                         </label>
                                     </div>
-                                </li>
-                                <li>
                                     <div class="radio-inline">
                                         <label>
                                             <input type="radio" name="TravelingFor" value="Pleasure" /> Pleasure
                                         </label>
-                                        <br>
                                     </div>
-                                </li>
-                            </ul>
                             <div class="radio-inline">
                                 <label>
                                     <input type="radio" name="TravelingFor" value="Convention" /> Convention
@@ -459,7 +450,7 @@
                     <!-- radio checks -->
                     <div class="form-group">
                         <label class="col-md-4 control-label">How did you hear about the Monroe West Monroe CVB?</label>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="radio-inline">
                                 <label>
                                     <input type="radio" name="HowDidYouHear" value="Billboard" Checked/> Billboard
@@ -472,22 +463,17 @@
                                 </label>
                                 <br>
                             </div>
-                            <ul class="firstrow">
-                                <li>
                                     <div class="radio-inline">
                                         <label>
                                             <input type="radio" name="HowDidYouHear" value="Others" /> Others
                                         </label>
                                     </div>
-                                </li>
-                            </ul>
                         </div>
                     </div>
-
                     <!-- radio checks -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label">Did you stay in a Monroe-West Monroe hotel?</label>
-                        <div class="col-md-4">
+                        <label class="col-md-4 control-label">Are you going to stay in a Monroe-West Monroe hotel?</label>
+                        <div class="col-md-6">
                             <div class="radio-inline">
                                 <label>
                                     <input type="radio" name="DidYouStay" value="yes" Checked/> Yes
@@ -499,6 +485,12 @@
                                 </label>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-md-2 control-label"> </label>
+                       <div class="col-md-8 checkbox">
+                           <input type="checkbox" name="emailYes" value="Bike"> I would like to receive monthly emails about Monroe-West Monroe events.
+                           </div>
                     </div>
                     <!-- Button -->
                     <label class="col-md-4 control-label"></label>
@@ -675,14 +667,8 @@
         });
     </script>
 
-    <!-- /.container -->
-    <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNOpboPQgboMUStdCcaODSa-l0b7UcfUU&libraries=places&callback=initAutocomplete" async defer></script-->
-
-    <!--script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script-->
     <script src='js/bootstrapvalidator.min.js'></script>
     <script src="js/index.js"></script>
-    <!--script src='js/jquery-3.1.1.min.js'></script-->
-
 </body>
 
 </html>

@@ -140,7 +140,7 @@
                                 draggable: true,
                                 icon: 'images/visitorMarker.png'
                             });
-
+                            marker.addListener('dragend', handleEvent);
                             positionArray = [results[0].geometry.location.lat(), results[0].geometry.location.lng()];
                             summaryPanel.innerHTML = "Your address was marked in map. If it is not correct click the marker that you pin to unmark it";
                             marker.desc = results[0].formatted_address;
