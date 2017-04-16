@@ -23,7 +23,7 @@
                     <!-- Form Name -->
                     <legend>Monroe-West Monroe Convention and Visitors Bureau (CVB)</legend>
 
-                     <!-- Text input-->
+                    <!-- Text input-->
 
                     <div class="form-group">
                         <label for="zipCode" class="col-md-4 control-label">Zip Code</label>
@@ -409,31 +409,20 @@
                         </div>
                     </div>
 
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">E-Mail(Optional)</label>
-                        <div class="col-md-5 inputGroupContainer">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input name="email" placeholder="E-Mail Address (Optional)" class="form-control" type="text">
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- radio checks -->
                     <div class="form-group">
                         <label class="col-md-4 control-label">Traveling for?</label>
                         <div class="col-md-6">
-                                    <div class="radio-inline">
-                                        <label>
-                                            <input type="radio" name="TravelingFor" value="business" Checked/> Business
-                                        </label>
-                                    </div>
-                                    <div class="radio-inline">
-                                        <label>
-                                            <input type="radio" name="TravelingFor" value="Pleasure" /> Pleasure
-                                        </label>
-                                    </div>
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="TravelingFor" value="business" Checked/> Business
+                                </label>
+                            </div>
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="TravelingFor" value="Pleasure" /> Pleasure
+                                </label>
+                            </div>
                             <div class="radio-inline">
                                 <label>
                                     <input type="radio" name="TravelingFor" value="Convention" /> Convention
@@ -463,11 +452,11 @@
                                 </label>
                                 <br>
                             </div>
-                                    <div class="radio-inline">
-                                        <label>
-                                            <input type="radio" name="HowDidYouHear" value="Others" /> Others
-                                        </label>
-                                    </div>
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="HowDidYouHear" value="Others" /> Others
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <!-- radio checks -->
@@ -486,12 +475,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                    <label class="col-md-2 control-label"> </label>
-                       <div class="col-md-8 checkbox">
-                           <input type="checkbox" name="emailYes" value="Bike"> I would like to receive monthly emails about Monroe-West Monroe events.
-                           </div>
+                    <div class="form-group" for="emailYes">
+                        <label class="col-md-2 control-label"> </label>
+                        <div class="col-md-8 checkbox">
+                            <input type="checkbox" name="emailYes" id="emailYes" onclick="ShowHideDiv(this)"> I would like to receive monthly emails about Monroe-West Monroe events.
+                        </div>
                     </div>
+                    <div class="form-group" id="emailAsk" style="display: none">
+                        <label class="col-md-4 control-label">E-Mail(Optional)</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="email" placeholder="E-Mail Address (Optional)" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Button -->
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-4">
@@ -511,6 +510,8 @@
             </form>
         </div>
     </section>
+
+    <!-- Auto fill address from the map -->
     <script>
         $(document).ready(function() {
             var address = '';
@@ -554,35 +555,31 @@
 
                     $('#cityName').val(city);
                     document.getElementById("cityName").style.color = '#700404';
-                     if (document.getElementById("cityName").value)
-                                   {
-                                   document.getElementById("cityName").style.backgroundColor = '#c4ad2b';
-                                   }
+                    if (document.getElementById("cityName").value) {
+                        document.getElementById("cityName").style.backgroundColor = '#c4ad2b';
+                    }
 
                     $('#zipCode').val(zipcode);
                     document.getElementById("zipCode").style.color = '#700404';
-                     if (document.getElementById("zipCode").value)
-                                   {
-                                   document.getElementById("zipCode").style.backgroundColor = '#c4ad2b';
-                                   }
-
+                    if (document.getElementById("zipCode").value) {
+                        document.getElementById("zipCode").style.backgroundColor = '#c4ad2b';
+                    }
 
                     $('#stateName').val(state);
                     document.getElementById("stateName").style.color = '#700404';
-                     if (document.getElementById("stateName").value)
-                                   {
-                                   document.getElementById("stateName").style.backgroundColor = '#c4ad2b';
-                                   }
+                    if (document.getElementById("stateName").value) {
+                        document.getElementById("stateName").style.backgroundColor = '#c4ad2b';
+                    }
                     $('#countryName').val(country);
                     document.getElementById("countryName").style.color = '#700404';
-                    if (document.getElementById("countryName").value)
-                                   {
-                                   document.getElementById("countryName").style.backgroundColor = '#c4ad2b';
-                                   }
+                    if (document.getElementById("countryName").value) {
+                        document.getElementById("countryName").style.backgroundColor = '#c4ad2b';
+                    }
 
                 });
         });
     </script>
+    <!-- Auto fill city, state and country after typing the zip-->
     <script>
         $(document).ready(function() {
             $('#zipCode').keyup(function() {
@@ -632,39 +629,41 @@
                                 $('#city_dropdown').html($select);
                             } else {
                                 $('#cityName').val(city);
-                                   document.getElementById("cityName").style.color = '#700404';
-                                   if (document.getElementById("cityName").value)
-                                   {
-                                   document.getElementById("cityName").style.backgroundColor = '#c4ad2b';
-                                   }
+                                document.getElementById("cityName").style.color = '#700404';
+                                if (document.getElementById("cityName").value) {
+                                    document.getElementById("cityName").style.backgroundColor = '#c4ad2b';
+                                }
 
                             }
 
                             $('#stateName').val(state);
                             document.getElementById("stateName").style.color = '#700404';
-                            if (document.getElementById("stateName").value)
-                                   {
-                                   document.getElementById("stateName").style.backgroundColor = '#c4ad2b';
-                                   }
+                            if (document.getElementById("stateName").value) {
+                                document.getElementById("stateName").style.backgroundColor = '#c4ad2b';
+                            }
 
                             $('#countryName').val(country);
                             document.getElementById("countryName").style.color = '#700404';
-                            if (document.getElementById("countryName").value)
-                                   {
-                                   document.getElementById("countryName").style.backgroundColor = '#c4ad2b';
-                                   }
+                            if (document.getElementById("countryName").value) {
+                                document.getElementById("countryName").style.backgroundColor = '#c4ad2b';
+                            }
                             $('#zipCode').val(zipcode);
                             document.getElementById("zipCode").style.color = '#700404';
-                            if (document.getElementById("zipCode").value)
-                                   {
-                                   document.getElementById("zipCode").style.backgroundColor = '#c4ad2b';
-                                   }
-
+                            if (document.getElementById("zipCode").value) {
+                                document.getElementById("zipCode").style.backgroundColor = '#c4ad2b';
+                            }
 
                         });
                 }
             });
         });
+    </script>
+    <!-- Onlick event to ask email if they are agree to receive monthly events -->
+    <script type="text/javascript">
+        function ShowHideDiv(emailYes) {
+            var emailAsk = document.getElementById("emailAsk");
+            emailAsk.style.display = emailYes.checked ? "block" : "none";
+        }
     </script>
 
     <script src='js/bootstrapvalidator.min.js'></script>
