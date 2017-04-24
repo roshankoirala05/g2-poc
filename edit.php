@@ -1,96 +1,138 @@
-<!DOCTYPE html>
+<?php
+
+session_start();
+$visitorId =  $_GET['id'];
+if(! (isset($_SESSION['name']))){
+header ('location:adminpage.php');
+}
+?>
 <html>
-
     <head>
-        <meta charset="UTF-8">
-        <title>Registration </title>
-        <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+        
+        <title>Visitor Profile</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+    <script src="js/Registration.js"></script>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+    <!--link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'-->
+    <link rel="stylesheet" href="css/Registration.css">
 
-        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-        <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
-        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+</head>
+<body>
+    
+    
+    
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    
+    <ul class="nav navbar-nav">
+      <li class ="active" ><a href="admin.php">Home</a></li>
+      <li><a href="visitor.php?id=<?php echo $visitorId;?>">View</a></li>
+      <li><a href="#">Edit</a></li>
+    </ul>
+  </div>
+</nav> 
+<div class = "container" >
+<?php 
 
-        <link rel="stylesheet" href="css/style.css">
+include 'DatabaseConnection.php';
+$conn= new DatabaseConnection();
 
-    </head>
+$query1 = "SELECT * FROM VISITOR WHERE id =".$visitorId;
 
-    <body>
-        <section id="contact">
-            <div class="container">
+$result= $conn->returnQuery($query1);
+if ($result->num_rows > 0) {
 
-                <form class="well form-horizontal" action="data.php" method="post" id="contact_form">
-                    <fieldset>
+    while($row = $result->fetch_assoc())
+    {
+       $id = $row["id"];
+       $fname = $row["Fname"];
+       $lname= $row["Lname"];  
+       $city = $row["City"];
+       $state = $row["State"];
+       $country = $row["Country"];
+       $zipcode = $row["Zipcode"];
+       $party = $row["Party"];
+       $date = date('d F Y H:i:s', $row["Time"]);
+       $purpose = $row["Purpose"];
+       $hear = $row["Hear"];
+       $hotel = $row["Hotel"];
+       $email = $row["Email"];
+       
 
-                        <!-- Form Name -->
-                        <legend>Monroe-West Monroe Convention and Visitors Bureau (CVB)</legend>
+    }
+ 
+ }
+?>
 
-                        <!-- Text input-->
+<form class="well form-horizontal" action="updateVisitor.php?id=<?php echo $id;?>" method="post" id="contact_form">
+                <fieldset>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">First Name</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input name="firstName" placeholder="First Name" class="form-control" type="text">
+                    <!-- Form Name -->
+                    <legend>Please update and submit the form</legend>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">First Name</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input name="firstName" value="<?php echo $fname; ?>" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Last Name</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input name="lastName" value="<?php echo $lname; ?>" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label for="zipCode" class="col-md-4 control-label">Zip Code</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                <input name="zipCode" id="zipCode" value="<?php echo $zipcode; ?>" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label for="cityName" class="col-md-4 control-label">City</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                <div id="city_dropdown">
+                                    <input name="cityName" id="cityName" value="<?php echo $city; ?>" class="form-control" type="text">
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Text input-->
+                    <!-- Select Basic -->
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Last Name</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input name="lastName" placeholder="Last Name" class="form-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">E-Mail</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input name="email" placeholder="E-Mail Address" class="form-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Text input-->
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">City</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                    <input name="cityName" id="cityName" placeholder="City" class="form-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Text input-->
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Zip Code</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                    <input name="zipCode" id="zipCode" placeholder="Zip Code" class="form-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Select Basic -->
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">State</label>
-                            <div class="col-md-4 selectContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                    <select name="stateName" class="form-control selectpicker">
-                                    <option value="">Chose a State</option>
+                    <div class="form-group">
+                        <label for="stateName" class="col-md-4 control-label">State</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <select name="stateName" id="stateName" class="form-control selectpicker" type="selectBox">
+                                    <option value="<?php echo $state; ?>"><?php echo $state; ?></option>
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
                                     <option value="AZ">Arizona</option>
@@ -143,18 +185,18 @@
                                     <option value="WI">Wisconsin</option>
                                     <option value="WY">Wyoming</option>
                                 </select>
-                                    </select>
-                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Country</label>
-                            <div class="col-md-4 selectContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
-                                    <select name="countryName" class="form-control selectpicker">
-                                    <option value="">Please select your country</option>
+                    <div class="form-group">
+                        <label for="countryName" class="col-md-4 control-label">Country</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
+                                <select name="countryName" id="countryName" class="form-control selectpicker" type="selectBox">
+                                    <option value="<?php echo $country; ?>"><?php echo $country; ?></option>
+                                    <option value="US">United States</option>
                                     <option value="AF">Afghanistan</option>
                                     <option value="AX">Åland Islands</option>
                                     <option value="AL">Albania</option>
@@ -390,7 +432,6 @@
                                     <option value="UA">Ukraine</option>
                                     <option value="AE">United Arab Emirates</option>
                                     <option value="GB">United Kingdom</option>
-                                    <option value="US">United States</option>
                                     <option value="UM">United States Minor Outlying Islands</option>
                                     <option value="UY">Uruguay</option>
                                     <option value="UZ">Uzbekistan</option>
@@ -405,120 +446,124 @@
                                     <option value="ZM">Zambia</option>
                                     <option value="ZW">Zimbabwe</option>
                                 </select>
-                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Number In Party</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                                    <input name="noInParty" placeholder="Enter the Number" class="form-control" type="text">
-                                </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Number In Party</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <input name="noInParty" value="<?php echo $party; ?>" class="form-control" type="text">
                             </div>
                         </div>
+                    </div>
 
-                        <!-- radio checks -->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Traveling for?</label>
-                            <div class="col-md-4">
-                                <ul class="firstrow">
-                                    <li>
-                                        <div class="radio-inline">
-                                            <label>
-                                            <input type="radio" name="TravelingFor" value="business" Checked/> Business
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">E-Mail(Optional)</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="email" value="<?php echo $email; ?>" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- radio checks -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Traveling for?</label>
+                        <div class="col-md-4">
+                            <ul class="firstrow">
+                                <li>
+                                    <div class="radio-inline">
+                                        <label>
+                                            <input type="radio" name="TravelingFor" value="business" <?php if ($purpose=='business'){echo 'Checked';}?>/> Business
                                         </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="radio-inline">
-                                            <label>
-                                            <input type="radio" name="TravelingFor" value="Pleasure" /> Pleasure
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio-inline">
+                                        <label>
+                                            <input type="radio" name="TravelingFor" value="Pleasure" <?php if ($purpose=='Pleasure'){echo 'Checked';}?>/> Pleasure
                                         </label>
-                                            <br>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <div class="radio-inline">
-                                            <label>
-                                            <input type="radio" name="TravelingFor" value="Convention" /> Convention
+                                        <br>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="TravelingFor" value="Convention" <?php if ($purpose=='Convention'){echo 'Checked';}?>/> Convention
+                                </label>
+                            </div>
+
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="TravelingFor" value="Others" <?php if ($purpose=='Others'){echo 'Checked';}?>/> Others
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- radio checks -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">How did you hear about the Monroe West Monroe CVB?</label>
+                        <div class="col-md-4">
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="HowDidYouHear" value="Billboard" <?php if ($hear=='Billboard'){echo 'Checked';}?>/> Billboard
+                                </label>
+
+                            </div>
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="HowDidYouHear" value="Interstate Signs" <?php if ($hear=='Interstate'){echo 'Checked';}?>/> Interstate Signs
+                                </label>
+                                <br>
+                            </div>
+                            <ul class="firstrow">
+                                <li>
+                                    <div class="radio-inline">
+                                        <label>
+                                            <input type="radio" name="HowDidYouHear" value="Others" <?php if ($hear=='Others'){echo 'Checked';}?>/> Others
                                         </label>
-                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-                                        <div class="radio-inline">
-                                            <label>
-                                            <input type="radio" name="TravelingFor" value="Others" /> Others
-                                        </label>
-                                        </div>
+                    <!-- radio checks -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Did you stay in a Monroe-West Monroe hotel?</label>
+                        <div class="col-md-4">
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="DidYouStay" value="yes" <?php if ($hotel=='yes'){echo 'Checked';}?>/> Yes
+                                </label>
+                            </div>
+                            <div class="radio-inline">
+                                <label>
+                                    <input type="radio" name="DidYouStay" value="no" <?php if ($hotel=='no'){echo 'Checked';}?> /> No
+                                </label>
                             </div>
                         </div>
-                        <!-- radio checks -->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">How did you hear about the Monroe West Monroe CVB??</label>
-                            <div class="col-md-4">
-                                <div class="radio-inline">
-                                    <label>
-                                    <input type="radio" name="HowDidYouHear" value="Billboard" Checked/> Billboard
-                                </label>
-
-                                </div>
-                                <div class="radio-inline">
-                                    <label>
-                                    <input type="radio" name="HowDidYouHear" value="Interstate Signs" /> Interstate Signs
-                                </label>
-                                </div>
-                                <div class="radio-inline">
-                                    <label>
-                                    <input type="radio" name="HowDidYouHear" value="Others" /> Others
-                                </label>
-                                </div>
-                            </div>
+                    </div>
+                    <!-- Button -->
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <div id="floating-pane1">
+                            <button type="submit" class="btn btn-success btn-lg">Save and Return
+                            </button>
                         </div>
-
-                        <!-- radio checks -->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Did you stay in a Monroe-West Monroe hotel??</label>
-                            <div class="col-md-4">
-                                <div class="radio-inline">
-                                    <label>
-                                    <input type="radio" name="DidYouStay" value="yes" Checked/> Yes
-                                </label>
-                                </div>
-                                <div class="radio-inline">
-                                    <label>
-                                    <input type="radio" name="DidYouStay" value="no" /> No
-                                </label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Success message -->
-                        <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div>
-
-                        <!-- Button -->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label"></label>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-success">Send <span class="glyphicon glyphicon-send"></span></button>
-                                <button type="reset" style="width:90px" class="btn btn-danger">Reset <span class="glyphicon glyphicon-refresh"></span></button>
-                                <a href="prototypeMap.php" class="btn btn-warning"><span class="glyphicon glyphicon-step-backward"></span> Return Home </a>
-                            </div>
-                        </div>
-            </div>
-            </fieldset>
+                        
+                    </div>
+                </fieldset>
             </form>
-            </div>
-            </secryion>
-            <!-- /.container -->
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-            <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
-
-            <script src="js/index.js"></script>
-
-    </body>
-
+ 
+ 
+ 
+</div>
+</body>
 </html>
