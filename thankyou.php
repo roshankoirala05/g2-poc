@@ -1,22 +1,23 @@
-<?php
-include 'Database.php';
+
+<?php 
+
 include 'DatabaseConnection.php';
-$firstname= ucfirst($_POST["firstName"]);
-$lastname= ucfirst($_POST["lastName"]);
-$city= ucfirst($_POST["cityName"]);
-$state=$_POST["stateName"];
-$zipcode=$_POST["zipCode"];
+if (isset($_POST["finalsubmit"]) && !empty($_POST["finalsubmit"])) {
+$firstname= ucwords(strtolower($_POST["firstName"]));
+$lastname= ucwords(strtolower($_POST["lastName"]));
+$city= ucwords(strtolower($_POST["cityName"]));
+$state=strtoupper($_POST["stateName"]);
+$zipcode=strtoupper($_POST["zipCode"]);
 $country=strtoupper($_POST["countryName"]);
 $noinparty=$_POST["noInParty"];
 $travelingfor=$_POST["TravelingFor"];
 $howdidyouhear=$_POST["HowDidYouHear"];
 $didyoustay=$_POST["DidYouStay"];
-$email=$_POST["email"];
+$email=strtolower($_POST["email"]);
 $count;
 date_default_timezone_set('America/Chicago');
-$date = time();
-
-/********************************************************************************************
+$date = time(); 
+/*******************************************************************************************
  * Converting the Latitude and longitude for the address
  ********************************************************************************************/
         $address = urlencode($city." ,".$state.", ".$zipcode.", ".$country);
@@ -38,7 +39,7 @@ $date = time();
 /**********************************************************************************
             Checking How many times he visited. If he has salready visited
             then system update his no of visit.
-**********************************************************************************/
+*********************************************************************************/
    $raj= new DatabaseConnection();
    $queryCheckCount= "SELECT Vcount FROM VISITOR WHERE Fname='$firstname' AND Lname='$lastname' AND  Zipcode='$zipcode' AND City='$city'";
    $result=$raj->returnQuery($queryCheckCount);
@@ -61,17 +62,73 @@ $date = time();
  **************************************************************************************
    $databaseValues = new Form($name,$lastname, $city,$state,$zipcode,$country,$noinparty,$travelingfor,$howdidyouhear,$didyoustay,$email,$count);
   /****************************************************************************************************************************/
+}
 ?>
-    <!DOCTYPE html>
     <html>
 
-    <body style="background-color:#3498DB">
-        <div style="margin: 0px 150px 100px 0px">
-        <h1 style="text-align:center;">Thank you for visiting the Monroe-West Monroe CVB!</h1>
-        <p style="text-align:center;">Visit our front desk if you'd like more information.</p>
-        <form method="post" action="index.php">
+<head>
+    <title>Monro-West-Monroe C&VB</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+   
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <style type="text/css">
+    html { 
+   
+  background: url(images/blackbayou.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  
+}
+body{
+          background-size:cover;
+          background:none;
+      }
+      
+     .container{
+         position:relative;
+         height:100%;
+         width:100%;
+         
+          
+          
+     }
+      .thankyou{
+          
+          position:absolute;
+          left:120;
+          bottom:120;
+          color:white;
+          max-width:450px;
+          
+          
+          
+      }
+      .btn-lg{
+    padding: 10px 30px;
+    font-size: 35px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
 
-            <input type="submit" value="Exit" style="float: right" />
+</style>
+    </head>
+    <body>
+        
+        
+        <div class="container">
+            <div class="thankyou">
+            <h1>Thank You for visiting Monroe-West Monroe CVB</h1>
+            <h4>Please visit our front desk if you'd like more information</h4>
+            <br>
+            <a href="index.html" class="btn btn-default btn-lg">Exit</a>
+            </div>
+        </div>
+        
     </body>
-
+    
     </html>

@@ -19,5 +19,5 @@ $conn= new DatabaseConnection();
      $query3 = "INSERT INTO COMMENT (Comment,Commenter,Time,id) VALUES('$comment','$commenter', '$time','$id')";
      $conn->insertDatabase($query3);
 // }
- 
+ echo"hi";
  header ('location:visitor.php?id='.$visitorId);
