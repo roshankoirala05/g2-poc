@@ -1,0 +1,203 @@
+#map_canvas {
+    height:100%;
+    width:100%;
+   
+}
+
+
+
+html,
+body {
+    
+    height: 100%;
+     background-color:edf0f5;
+      
+    
+}
+
+
+#mapandinfo{
+ background-color: #ffffff; 
+
+    
+}
+#map{
+    position:relative;
+}
+
+#zoomers{
+    position: absolute;
+    right: 60px;
+    top: 100px;
+}
+
+#plus, #minus{
+   background: rgba(54, 25, 25, .5);
+    width: 85px;
+    height: 85px;
+    /* padding: 16px 16px; */
+    font-size: 60px;
+    line-height: 1;
+    border-radius: 40px;
+    margin-top: 20px;
+    border-color: rgba(51, 51, 51, 0);
+    
+    
+}
+#thankyou{
+    
+   
+}
+
+#text{
+    height:100%;
+    position: relative;
+    margin-left:50px;
+    margin-right:35px;
+    
+}
+
+#logo{
+    padding:20px;
+}
+img{
+    max-width: 50%;
+    max-height: 100%;
+    display:block;
+    margin:10px auto; 
+}
+
+
+.question{
+   padding-top:150px;
+   padding-left:300px;
+   padding-right:180px;
+    height:100%;
+    width:100%;
+    font-size: 26px;
+      
+    
+}
+legend{
+    font-size: 29px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #d4d2d2;
+}
+.container-fluid{
+    position:relative;
+    padding:0;
+}
+
+.eachSection{
+   
+    top:0;
+    
+}
+
+.form-group{
+    margin-bottom:40px;
+}
+
+body {
+  overflow-x:hidden;
+  overflow-y:hidden;
+}
+
+.well{
+    background-image: none;
+    background-color: edf0f5;
+}
+
+#introtext
+{
+     border: dashed 2px red;
+     text-align: center;
+     background-color: #edf0f5;
+     border-radius: 4px;
+     text-shadow: 0 1px black;
+}
+
+.mapicon
+{
+    color:red;
+}
+h3
+{
+     text-shadow: 0 1px black;
+}
+
+#addresstext
+{
+     text-align: center;
+     text-shadow: 0 1px black;
+}
+
+
+.welcomeText{
+    position: absolute;
+    top:5;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 22px;
+    line-height: 126%;
+    color: #333;
+    font-family: 'Lato', sans-serif;
+    font-weight: normal !important;
+    letter-spacing: normal;
+    text-rendering: optimizelegibility;
+    word-wrap: break-word;
+    direction: ltr;
+   
+}
+
+#next, #no, #yes, #linkToNameAndEmail, #finalsubmit{
+    margin-top:50px;
+}
+
+.btn-lg{
+    padding: 10px 30px;
+    font-size: 35px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
+
+
+.glyphicon-ok-circle {
+    font-size: 35px;
+    line-height: 50px;
+    padding-top:6px;
+}
+
+.glyphicon-remove-circle
+{
+    font-size: 35px;
+    line-height: 50px;
+     padding-top:6px;
+}
+.glyphicon-refresh
+{
+    font-size: 35px;
+    line-height: 50px;
+    padding-top:6px;
+}
+/*
+.right-inner-addon {
+    position: relative;
+}
+*/
+.input-lg{
+    height: 60px;
+    padding: 15px 20px;
+    font-size: 25px;
+    line-height: 1.5;
+    border-radius: 6px;
+    
+}
+.form-control{
+    color:black;
+}
+.popover
+{
+    color:white;
+    background-color:red;
+}
