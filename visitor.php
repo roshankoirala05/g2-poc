@@ -2,9 +2,7 @@
 
 session_start();
 $visitorId =  $_GET['id'];
-if(! (isset($_SESSION['name']))){
-header ('location:adminpage.php');
-}
+
 ?>
 <html>
     <head>

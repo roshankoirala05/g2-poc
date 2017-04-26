@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <script src="https://ui.jquery.com/latest/ui/effects.core.js"></script>
+<script src="https://ui.jquery.com/latest/ui/effects.slide.js"></script>
+<style type="text/css">
+  div { display: none; margin: 0px; width: 100px; height: 80px; background: blue; position: relative; }
+</style>
+  <script>
+  $(document).ready(function() {
+    $("p").click(function () {
+      $("div").show('scale', { percent: 100 }, 500);
+    });
+  });
+  </script>
+</head>
+<body style="font-size:62.5%;">
+  
+<p>Click me</p><div></div>
+
+</body>
+</html>
