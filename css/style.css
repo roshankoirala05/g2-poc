@@ -1,0 +1,163 @@
+/*----------------------------------------------
+css settings for HTML div exactCenter 
+------------------------------------------------*/
+
+#main{
+margin:30px auto;
+padding-left: 35em;
+font-family:raleway;
+}
+
+span{
+position: absolute;
+    z-index: 10;
+    opacity: 1;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    color: #e75009;
+    margin-top: -25px;
+}
+
+h2{
+background-color: #FEFFED;
+text-align:center;
+border-radius: 10px 10px 0 0;
+margin: -10px -40px;
+padding: 15px;
+}
+
+hr{
+border:0;
+border-bottom:1px solid #ccc;
+margin: 10px -40px;
+margin-bottom: 30px;
+}
+
+#login{
+width:250px;
+float: left;
+border-radius: 10px;
+font-family:raleway;
+border: 2px solid #ccc;
+padding: 10px 40px 25px;
+margin-top: 40px;
+	background-color: #edf0f5;
+}
+#Create{
+  position: absolute;
+width:480px;
+float: left;
+border-radius: 10px;
+font-family:raleway;
+border: 2px solid #ccc;
+padding: 10px 40px 25px;
+margin-top: 40px;
+	display:none;
+		background-color: #edf0f5;
+}
+ 
+input[type=text],input[type=password]{
+width:95%;
+text-shadow: 0 1px black;
+  border: 1px solid #15243b;
+  border-top-color: #0d1827;
+  border-radius: 4px;
+  padding:10px;
+font-size: 16px;
+}
+input[type=bday],input[type=date]{
+width:95%;
+text-shadow: 0 1px black;
+  border: 1px solid #15243b;
+  border-top-color: #0d1827;
+  border-radius: 4px;
+  padding:10px;
+  text-align: center;
+font-size: 16px;
+background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+} 
+
+
+input[type=name]
+{
+  padding:8px;
+  font-size: 16px;
+  margin-right: 15px;
+  text-shadow: 0 1px black;
+  border: 1px solid #15243b;
+  border-top-color: #0d1827;
+  border-radius: 4px;
+}
+input[type=answer]
+{
+  margin-left:15em;
+  padding:8px;
+  font-size: 16px;
+  margin-right: 15px;
+  text-shadow: 0 1px black;
+  border: 1px solid #15243b;
+  border-top-color: #0d1827;
+  border-radius: 4px;
+}
+::placeholder
+{
+  text-align: center;
+}
+input[type=username], input[type=password]
+{
+  text-shadow: 0 1px black;
+  border: 1px solid #15243b;
+  border-top-color: #0d1827;
+  border-radius: 4px;
+  padding:10px;
+  width:95%;
+  font-size: 16px;
+  display: block;
+}
+
+input[type=submit]{
+width: 95%;
+background-color:#FFBC00;
+color: white;
+border: 2px solid #FFCB00;
+padding: 10px;
+font-size:20px;
+cursor:pointer;
+border-radius: 5px;
+margin-bottom: 15px;
+}
+#profile{
+padding:15px;
+border:1px dashed grey;
+font-size:20px;
+background-color:#DCE6F7;
+}
+
+#logout{
+float:right;
+padding:5px;
+}
+
+a{
+text-decoration:none;
+color: cornflowerblue;
+border-color: green;
+border: 2px solid;
+margin-left: 5px;
+padding:3px;
+}
+
+i{
+color: cornflowerblue;
+}#note{
+clear: left;
+padding-top: 20px;
+margin-left: 20px;
+}
+p
+{
+    text-align: center;
+    border: dashed 2px red;
+    padding:10px 0px 10px 0px;
+    width:95%;
+}

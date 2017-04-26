@@ -1,0 +1,51 @@
+<html>
+<head>
+     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <script src="https://ui.jquery.com/latest/ui/effects.core.js"></script>
+<script src="https://ui.jquery.com/latest/ui/effects.slide.js"></script>
+</head>
+<style type="text/css"> 
+.box {
+    background-color:#666;
+    margin:0.5em;
+    width:100px;
+    height:100px;
+}
+#transfer-to {
+    background-color: #CFD4E6;
+    margin: 0.5em;
+    width: 20px;
+    height: 20px;
+}
+.ui-effects-transfer {
+    background-color: #CFD4E6;
+    border: 1px solid #000000;
+}
+</style>
+<script>
+$(function() {
+     $("#but-transfer").toggle(
+        function() {
+            $("#transfer").effect("transfer", { to: "#transfer-to" }, 1000);
+        },
+        function() {
+            $("#transfer-to").effect("transfer", { to: "#transfer" }, 500);
+        }
+    );
+});
+</script>
+<h2>The Transfer Effect</h2>
+<div>
+<dl>
+<dt type="disk">             <button id="but-transfer" class="but" title="click me">transfer-test</button>
+</dt>
+<dd>
+<div id="transfer" class="box">&nbsp;</div>
+<div id="transfer-to">&nbsp;</div>
+<p>
+</dd>
+</dl>
+</div>
+</html>
