@@ -1,0 +1,5 @@
+body,
+html {
+    background-repeat: repeat;
+    background-image: linear-gradient(to bottom, #207cca 0%,#7db9e8 0%,#207cca 63%,#1e5799 100%);
+}

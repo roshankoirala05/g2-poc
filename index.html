@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Welcome to Monroe-West Monroe Louisiana</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Style for full screen background -->
+    <style type="text/css">
+        html {
+            background: url(images/monroepic.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        
+        body {
+            background: none;
+        }
+        
+        .container {
+            text-align: center;
+            margin-top: 90px;
+            max-width: 900px;
+        }
+        
+        #search {
+            position: relative;
+            margin: 20px auto;
+            color: #aaa;
+        }
+        
+        .myinput {
+            text-indent: 20px;
+            width: 400px;
+            
+            background: #fcfcfc;
+            border: 1px solid #aaa;
+            box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+            padding: 15px 10px 18px 10px;
+            font-size: 22px;
+            height:70px;
+            border-radius: 6px;
+            margin: 2px 0px;
+        }
+        
+        .mybutton{
+            
+            padding: 15px 30px 10px 30px;
+            font-size: 30px;
+            
+            border-radius: 6px;
+            margin:2px 0px;
+        }
+        
+        h1 {
+            color: black;
+            font-size: 5rem;
+        }
+        
+        input{
+            color:black;
+        }
+       
+    </style>
+
+    <script>
+        window.onload = function() {
+            // Create the Google Map search box and link it to the address search box
+            var input = document.getElementById('address');
+            var searchBox = new google.maps.places.SearchBox(input);
+        };
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Welcome to Monroe, Louisiana</h1>
+        <form action="mapAndForm.php" method="post">
+            <div id="search">
+               
+                <input type="text" id="address" class="myinput" placeholder="Enter your Zip or City or Country" name="address" value="">
+                <button type="submit" class="btn btn-primary mybutton">
+      <span class="glyphicon glyphicon-search"></span></button>
+            </div>
+            
+        <!--    <div class="input-group">
+   <input type="text" class="form-control" placeholder="Search" id="txtSearch"/>
+   <div class="input-group-btn">
+        <button class="btn btn-primary" type="submit">
+        <span class="glyphicon glyphicon-search"></span>
+        </button>
+   </div>
+   </div>
+   -->
+        </form>
+    </div>
+
+</body>
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="https://maps.google.com/maps/api/js?v=3.9&libraries=places&amp;sensor=false"></script>
+
+</html>
