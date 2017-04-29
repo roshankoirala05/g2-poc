@@ -24,8 +24,7 @@ fieldset {
     border-style: dotted;
 }
 
-
-/*ul {
+ul {
     list-style-type: none;
     padding-left: 0px;
 }
@@ -34,7 +33,6 @@ li {
     display: inline-block;
     padding-right: 25px;
 }
-*/
 
 input[type="text"] {
     height: 50px;
@@ -107,4 +105,9 @@ input[type="checkbox"] {
     text-align: center;
     font-family: 'Roboto', 'sans-serif';
     line-height: 30px;
+}
+
+.popover {
+    color: white;
+    background-color: red;
 }
