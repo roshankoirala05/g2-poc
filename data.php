@@ -11,18 +11,17 @@ $noinparty=$_POST["noInParty"];
 $travelingfor=$_POST["TravelingFor"];
 $howdidyouhear=$_POST["HowDidYouHear"];
 $didyoustay=$_POST["DidYouStay"];
-$email=null;
+$email=$_POST["email"];
 $count;
 date_default_timezone_set('America/Chicago');
-$date = date('Y/m/d h:i:s a', time());
+$date = time();
 
 /********************************************************************************************
  * Converting the Latitude and longitude for the address
  ********************************************************************************************/
-
-        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=$city,+$state,+$zipcode,+$country&sensor=false";
+        $address = urlencode($city." ,".$state.", ".$zipcode.", ".$country);
+        $url = "http://maps.googleapis.com/maps/api/geocode/json?address=$address&sensor=false";
         $google_api_response =file_get_contents( $url );
-
         $results = json_decode( $google_api_response);
         $results = (array) $results;
         $status = $results["status"];
@@ -36,9 +35,8 @@ $date = date('Y/m/d h:i:s a', time());
             $latitude = '';
             $longitude = '';
         }
-
 /**********************************************************************************
-            Checking How many times he visited. If he already visited
+            Checking How many times he visited. If he has salready visited
             then system update his no of visit.
 **********************************************************************************/
    $raj= new DatabaseConnection();
@@ -48,25 +46,21 @@ $date = date('Y/m/d h:i:s a', time());
     if($row["Vcount"] ==0)
         {
             $count=1;
-            $query = "INSERT INTO VISITOR VALUES('$firstname','$lastname', '$city','$state',
+            $query = "INSERT INTO VISITOR (Fname,Lname,City,State,Zipcode,Country,Party,Purpose,Hear,Hotel,Email,Time,Vcount,Lat,Lng) VALUES('$firstname','$lastname', '$city','$state',
                                                    '$zipcode','$country','$noinparty','$travelingfor','$howdidyouhear','$didyoustay','$email','$date','$count','$latitude','$longitude')";
             $raj->insertDatabase($query);
         }
-
         else
         {
             $count=$row["Vcount"]+1;
             $query="UPDATE VISITOR SET Vcount=$count WHERE Fname='$firstname' AND Lname='$lastname' AND  Zipcode='$zipcode' AND City='$city'";
             $raj->insertDatabase($query);
         }
-
 /**************************************************************************************
        Inserting Database class if we need
  **************************************************************************************
-
    $databaseValues = new Form($name,$lastname, $city,$state,$zipcode,$country,$noinparty,$travelingfor,$howdidyouhear,$didyoustay,$email,$count);
   /****************************************************************************************************************************/
-
 ?>
     <!DOCTYPE html>
     <html>

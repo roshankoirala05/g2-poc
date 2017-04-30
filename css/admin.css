@@ -1,0 +1,18 @@
+#state {
+  height: 150;
+  width: 200px;
+  display: inline;
+  position: relative;
+}
+
+#ScrollCB {
+  left: 10;
+  height: 150;
+  width: 200px;
+  overflow: auto;
+  position: absolute;
+  visibility: hidden;
+  z-index: 1;
+  background-color: white;
+  border: 1px solid gray;
+}

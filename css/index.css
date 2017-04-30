@@ -7,7 +7,8 @@
     border-bottom-color: red;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -15,13 +16,13 @@ html, body {
     background-image: linear-gradient(to bottom, #207cca 0%,#7db9e8 0%,#207cca 63%,#1e5799 100%);
 }
 
+
 .form-group{
     margin-left: 20%;
     margin-right: 20%;
     
 }
-
-/***Registration****/
+/***buttons****/
 
 .button{
     background-color: #4CAF50;
@@ -36,105 +37,88 @@ html, body {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    
 }
 
-.button:hover{
-    background: red;
-}
-/**** Location****
+/*** Marker*****/
 
-#locate_place {
-    position: relative;
-    background-color: #fff;
+#Output {
+    position: absolute;
+    top: 100px;
+    left: 20%;
+    z-index: 10;
+    opacity: 1;
     border: 1px solid #999;
     text-align: center;
     font-family: 'Roboto', 'sans-serif';
-    border-radius: 2px;
-}
-**/
-
-/*** Marker*****
-
-#manual_pin {
-    position: relative;
-    background-color: #fff;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-    font-family: 'Roboto', 'sans-serif';
-    line-height: 30px;
+    line-height: 45px;
     padding-left: 10px;
-    border-radius: 2px;
-}
-*/
-h1{
-    font-weight: bold;
-    color: Black;
-    
+    padding-right: 10px;
+    font-size: 26px;
+    color: #171918;
+    background-color: #f4ece8;
 }
 
-input[type=textbox]:focus {
-    color: Black;
-    text-transform: uppercase;
-    border: 2px;
-    border-style: inset;
-    border-radius: 5px;
-    background-color: #F5F5DC;
+.textbox {
+    border: 1px solid #999;
+    padding-left: 30px;
+    height: 50px;
+    width: 400px;
+    color: #1a1b1c;
+    font-size: 20px;
 }
 
-input[type=button]{
-    background-color: #4CAF50;
-    border-width: medium;
-    border-radius: 2px;
-    border-style: outset;
-    color: white;
-    padding: 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    
-}
-input[type=button]:hover{
-    background:red;
+
+.scroll-left {
+ height: 50px;	
+ overflow: hidden;
+ position: relative;
+ /*background: yellow;*/
+ color: #A52A2A;
+ 
+/* border: 1px solid orange;*/
 }
 
-/*hover section**/
-/*whole registration page*/
-.container {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
+.scroll-left h1 {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ margin: 0;
+ line-height: 50px;
+ text-align: center;
+ font-weight: bolder;
+ 
+ /* Starting position */
+ -moz-transform:translateX(100%);
+ -webkit-transform:translateX(100%);	
+ transform:translateX(100%);
+ 
+ /* Apply animation to this element */	
+ -moz-animation: scroll-left 15s linear infinite;
+ -webkit-animation: scroll-left 15s linear infinite;
+ animation: scroll-left 15s linear infinite;
 }
 
-.container:target{
-  visibility: visible;
-  opacity: 1;
+/* Move it (define the animation) */
+@-moz-keyframes scroll-left {
+ 0%   { -moz-transform: translateX(100%); }
+ 100% { -moz-transform: translateX(-100%); }
 }
 
-/*close button*/
-.container .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
+@-webkit-keyframes scroll-left {
+ 0%   { -webkit-transform: translateX(100%); }
+ 100% { -webkit-transform: translateX(-100%); }
 }
 
-/*close color*/
-.popup .close:hover {
-  color: #06D85F;
+@keyframes scroll-left {
+ 0%   { 
+ -moz-transform: translateX(100%); /* Browser bug fix */
+ -webkit-transform: translateX(100%); /* Browser bug fix */
+ transform: translateX(100%); 		
+ }
+ 100% { 
+ -moz-transform: translateX(-100%); /* Browser bug fix */
+ -webkit-transform: translateX(-100%); /* Browser bug fix */
+ transform: translateX(-100%); 
+ }
 }
 

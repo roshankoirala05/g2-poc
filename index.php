@@ -1,159 +1,343 @@
-<!DOCTYPE html>
 <html>
 
 <head>
     <title>Monro-West-Monroe C&VB</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
     <link rel="stylesheet" href="css/index.css" />
+    <script src="https://maps.google.com/maps/api/js?v=3.9&libraries=places&amp;sensor=false"></script>
+    <script src="js/oms.min.js"></script>
     <script>
-        jQuery(document).ready(function($) {
-
-            //Initialize the Google Maps
-            var  geocoder = new google.maps.Geocoder();
-            var marker;
-            var infowindow = new google.maps.InfoWindow();
+        window.onload = function() {
+            // Initialize variables
             var encodedString;
-            var stringArray = [];
-
-
-            var map = new google.maps.Map(document.getElementById('map_canvas'), {
-                zoom: 3,
+            var address;
+            var markerCluster;
+            var marker;
+            var x;
+            var positionArray=[];
+            var result=[];
+            var markerMoved=false;
+            var stringArray, markers = [];
+            var userMarker = [];
+            var clusterClicked = false;
+            var gm = google.maps;
+            var summaryPanel = document.getElementById('Output');
+            summaryPanel.innerHTML = '';
+            /******** Initialize Map **********/
+            var map = new gm.Map(document.getElementById('map_canvas'), {
+                zoom: 4,
                 center: {
-                    lat: 13.143678,
-                    lng: 18.808594
+                    lat: 39.81528751808606,
+                    lng: -99.5625000167638
                 },
-
+               /*styles: [
+              {
+                featureType: 'water',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#0e5b55'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#0c23a0'}]
+              }
+          ]
+*/
             });
-
+            /*********************************/
+            // Initialize variables
+            var geocoder = new gm.Geocoder();
+            var iw = new gm.InfoWindow();
+            var oms = new OverlappingMarkerSpiderfier(map, {
+                markersWontMove: true,
+                markersWontHide: true
+            });
+            var shadow = new gm.MarkerImage(
+                new gm.Size(37, 34),
+                new gm.Point(0, 0),
+                // anchor - where to meet map location
+                new gm.Point(10, 34)
+            );
+            /****** Set the Infowindow of marker **********/
+            oms.addListener('click', function(marker) {
+                iw.setContent(marker.desc);
+                iw.open(map, marker);
+            });
+            /*************** Show multiple marker of same place**********/
+            oms.addListener('spiderfy', function(markers) {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setIcon('images/defultMarker.png');
+                    markers[i].setShadow(null);
+                }
+                iw.close();
+            });
+            /********** Closed Multiple marker of same place *******/
+            oms.addListener('unspiderfy', function(markers) {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setIcon("images/iconRed.png");
+                    markers[i].setShadow(shadow);
+                }
+            });
+            /******* Mark pin on Map form the values of database *************/
+            var bounds = new gm.LatLngBounds();
             encodedString = document.getElementById("encodedString").value;
             stringArray = encodedString.split("END");
-
-            var x;
             for (x = 0; x < stringArray.length; x = x + 1) {
                 var addressDetails = [];
                 addressDetails = stringArray[x].split("ZIPCODE");
                 setMarker(map, addressDetails);
             }
-
             function setMarker(map, addressDetails) {
-                 var lat = new google.maps.LatLng(addressDetails[1], addressDetails[2]);
-                //Create a new marker and info window
-                marker = new google.maps.Marker({
-                      map: map,
-                      position: lat,
-                    //Content is what will show up in the info window
-                    content: addressDetails[0]
-                });
-                        google.maps.event.addListener(marker, "click", function() {
-                            infowindow.setContent(this.content);
-                            infowindow.open(map, this);
-                        });
-                    }
-
-             // Click Pin Function 
-            google.maps.event.addListener(map, 'click', function(event) {
-                getReverseGeocodingData(event.latLng);
-            });
-
-            function placeMarker(location, address) {
-                marker = new google.maps.Marker({
-                    position: location,
+                var lat = new gm.LatLng(addressDetails[1], addressDetails[2]);
+                bounds.extend(lat);
+                marker = new gm.Marker({
                     map: map,
-                    content: address
+                    position: lat,
+                    content: addressDetails[0],
+                    title:addressDetails[0]
                 });
-                google.maps.event.addListener(marker, "click", function() {
-                    infowindow.setContent(this.content);
-                    infowindow.open(map, this);
-                });
-
+                marker.desc = addressDetails[0];
+                oms.addMarker(marker);
+                markers.push(marker);
             }
-
-            function getReverseGeocodingData(latlng) {
-                geocoder = new google.maps.Geocoder();
-                geocoder.geocode({
-                    'latLng': latlng
-                }, function(results, status) {
-                    if (status !== google.maps.GeocoderStatus.OK) {
-                        alert(status);
-                    }
-                    // This is checking to see if the Geoeode Status is OK before proceeding
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        console.log(results);
-                        var address = (results[0].formatted_address);
-                     // window.location.href = "pass.php?name="+address;
-                  // alert(latlng);
-                  // alert(latlng.lat());
-                        placeMarker(latlng, address);
-                    }
-                });
-            }
-            /********************* Address ***************************************/
-            document.getElementById('addressSubmit').addEventListener('click', function() {
-
-                addressLocation(geocoder, map);
+            /********* MarkerClusterer to show the no of visitor from that place *******/
+            var mcOptions = {
+                gridSize: 50,
+                maxZoom: 15,
+                imagePath: 'images/m'
+            };
+             markerCluster = new MarkerClusterer(map, markers, mcOptions);
+            /******************************************************************************/
+            /********************* Pin Mark on map form the Pin Mark Button*******************************/
+            document.getElementById('markerSubmit').addEventListener('click',  function() {
+               // clearMarkers(null);
+                geocodeAddress(geocoder);
+               // $('#address').val('');s
             });
-
-            function addressLocation(geocoder, resultsMap) {
-                var address = document.getElementById('address').value;
+            function geocodeAddress(geocoder) {
+                address = document.getElementById('address').value;
                 geocoder.geocode({
                     'address': address
                 }, function(results, status) {
-                    if (status === google.maps.GeocoderStatus.OK) {
-                        resultsMap.setCenter(results[0].geometry.location);
-                        resultsMap.setZoom(9);
-                    } else {
-                        alert('Geocode was not successful for the following reason: ' + status);
-                    }
-                });
-
-            }
-     /********************* Marker From Input box ***************************************/
-            document.getElementById('markerSubmit').addEventListener('click', function() {
-                geocodeAddress(geocoder, map);
-                $('#marker').val('');
-            });
-
-            function geocodeAddress(geocoder, resultsMap) {
-                var address = document.getElementById('marker').value;
-                geocoder.geocode({
-                    'address': address
-                }, function(results, status) {
-                   if (status === 'OK') {
+                    if (status === 'OK') {
+                         if(!markerMoved)
+                        {
                         /*
                         This will load the final position of map
                         */
-                     map.setCenter(results[0].geometry.location);
-                        marker = new google.maps.Marker({
+                        map.setCenter(results[0].geometry.location);
+                        marker = new gm.Marker({
                             map: map,
                             position: results[0].geometry.location,
-                            content: address
+                            content: results[0].formatted_address,
+                            title:results[0].formatted_address,
+                              animation: gm.Animation.DROP,
+                            icon: 'images/visitorMarker.png'
                         });
-                        google.maps.event.addListener(marker, "click", function() {
-                            infowindow.setContent(this.content);
-                            infowindow.open(map, this);
-                        });
-                    } else {
-                        alert('Geocode was not successful for the following reason: ' + status);
+
+                        positionArray=[results[0].geometry.location.lat(), results[0].geometry.location.lng()] ;
+                        summaryPanel.innerHTML = "Your address was marked in map. If it is not correct click the marker that you pin to unmark it";
+                        marker.desc = results[0].formatted_address;
+                        oms.addMarker(marker);
+                        userMarker.push(marker);
+                        timerMessage();
+                         markerMoved=true;
+                        }
+                        else
+                        {
+                           result=[results[0].geometry.location.lat(), results[0].geometry.location.lng()];
+                           transition(result);
+                        }
+                    }
+                        else {
+                        summaryPanel.innerHTML = 'Address is not available form that place to pin on map';
+                        timerMessage();
                     }
                 });
             }
-
-    /********************************************************************************/
+            /******************************* Zoom In and Zoom Out*********************************/
             // Setup the click event listener - zoomIn
-  google.maps.event.addDomListener(document.getElementById('zoomIn'), 'click', function() {
-    map.setZoom(map.getZoom() + 1);
-  });
-  // Setup the click event listener - zoomOut
-  google.maps.event.addDomListener(document.getElementById('zoomOut'), 'click', function() {
-    map.setZoom(map.getZoom() - 1);
-  });
-        });
+            gm.event.addDomListener(document.getElementById('zoomIn'), 'click', function() {
+                map.setZoom(map.getZoom() + 1);
+            });
+            // Setup the click event listener - zoomOut
+            gm.event.addDomListener(document.getElementById('zoomOut'), 'click', function() {
+                map.setZoom(map.getZoom() - 1);
+            });
+            /********************************************************************************/
+            document.getElementById('submit').addEventListener('click', function() {
+                if (!address)
+                {
+               window.location.href = "Registration.php?" + document.getElementById('address').value;
+                }
+                else
+                {
+                  window.location.href = "Registration.php?" + address;
+                }
+            });
+            /************************** Map Location search Box ******************************/
+            // Create the search box and link it to the UI element(address div).
+            var input = document.getElementById('address');
+            var searchBox = new google.maps.places.SearchBox(input);
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function() {
+                searchBox.setBounds(map.getBounds());
+            });
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+                if (places.length == 0) {
+                    return;
+                }
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function(place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+            /*************************** End Map Location Search box **********************/
+            /****************** Timer to display message for only 5 sec *******************/
+            function timerMessage() {
+                setTimeout(function() {
+                    document.getElementById('Output').innerHTML = '';
+                }, 5000);
+            }
+            /***********************************************************************************************
+                                       Mark on the Map
+             ***********************************************************************************************/
+            function getReverseGeocodingData(latlng) {
+                // summaryPanel.innerHTML = "";
+                geocoder = new gm.Geocoder();
+                geocoder.geocode({
+                    'latLng': latlng
+                }, function(results, status) {
+                    if (status !== gm.GeocoderStatus.OK) {
+                        summaryPanel.innerHTML = "Address is not available form that pale to pin on map";
+                        timerMessage();
+                    }
+                    // This is checking to see if the Geoeode Status is OK before proceeding
+                    if (status == gm.GeocoderStatus.OK) {
+                        console.log(results);
+                        address = (results[0].formatted_address);
+                        if(!markerMoved)
+                        {
+                          placeMarker(latlng, address);
+                           positionArray=[latlng.lat(),latlng.lng()];
+                           markerMoved=true;
+                        }
+                        else
+                        {
+                               result = [latlng.lat(),latlng.lng()];
+                                transition(result);
+                        }
 
+
+                    }
+                });
+            }
+            function placeMarker(location, address) {
+                marker = new gm.Marker({
+                    position: location,
+                    map: map,
+                    content: address,
+                    animation: gm.Animation.DROP,
+                    title:address,
+                    icon: 'images/visitorMarker.png'
+                });
+                summaryPanel.innerHTML = "Your address was successfully marked on map. If it is not correct, then mark on correct address ";
+                marker.desc = address;
+                oms.addMarker(marker);
+                userMarker.push(marker);
+                timerMessage();
+            }
+            /*******************************************************************************/
+            /******************* Pin Marker on Map only when it is not clicked on Cluster ***/
+            gm.event.addListener(map, 'click', function(event) {
+                // setTimeout to relay the map click event to be the last thing javascript should execute
+                setTimeout(function() {
+                    if (!clusterClicked) {
+                        // remove  the last marker
+                      //  clearMarkers(null);
+                        // call the function to pin on map
+                       getReverseGeocodingData(event.latLng);
+                        clusterClicked = false;
+                    } else {
+                        clusterClicked = false;
+                    }
+                }, 0);
+            });
+            /******************** Clear all marker from Map ********************************/
+            function clearMarkers(map) {
+                for (var i = 0; i < userMarker.length; i++) {
+                    userMarker[i].setMap(map);
+                }
+            }
+
+            /**************************************************************************************
+                 Click event for MarkerCluster. If click on MarkerCluster then it will zoom on
+                            Markercluster insted of mark on Map
+             **************************************************************************************/
+            gm.event.addListener(markerCluster, "clusterclick", function(cluster) {
+                clusterClicked = true;
+            });
+            //  map.fitBounds(bounds);
+
+
+    var numDeltas = 100;
+    var delay = 10; //milliseconds
+    var i = 1;
+    var deltaLat;
+    var deltaLng;
+    function transition(result){
+        i = 0;
+        deltaLat = (result[0] - positionArray[0])/numDeltas;
+        deltaLng = (result[1] - positionArray[1])/numDeltas;
+        moveMarker();
+    }
+
+    function moveMarker(){
+        positionArray[0] += deltaLat;
+        positionArray[1] += deltaLng;
+        var latlng = new google.maps.LatLng(positionArray[0], positionArray[1]);
+         marker.setPosition(latlng);
+        if(i==numDeltas)
+        {
+            clearMarkers(null);
+       marker = new gm.Marker({
+                    position: latlng,
+                    map: map,
+                    content: address,
+                    title:address,
+                    icon: 'images/visitorMarker.png'
+                });
+               summaryPanel.innerHTML = "Your address was successfully marked on map. If it is not correct, then mark on correct address ";
+               marker.desc = address;
+               oms.addMarker(marker);
+               userMarker.push(marker);
+               timerMessage();
+        }
+        if(i!=numDeltas){
+            i++;
+            setTimeout(moveMarker, delay);
+        }
+    }
+
+        };
     </script>
 </head>
 
@@ -164,10 +348,8 @@
            $raj= new DatabaseConnection();
          $query = "SELECT * FROM VISITOR";
          $result= $raj->returnQuery($query);
-
          $encodedString = "";
          $x= 0;
-
          while ($row = $result->fetch_array()) {
          if ($x == 0) {
          $separator = "";
@@ -175,62 +357,56 @@
          $separator = "END";
          }
          $encodedString = $encodedString . $separator .
-         $row[0]." ".$row[1]." ".$row[2]." ".$row[3]." ".$row[4]." ".$row[5].
-         "ZIPCODE".$row[13]."ZIPCODE".$row[14];;
-         $x = $x + 1;
-         }
-         $encodedString = $encodedString."END";
-         // Retrive states that Dr. Smith provided 
-          $query = "SELECT * FROM STATE";
-         $result= $raj->returnQuery($query);
-         $x= 0;
-
-         while ($row = $result->fetch_array()) {
-         if ($x == 0) {
-         $separator = "";
-         } else {
-         $separator = "END";
-         }
-         $encodedString = $encodedString . $separator .
-         $row[0].
-         "ZIPCODE".$row[1]."ZIPCODE".$row[2].
+         $row[1]." ".$row[2]." ".$row[3]." ".$row[4]." ".$row[5]." ".$row[6].
+         "ZIPCODE".$row[14]."ZIPCODE".$row[15];;
          $x = $x + 1;
          }
          ?>
             <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString;?>" />
     </div>
+    <div class="scroll-left">
+        <h1 align="center">WELCOME TO THE MONROE-WEST MONROE CONVENTION AND VISITORS BUREAU</h1>
+    </div>
     
-    <h1 align="center">Welcome to Monroe West-Monroe  Convention and Vistor Bureau </h1>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNOpboPQgboMUStdCcaODSa-l0b7UcfUU&callback=initMap"></script>
+    <script src="js/markerclusterer.js"></script>
     <div id="map_canvas"></div>
+    <div id="Output"></div>
+    
     
     <div class="form-group">
-        
-        
-
-            <span id="locate_place">
-                <input id="address" type="textbox" placeholder="Enter Zip, City or State" value="" required autofocus>
-                <input id="addressSubmit" type="button" value="ENTER">
-            </span>
-            <span id="manual_pin">
-                <input id="marker" type="textbox" placeholder="Enter Zip, City or State" value="" required autofocus>
-                <input id="markerSubmit" type="button" value="PIN MARK">
+    
+            <!-- Add location -->
+            <span id="Provide Location">
+                <input id="address" name ="address" class="textbox" placeholder="Provide Your Location" value="">
+                <button id="markerSubmit" class="btn btn-info btn-lg"> PIN </button>
             </span>
             
-            <!-- Register button -->
-            <a href="Registration.php#overlay" class="button">REGISTER</a>
+            <!-- Registration Button -->
+            <span id="Registration Button">
+                <button id="submit" type="submit" class="btn btn-warning btn-lg">Registration Button</button>
+            </span>
             
-            <!--Zoom In button-->
-            <button id= zoomIn class="button">ZOOM IN</button>
-        
-            <!--Zoom Out button-->
-            <button id= zoomOut class="button">ZOOM OUT</button>
+            <!-- Admin link -->
+            <span id="Admin Link">
+                <a href="admin.php" class="btn btn-info" role="button">Admin Login</a>
+            </span>
             
-            <!--Admin page link-->
-            <a href="adminpage.php" class="button">ADMIN</a>
+            <!-- Zoom In -->
+            <span id="Zoom In">
+                <button class="btn btn-info btn-lg" id="zoomIn">Zoom In</button>
+                    <!--<span class="glyphicon glyphicon-zoom-in"></span> --> 
+            </span>
+            
+            <!-- Zoom Out -->
+            <span id="Zoom Out">
+                <button class="btn btn-info btn-lg" id="zoomOut"> Zoom Out</button>
+            </span>
 
         
     </div>
+    
+    
+    
 </body>
 
 </html>
