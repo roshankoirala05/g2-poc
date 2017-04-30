@@ -1,13 +1,12 @@
 <?php
+
 session_start();
 $visitorId =  $_GET['id'];
-if(! (isset($_SESSION['name']))){
-header ('location:adminpage.php');
-}
+
 ?>
 <html>
     <head>
-
+        
         <title>Visitor Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,31 +19,35 @@ header ('location:adminpage.php');
 
 </head>
 <body>
-
-
-
+    
+    
+    
     <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-
+    
     <ul class="nav navbar-nav">
-
-      <li class="active"><a href="visitor.php?id=<?php echo $visitorId;?>">View</a></li>
+      <li class ="active" ><a href="admin.php">Home</a></li>
+      <li><a href="visitor.php?id=<?php echo $visitorId;?>">View</a></li>
       <li><a href="#">Edit</a></li>
     </ul>
   </div>
-</nav>
+</nav> 
 <div class = "container" >
-<?php
+<?php 
+
 include 'DatabaseConnection.php';
 $conn= new DatabaseConnection();
+
 $query1 = "SELECT * FROM VISITOR WHERE id =".$visitorId;
+
 $result= $conn->returnQuery($query1);
 if ($result->num_rows > 0) {
+
     while($row = $result->fetch_assoc())
     {
        $id = $row["id"];
        $fname = $row["Fname"];
-       $lname= $row["Lname"];
+       $lname= $row["Lname"];  
        $city = $row["City"];
        $state = $row["State"];
        $country = $row["Country"];
@@ -55,9 +58,10 @@ if ($result->num_rows > 0) {
        $hear = $row["Hear"];
        $hotel = $row["Hotel"];
        $email = $row["Email"];
+       
 
     }
-
+ 
  }
 ?>
 
@@ -551,13 +555,13 @@ if ($result->num_rows > 0) {
                             <button type="submit" class="btn btn-success btn-lg">Save and Return
                             </button>
                         </div>
-
+                        
                     </div>
                 </fieldset>
             </form>
-
-
-
+ 
+ 
+ 
 </div>
 </body>
 </html>

@@ -1,19 +1,21 @@
 <?php
-include('session.php');
+
+session_start();
+if(! (isset($_SESSION['name']))){
+header ('location:adminpage.php');
+}
 ?>
-<!DOCTYPE html>
 <html>
-<head>
-<title>Admin Page</title>
+    <head>
+      <title>Admin Page</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link href="css/admin.css" rel="stylesheet">
-<!--<link href="css/style.css" rel="stylesheet" type="text/css"> -->
-
-<script>
+        
+      <script>
          var state="";
         
         function show(){
@@ -35,12 +37,13 @@ include('session.php');
               }
            }
       </script>
-</head>
-<body>
- <div class="container"> 
-        <h1>Welcome <?php  echo $login_session;?></h1>
+    </head>
+    
+    <body>
+    <div class="container"> 
+        <h1>Welcome <?php  echo $_SESSION['name'];?></h1>
         
-        <a href = "logout.php"><button class="btn btn-danger btn-md">Log Out</button></a>
+        <a href = "adminpage.php"><button class="btn btn-danger btn-md">Log Out</button></a>
         
         <h3>Type one or more filters !</h3>
 
@@ -116,7 +119,7 @@ include('session.php');
         <br>
 
  <?php
-
+include 'DatabaseConnection.php';
 $conn= new DatabaseConnection();
 $query = "SELECT * FROM VISITOR";
 
@@ -260,5 +263,5 @@ else{
 <a href = "Report.php"><button class="btn btn-primary btn-lg">Generate Report</button></a>
   <br><br> <br>    
     </div>
-</body>
+        </body>
 </html>

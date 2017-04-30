@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $visitorId =  $_GET['id'];
 if(! (isset($_SESSION['name']))){
@@ -18,7 +19,11 @@ $howdidyouhear=$_POST["HowDidYouHear"];
 $didyoustay=$_POST["DidYouStay"];
 $email=$_POST["email"];
 
+
+
+          
 $query1 = "UPDATE VISITOR SET Fname='$firstname' , Lname='$lastname', City='$city', State='$state',  Zipcode='$zipcode', Country='$country', Party='$noinparty', Purpose='$travelingfor', Hear='$howdidyouhear', Hotel='$didyoustay', Email='$email' WHERE id=$visitorId";
  $conn->insertDatabase($query1);
+
 header('location:visitor.php?id='.$visitorId);
 ?>
