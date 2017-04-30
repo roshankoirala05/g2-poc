@@ -117,6 +117,101 @@ include('session.php');
 
  <?php
 $conn= new DatabaseConnection();
+
+
+
+$query = "SELECT COUNT(*) as count FROM (SELECT * FROM VISITOR";
+$city = trim($_POST["city"]);
+$state = trim($_POST["state"]);
+$zip = trim($_POST["zip"]);
+$from = trim($_POST["from"]);
+$to =  trim($_POST["to"]);
+$date= trim($from.$to); 
+$filter="";
+if( $city!="" || $state !="" || $zip !="" || $date!="" ){
+    $query.=" WHERE ";
+    
+    if ( $city!=""){
+        $query.="City = '".$city."'";
+        $filter.=" from ".ucfirst($city);
+    }
+    if($state !=""){
+        
+        
+          $stateString;  
+          
+          $stateArray = explode(" ", $state);
+        
+        foreach ($stateArray as $value) {
+            $stateString.="'".$value."',";
+         } 
+        
+        $stateString = substr($stateString, 0, -1);     
+        
+        
+        
+        
+        
+        
+        if (strpos($query,"=")===false){
+            $query.=" State in (".$stateString.")";
+        }
+        else {
+                 
+            $query.=" AND State in (".$stateString.")";
+        }
+        if ($city!="")
+            $filter.=", ".$state;
+        else
+            $filter.=" ".$state;
+        
+    }
+    
+    if($zip !=""){
+        if (strpos($query,"=")===false){
+            $query.=" Zipcode = '".$zip."'";
+        }
+        else {
+                 
+            $query.=" AND Zipcode = '".$zip."'";
+        }
+        if($city!=""||$state!="")
+            $filter.=" ".$zip;
+        else
+            $filter.=" from ".$zip;
+        
+    }
+    if($date!=""){
+        $convertedFrom = new DateTime($from);
+        $date1 = $convertedFrom->getTimestamp();
+        $convertedTo = new DateTime($to);
+        $date2 = $convertedTo->getTimestamp();
+        if (strpos($query,"=")===false){
+            $query.=" Time > ".$date1." AND Time < ".$date2;
+        }
+        else {
+                 
+            $query.=" AND Time > ".$date1." AND Time < ".$date2;
+        }
+        $filter.=" between ".$from." and ".$to;
+        
+    }
+    $query.=")AS T";
+    
+    $result= $conn->returnQuery($query);
+    
+    if($result->num_rows > 0){
+        $row = $result->fetch_assoc();
+        echo "<h3>Summary: ";
+        echo $row['count']." people visited ".$filter;
+        echo "</h3>";
+    }
+}
+
+
+
+
+
 $query = "SELECT * FROM VISITOR";
 $city = trim($_POST["city"]);
 $state = trim($_POST["state"]);
