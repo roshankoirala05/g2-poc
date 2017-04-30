@@ -38,12 +38,12 @@ include('session.php');
 </head>
 <body>
  <div class="container"> 
-        <h1>Welcome <?php  echo $login_session;?></h1>
+        <h1 align="center">Welcome <?php  echo $login_session;?></h1>
         
+        <div id ="toRight">
         <a href = "logout.php"><button class="btn btn-danger btn-md">Log Out</button></a>
+        </div>
         
-        <h3>Type one or more filters !</h3>
-
         <br> <br>
         <div class = "well">
             <form method ="post" action = "admin.php">
@@ -256,8 +256,9 @@ else{
  ?>
 
 
-
+<div id = "toRight">
 <a href = "Report.php"><button class="btn btn-primary btn-lg">Generate Report</button></a>
+</div>
   <br><br> <br>    
     </div>
 </body>

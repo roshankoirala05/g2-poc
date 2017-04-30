@@ -15,7 +15,7 @@ class DatabaseConnection
     {
 
       $this->localhost = "127.0.0.1";
-      $this ->username = "roshankoirala05";
+      $this ->username = "combonary";
       $this ->password = "";
       $this ->dbname = "REGISTRATION";
       $this->port = 3306;
