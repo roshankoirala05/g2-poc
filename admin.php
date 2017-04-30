@@ -40,10 +40,9 @@ include('session.php');
  <div class="container"> 
         <h1>Welcome <?php  echo $login_session;?></h1>
         
-        <a href = "logout.php"><button class="btn btn-danger btn-md">Log Out</button></a>
+        <a href = "logout.php"><button id = logoutBtn class="btn btn-danger btn-md">Log Out</button></a>
         
         <h3>Type one or more filters !</h3>
-
         <br> <br>
         <div class = "well">
             <form method ="post" action = "admin.php">
@@ -119,7 +118,7 @@ include('session.php');
 $conn= new DatabaseConnection();
 
 
-
+//Summary query
 $query = "SELECT COUNT(*) as count FROM (SELECT * FROM VISITOR";
 $city = trim($_POST["city"]);
 $state = trim($_POST["state"]);
@@ -193,8 +192,12 @@ if( $city!="" || $state !="" || $zip !="" || $date!="" ){
                  
             $query.=" AND Time > ".$date1." AND Time < ".$date2;
         }
-        $filter.=" between ".$from." and ".$to;
-        
+        if($from != "" && $to != "")
+            $filter.=" between ".$from." and ".$to;
+        else if ($from != "")
+            $filter.=" between ".$from." and now";
+        else
+            $filter.=" up until ".$to;
     }
     $query.=")AS T";
     
@@ -203,15 +206,19 @@ if( $city!="" || $state !="" || $zip !="" || $date!="" ){
     if($result->num_rows > 0){
         $row = $result->fetch_assoc();
         echo "<h3>Summary: ";
-        echo $row['count']." people visited ".$filter;
+        echo $row['count']." visitors ".$filter.".";
         echo "</h3>";
     }
+}
+else{
+        echo "<h3>";
+        echo "The 30 most recent visitors are listed below.";
+        echo "</h3>";
 }
 
 
 
-
-
+//Display results query
 $query = "SELECT * FROM VISITOR";
 $city = trim($_POST["city"]);
 $state = trim($_POST["state"]);

@@ -1,38 +1,16 @@
-body,
-html {
+/*html,body {
+    background-size:cover;
     background-repeat: repeat;
     background-image: linear-gradient(to bottom, #207cca 0%,#7db9e8 0%,#207cca 63%,#1e5799 100%);
-}
-
-body{
-  margin:auto;
-  padding:3em;
-}
-
-
-
-.center{
-  width:100%;
-  margin: auto;
-}
+    background-attachment: fixed;
+}*/
 
 #state{
+  left:10;
   height:150;
   width:200px;
   display: inline;
   position: relative;
-}
-
-#logoutBtn{
-   position:fixed;
-   right:10px;
-   top:5px;
-}
-   
-#toMapBtn{
-  position:fixed;
-  right:90px;
-  top:5px;
 }
 
 #ScrollCB{
@@ -45,9 +23,9 @@ body{
   z-index:1;
   background-color: white;
   border: 1px solid gray;
-   
-body,
-html {
-  background: linear-gradient(to bottom, #207cca 0%,#7db9e8 0%,#207cca 63%,#1e5799 100%);
 }
+#logoutBtn{
+   position:absolute;
+   right:60px;
+   top:25px;
 }
