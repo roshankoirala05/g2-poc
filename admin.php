@@ -1,3 +1,4 @@
+
 <?php
 include('session.php');
 ?>
@@ -40,10 +41,9 @@ include('session.php');
  <div class="container"> 
         <h1>Welcome <?php  echo $login_session;?></h1>
         
-        <a href = "logout.php"><button class="btn btn-danger btn-md">Log Out</button></a>
+        <a href = "logout.php"><button id = logoutBtn class="btn btn-danger btn-md">Log Out</button></a>
         
         <h3>Type one or more filters !</h3>
-
         <br> <br>
         <div class = "well">
             <form method ="post" action = "admin.php">
@@ -116,19 +116,112 @@ include('session.php');
         <br>
 
  <?php
-
 $conn= new DatabaseConnection();
-$query = "SELECT * FROM VISITOR";
-
+//Summary query
+$query = "SELECT COUNT(*) as count FROM (SELECT * FROM VISITOR";
 $city = trim($_POST["city"]);
 $state = trim($_POST["state"]);
 $zip = trim($_POST["zip"]);
 $from = trim($_POST["from"]);
 $to =  trim($_POST["to"]);
 $date= trim($from.$to); 
-
-
-
+$filter="";
+if( $city!="" || $state !="" || $zip !="" || $date!="" ){
+    $query.=" WHERE ";
+    
+    if ( $city!=""){
+        $query.="City = '".$city."'";
+        $filter.=" from ".ucfirst($city);
+    }
+    if($state !=""){
+        
+        
+          $stateString;  
+          
+          $stateArray = explode(" ", $state);
+        
+        foreach ($stateArray as $value) {
+            $stateString.="'".$value."',";
+         } 
+        
+        $stateString = substr($stateString, 0, -1);     
+        
+        
+        
+        
+        
+        
+        if (strpos($query,"=")===false){
+            $query.=" State in (".$stateString.")";
+        }
+        else {
+                 
+            $query.=" AND State in (".$stateString.")";
+        }
+        if ($city!="")
+            $filter.=", ".$state;
+        else
+            $filter.=" ".$state;
+        
+    }
+    
+    if($zip !=""){
+        if (strpos($query,"=")===false){
+            $query.=" Zipcode = '".$zip."'";
+        }
+        else {
+                 
+            $query.=" AND Zipcode = '".$zip."'";
+        }
+        if($city!=""||$state!="")
+            $filter.=" ".$zip;
+        else
+            $filter.=" from ".$zip;
+        
+    }
+    if($date!=""){
+        $convertedFrom = new DateTime($from);
+        $date1 = $convertedFrom->getTimestamp();
+        $convertedTo = new DateTime($to);
+        $date2 = $convertedTo->getTimestamp();
+        if (strpos($query,"=")===false){
+            $query.=" Time > ".$date1." AND Time < ".$date2;
+        }
+        else {
+                 
+            $query.=" AND Time > ".$date1." AND Time < ".$date2;
+        }
+        if($from != "" && $to != "")
+            $filter.=" between ".$from." and ".$to;
+        else if ($from != "")
+            $filter.=" between ".$from." and now";
+        else
+            $filter.=" up until ".$to;
+    }
+    $query.=")AS T";
+    
+    $result= $conn->returnQuery($query);
+    
+    if($result->num_rows > 0){
+        $row = $result->fetch_assoc();
+        echo "<h3>Summary: ";
+        echo $row['count']." visitors ".$filter.".";
+        echo "</h3>";
+    }
+}
+else{
+        echo "<h3>";
+        echo "The 30 most recent visitors are listed below.";
+        echo "</h3>";
+}
+//Display results query
+$query = "SELECT * FROM VISITOR";
+$city = trim($_POST["city"]);
+$state = trim($_POST["state"]);
+$zip = trim($_POST["zip"]);
+$from = trim($_POST["from"]);
+$to =  trim($_POST["to"]);
+$date= trim($from.$to); 
 if( $city!="" || $state !="" || $zip !="" || $date!="" ){
     $query.=" WHERE ";
     
@@ -177,7 +270,6 @@ if( $city!="" || $state !="" || $zip !="" || $date!="" ){
     if($date!=""){
         $convertedFrom = new DateTime($from);
         $date1 = $convertedFrom->getTimestamp();
-
         $convertedTo = new DateTime($to);
         $date2 = $convertedTo->getTimestamp();
         if (strpos($query,"=")===false){
@@ -196,18 +288,14 @@ if( $city!="" || $state !="" || $zip !="" || $date!="" ){
 else{
     $query.=" ORDER BY Time DESC LIMIT 30 ";
 }
-
 /**************************************************************
           Retriving query
  **************************************************************/
-
-
-
-
  
    $result= $conn->returnQuery($query);
    echo "<br>";
    if ($result->num_rows > 0) {
+    echo "";
     echo"
     <div class='table-responsive'>
     <table class='table table-hover table-condensed'>

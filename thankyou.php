@@ -1,7 +1,8 @@
 
-<?php 
+<?php
 
 include 'DatabaseConnection.php';
+header( "refresh:7;url=index.html" );
 if (isset($_POST["finalsubmit"]) && !empty($_POST["finalsubmit"])) {
 $firstname= ucwords(strtolower($_POST["firstName"]));
 $lastname= ucwords(strtolower($_POST["lastName"]));
@@ -10,13 +11,18 @@ $state=strtoupper($_POST["stateName"]);
 $zipcode=strtoupper($_POST["zipCode"]);
 $country=strtoupper($_POST["countryName"]);
 $noinparty=$_POST["noInParty"];
+if($noinparty==0)
+{
+    $noinparty=1;
+}
 $travelingfor=$_POST["TravelingFor"];
 $howdidyouhear=$_POST["HowDidYouHear"];
 $didyoustay=$_POST["DidYouStay"];
 $email=strtolower($_POST["email"]);
 $count;
 date_default_timezone_set('America/Chicago');
-$date = time(); 
+$date = time();
+
 /*******************************************************************************************
  * Converting the Latitude and longitude for the address
  ********************************************************************************************/
@@ -53,9 +59,19 @@ $date = time();
         }
         else
         {
+             if ($firstname==null && $lastname==null)
+             {
+            $count=1;
+            $query = "INSERT INTO VISITOR (Fname,Lname,City,State,Zipcode,Country,Party,Purpose,Hear,Hotel,Email,Time,Vcount,Lat,Lng) VALUES('$firstname','$lastname', '$city','$state',
+                                                   '$zipcode','$country','$noinparty','$travelingfor','$howdidyouhear','$didyoustay','$email','$date','$count','$latitude','$longitude')";
+            $raj->insertDatabase($query);
+             }
+             else
+             {
             $count=$row["Vcount"]+1;
             $query="UPDATE VISITOR SET Vcount=$count WHERE Fname='$firstname' AND Lname='$lastname' AND  Zipcode='$zipcode' AND City='$city'";
             $raj->insertDatabase($query);
+             }
         }
 /**************************************************************************************
        Inserting Database class if we need
@@ -70,43 +86,43 @@ $date = time();
     <title>Monro-West-Monroe C&VB</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-   
+
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <style type="text/css">
-    html { 
-   
-  background: url(images/blackbayou.jpg) no-repeat center center fixed; 
+    html {
+
+  background: url(images/blackbayou.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  
+
 }
 body{
           background-size:cover;
           background:none;
       }
-      
+
      .container{
          position:relative;
          height:100%;
          width:100%;
-         
-          
-          
+
+
+
      }
       .thankyou{
-          
+
           position:absolute;
           left:120;
           bottom:120;
           color:white;
           max-width:450px;
-          
-          
-          
+
+
+
       }
       .btn-lg{
     padding: 10px 30px;
@@ -118,8 +134,8 @@ body{
 </style>
     </head>
     <body>
-        
-        
+
+
         <div class="container">
             <div class="thankyou">
             <h1>Thank You for visiting Monroe-West Monroe CVB</h1>
@@ -128,7 +144,7 @@ body{
             <a href="index.html" class="btn btn-default btn-lg">Exit</a>
             </div>
         </div>
-        
+
     </body>
-    
+
     </html>

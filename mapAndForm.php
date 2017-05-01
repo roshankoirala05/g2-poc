@@ -4,14 +4,22 @@
     <title>Monro-West-Monroe C&VB</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <!-- Address autofill plugin -->
    	<script src="js/Registration.js"></script>
+
+   	<!-- Bootstrap CSS -->
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
     <link rel="stylesheet" href="css/mapAndForm.css">
-    <script src="https://maps.google.com/maps/api/js?v=3.9&libraries=places&amp;sensor=false"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    
-   
+
+
+     <!-- Google Map -->
+      <script src="https://maps.google.com/maps/api/js?v=3.9&libraries=places&amp;sensor=false"></script>
+
+    <!-- Form Validation Plugin -->
+    <script type="text/javascript" src="formvalidation/jquery-1.10.2.min.js"></script>
+  <script src="js/addressAjax.js"></script>
     <script>
         window.onload = function() {
             // Initialize variables
@@ -107,9 +115,9 @@
             var address=document.getElementById("address").value;
             if (address !== ""){
             geocoder.geocode({'address': address}, function(results, status) {
-                                            if(status == google.maps.GeocoderStatus.OK) 
+                                            if(status == google.maps.GeocoderStatus.OK)
                                             {
-                                               
+
                                                 var bounds = new google.maps.LatLngBounds();
                                                 bounds.extend(results[0].geometry.location);
                                                 map.fitBounds(bounds);
@@ -120,7 +128,7 @@
                                       }
                               );
             }
-            
+
             /***********************************************************************************************
                                        Mark on the Map
              ***********************************************************************************************/
@@ -172,8 +180,8 @@
                     if (!clusterClicked) {
                         // call the function to pin on map
                         getReverseGeocodingData(event.latLng);
-                        
-                        // To execute the show hide effect 
+
+                        // To execute the show hide effect
                         showhide();
                         clusterClicked = false;
                     } else {
@@ -193,6 +201,7 @@
                             Markercluster insted of mark on Map
              **************************************************************************************/
             gm.event.addListener(markerCluster, "clusterclick", function(cluster) {
+                 cluster.stopPropagation();
                 clusterClicked = true;
             });
 
@@ -305,7 +314,7 @@
                 oms.addMarker(marker);
                 userMarker.push(marker);
             }
-            
+
             /******************************* Zoom In and Zoom Out*********************************/
             // Setup the click event listener - zoomIn
             gm.event.addDomListener(document.getElementById('plus'), 'click', function() {
@@ -316,7 +325,7 @@
                 map.setZoom(map.getZoom() - 1);
             });
             /********************************************************************************/
-            
+
             function showhide()
             {
                 $('#introtext').hide();
@@ -325,12 +334,12 @@
             }
         };
     </script>
-    
-    
+
+
 </head>
 
 <body>
-    
+
         <?php
          include 'DatabaseConnection.php';
            $raj= new DatabaseConnection();
@@ -351,41 +360,41 @@
          }
          ?>
         <input style="display:none" type="hidden" id="address" name="address" class="textbox" placeholder="Provide Your Location" value="<?php echo $_POST["address"];?>" >
-        <input style="display:none" type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString;?>" />
-     
-        
+        <input style="display:none" type="hidden" id="encodedString" name="encodedString"  value="<?php echo $encodedString;?>" />
+
+
         <div class="container-fluid">
-            
+
             <div class = "row " id="mapandinfo" >
                 <div class = "col-lg-4"  id="thankyou">
-                    <div id= "logo"> 
+                    <div id= "logo">
                         <img src="images/mwmcc.JPG">
                     </div>
-                    
+
                     <div id="text">
                         <div class="welcomeText" id="introtext">
-                            <h2>Click your location on the map to pin.</h2>
+                            <h2> <span class="glyphicon glyphicon-map-marker mapicon"></span>Pin your location on the map.</h2>
                         </div>
-                        
+
                         <div class= "welcomeText"  id="addresstext" style="display:none" >
-                            <h3>Your address : </h3> <h2><div id = "addressRefine" style="display:none;"></div> <div class="well" id="Output"></div> </h2>
+                            <h3>Your address : </h3> <h2><div id = "addressRefine" style="display:none;"></div><span class="glyphicon glyphicon-map-marker mapicon"></span><div class="well" id="Output"></div> </h2>
                             <br><br><br>
                             <h3>Reclick or drag the pin to change</h3>
-                            <h3>Hit Next to confirm</h3>
-                            <button style="float:right"class="btn btn-primary btn-lg" id="next">Next</button>
+                            <h3><span class="glyphicon glyphicon-forward"></span>Hit Next to confirm</h3>
+                            <button style="float:right"class="btn btn-primary btn-lg" id="next" onclick="myFunction()">Next</button>
                         </div>
-                        
+
                         <div class= "welcomeText" id="greetingtext" style="display:none">
                             <h3 style="">Thank You for visiting Monroe, Lousiana.</h3>
-                            
-                            <h2><div class="well">You are the 10th visitor from Foobar Island.</div></h2>
+
+                            <h3 style="text-align:center; font-size:30px;"><span class="glyphicon glyphicon-envelope mapicon"></span><div class="well" id="well"></div></h3>
                             <br><br>
-                            <h3>Please help us provide better service by answering few questions.</h4>
+                            <h3>Please help us provide better service by answering few questions.</h3>
                             <form action="thankyou.php" method="post">
                                 <div class="form-group" style="display:none">
-                                   <input name="zipCode" id="zipCode" class="form-control" type="text">
-                                   <input name="cityName" id="cityName"  class="form-control" type="text">
-                                    <select name="stateName" id="stateName" class="form-control selectpicker" type="selectBox">
+                                   <input name="zipCode" id="zip" class="form-control" type="text">
+                                   <input name="cityName" id="city"  class="form-control" type="text">
+                                    <select name="stateName" id="state" class="form-control selectpicker" type="selectBox">
                                     <option value="">Chose a State</option>
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
@@ -439,25 +448,25 @@
                                     <option value="WI">Wisconsin</option>
                                     <option value="WY">Wyoming</option>
                                 </select>
-                               <input name="countryName" id="countryName" class="form-control" type="text">
+                               <input name="countryName" id="country" class="form-control" type="text">
                             </div>
-                           
+
                            <button type="submit" id="no" class="btn btn-danger btn-lg" name="finalsubmit"  value="clicke">No</button>
                            <a href="#threeQuestions" style="float:right" id="yes" class="btn btn-primary btn-lg">Yes</a>
                             </form>
-                             
+
                         </div>
                     </div>
                 </div>
-                
-                
+
+
                 <div class = "col-lg-8"  id="map" >
-                  <div id="map_canvas"></div> 
+                  <div id="map_canvas"></div>
                   <div id ="zoomers" ><button id="plus">+</button><br><button id="minus">-</button></div>
                 </div>
             </div>
-    
-   
+
+
     <form action = "thankyou.php" method = "post" id="contact_form" class="form-horizontal">
        <div class = "question eachSection" id="threeQuestions"  style="display:none">
           <div class="form-group">
@@ -469,7 +478,7 @@
               <label class="radio-inline"><input type="radio" name="TravelingFor" value="Others">Others</label>
               </div>
           </div>
-          
+
           <div class="form-group">
               <legend>How did you hear about us?</legend>
               <div class="right-inner-addon">
@@ -478,7 +487,7 @@
               <label class="radio-inline"><input type="radio" name="HowDidYouHear" value="Others">Others</label>
               </div>
           </div>
-         
+
          <div class="form-group">
               <legend>Are you going to stay in Monroe-West Monroe Hotel?</legend>
               <div class="right-inner-addon">
@@ -548,21 +557,21 @@
          </div>
          <a href="#nameAndEmail" id='linkToNameAndEmail' class="btn btn-primary btn-lg">Next</a>
        </div>
-       
+
        <div class="question eachSection" id='nameAndEmail' style="display:none">
-          <div class="row form-group">
-             <div class="col-xs-4 ">
+
+                        <div class=" row form-group">
+             <div class="col-sm-4 ">
                  <div class="right-inner-addon">
                 <input class="form-control input-lg" name="firstName" placeholder="First name" type="text">
               </div>
               </div>
-              <div class="col-xs-4">
+              <div class="col-sm-4">
                    <div class="right-inner-addon">
                 <input class="form-control input-lg"  name="lastName" type="text" placeholder="Last name">
               </div>
               </div>
               </div>
-           
           <div class="row form-group" >
                 <div class="col-lg-8">
                      <div class="right-inner-addon">
@@ -570,13 +579,13 @@
                 </div>
                 </div>
            </div>
-           
+
           <div class="row form-group">
                <div class="col-lg-8">
-                  <input type="checkbox" name="emailYes" id="emailYes" onclick="ShowHideDiv(this)"><p style="font-size:16px;display:inline"> I would like to receive monthly emails about Monroe-West Monroe events. </p>
+                  <input type="checkbox" name="emailYes" id="emailYes" onclick="ShowHideDiv(this)"><p style="font-size:28px;display:inline"> I would like to receive monthly emails about Monroe-West Monroe events. </p>
                </div>
            </div>
-                        
+
            <div class="row form-group" id="emailAsk" style="display:none">
                 <div class="col-lg-8">
                      <div class="right-inner-addon">
@@ -584,8 +593,8 @@
                 </div>
                 </div>
            </div>
-            
-            <div id="submitbutton">  
+
+            <div id="submitbutton">
            <button type="submit" id ="finalsubmit" class="btn btn-success btn-lg" name="finalsubmit"  value="clicke">Submit</button>
            </div>
         </div>
@@ -603,7 +612,7 @@
                 if (address.substring(0, 13) == "Unnamed Road,") {
                     address = address.substring(13);
                 }
-            
+
             var city = '';
             var state = '';
             var country = '';
@@ -619,37 +628,37 @@
                         $.each(types, function(index, type) {
                             if (type == 'locality') {
                                 city = component.long_name;
-                               
+
                             }
                             if (type == 'administrative_area_level_1') {
                                 state = component.short_name;
-                                
+
                             }
                             if (type == 'postal_code') {
                                 zipcode = component.short_name;
-                               
+
                             }
                             if (type == 'country') {
                                 country = component.short_name;
-                                
+
                             }
-                            
-                           
+
+
                         });
                     });
-                    
+
                     /*  To Generate better Output of the address ( City, State Zip, Country */
-                    
+
                      if (city!== "")
                      {
                          refineaddress=city+", ";
                      }
-                     
+
                       if (state!== "")
                      {
                          refineaddress+=state+" ";
                      }
-                     
+
                       if (zipcode!== "")
                      {
                          refineaddress+=zipcode+", ";
@@ -660,18 +669,18 @@
                      }
                     document.getElementById("Output").innerHTML=refineaddress;
                     $('#cityName').val(city);
-                    
+                     $('#city').val(city);
 
                     $('#zipCode').val(zipcode);
-                   
-                    
+                    $('#zip').val(zipcode);
+
 
                     $('#stateName').val(state);
-                   
-                    
+                      $('#state').val(state);
+
                     $('#countryName').val(country);
-                   
-                    
+                     $('#country').val(country);
+
 
              });
             }
@@ -684,35 +693,28 @@
             emailAsk.style.display = emailYes.checked ? "block" : "none";
         }
  </script>
- <script>
- /*
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-});
-*/
-</script>
+
+
     <!-- Map and Auto fill -->
     <script src="js/jquery.min.js"></script>
     <script src="js/showhide.js"></script>
     <script src="js/markerclusterer.js"></script>
     <script src="js/oms.min.js"></script>
-    
+
     <!-- Pop Over effect -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>
-    
-    
-    
+
+
+
  <!-- Slide Effect-->
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <script src="https://ui.jquery.com/latest/ui/effects.core.js"></script>
   <script src="https://ui.jquery.com/latest/ui/effects.slide.js"></script>
-  
+
   <!-- Form Validation Js -->
-    <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
-     <script src='js/bootstrapvalidator.min.js'></script>
-     
-     
-     
-    <script src="js/index.js"></script>
+   <script type="text/javascript" src="formvalidation/bootstrap.min.js"></script>
+    <script type="text/javascript" src="formvalidation/bootstrapValidator.js"></script>
+   <script src="js/index.js"></script>
+
 </html>

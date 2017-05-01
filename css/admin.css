@@ -1,6 +1,20 @@
+/*html,body {
+    background-size:cover;
+    background-repeat: repeat;
+    background-image: linear-gradient(to bottom, #207cca 0%,#7db9e8 0%,#207cca 63%,#1e5799 100%);
+    background-attachment: fixed;
+}*/
 
+.html, body{
+    background: #d9d9d9; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#f2f2f2, #ffffff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f2f2f2, #ffffff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f2f2f2, #ffffff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f2f2f2, #ffffff); /* Standard syntax (must be last) */
+}
 
 #state{
+  left:10;
   height:150;
   width:200px;
   display: inline;
@@ -17,8 +31,18 @@
   z-index:1;
   background-color: white;
   border: 1px solid gray;
-   
-
+}
+#logoutBtn{
+   position:absolute;
+   right:60px;
+   top:25px;
 }
 
+.well{
+  background-color: white;
+  
+}
 
+table{
+  background-color: white;
+}
