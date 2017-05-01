@@ -52,6 +52,7 @@ include('session.php');
  <div class="container"> 
  <div class="well">
         <h1>Welcome <?php  echo $login_session;?></h1>
+        <a href="createAccount.php">Add Admin</a>
         
         <a id = "logout" href = "logout.php"><button id = logoutBtn class="btn btn-danger btn-md">Log Out</button></a>
         </div>
@@ -125,13 +126,15 @@ include('session.php');
         
             </form>
         </div>
+        
+        <a href = "addvisitor.php">Add visitor</a>
         <br>
 
  <?php
 $conn= new DatabaseConnection();
 //Summary query
 $query = "SELECT COUNT(*) as count FROM (SELECT * FROM VISITOR";
-$city = trim($_POST["city"]);
+$city = trim(ucwords(strtolower($_POST["city"])));
 $state = trim($_POST["state"]);
 $zip = trim($_POST["zip"]);
 $from = trim($_POST["from"]);
@@ -316,6 +319,12 @@ else{
     <th>Last Name </th>
     <th>City </th>
     <th>State </th>
+     <th>Zipcode </th>
+    <th>Country </th>
+    <th>Party </th>
+    <th>Purpose </th>
+    <th>Hear </th>
+    <th>Hotel</th>
     <th>Email </th>
     <th>Submission Date </th>
     </tr>
@@ -326,13 +335,19 @@ else{
     while($row = $result->fetch_assoc())
     {
       // echo "<a href='visitor.php?id={$row["id"]}'>" . $row["Fname"]. " ".$row["Lname"]." ".$row["City"]." ".$row["State"]." ".$row["Country"]." ".$row["Zipcode"]." ".$row["Party"]." ".date('d F Y H:i:s', $row["Time"])." ".$row["Purpose"]." ".$row["Hear"]." ".$row["Hotel"]." ".$row["Email"]."</a><br>";
-     $csvdata[]=array($row["Fname"],$row["Lname"],$row["City"],$row["State"],$row["Email"],date('d F Y H:i:s', $row["Time"])) ;
+     $csvdata[]=array($row["Fname"],$row["Lname"],$row["City"],$row["State"],$row["Zipcode"],$row["Country"],$row["Party"],$row["Purpose"],$row["Hear"],$row["Hotel"],$row["Email"],date('d F Y H:i:s', $row["Time"])) ;
     echo"
     <tr>
     <td><a href='visitor.php?id={$row["id"]}'>{$row["Fname"]}</a></td>
     <td>{$row["Lname"]}</td>
     <td>{$row["City"]}</td>
     <td>{$row["State"]}</td>
+     <td>{$row["Zipcode"]}</td>
+    <td>{$row["Country"]}</td>
+    <td>{$row["Party"]}</td>
+     <td>{$row["Purpose"]}</td>
+    <td>{$row["Hear"]}</td>
+    <td>{$row["Hotel"]}</td>
     <td>{$row["Email"]}</td>
     
     <td>".date('d F Y H:i:s', $row["Time"])."</td>
@@ -361,9 +376,12 @@ else{
     
     </div>
     
-    <div class="foot">
+    
+</body>
+<footer>
+<div class="foot">
         <p>&copy;2017 Monroe West Monroe Visitor Center</p>
         
-    </div>
-</body>
+  </div>
+  </footer>
 </html>

@@ -1,5 +1,5 @@
 /*----------------------------------------------
-css settings for HTML div exactCenter 
+css settings for createAccount.html
 ------------------------------------------------*/
 
 #main{
@@ -34,7 +34,7 @@ margin-bottom: 30px;
 }
 
 #Create{
-width:480px;
+width:560px;
 float: left;
 border-radius: 10px;
 font-family:raleway;
@@ -67,7 +67,7 @@ background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blac
 
 input[type=name]
 {
-  padding:8px;
+  padding:7px;
   font-size: 16px;
   margin-right: 15px;
   text-shadow: 0 1px black;
