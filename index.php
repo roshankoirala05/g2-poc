@@ -10,18 +10,18 @@ header("Location: admin.php");
 <head>
     <title>MWMCVB</title>
     <meta name="robots" content="noindex, nofollow" />
-       
+
 <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="js/showhide1.js"></script>
-	
+	<script src="js/showhideadmin.js"></script>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <script src="https://ui.jquery.com/latest/ui/effects.core.js"></script>
   <script src="https://ui.jquery.com/latest/ui/effects.slide.js"></script>
  	<script src="js/setup.js"></script>
-</head> 
-   
-<body> 
+</head>
+
+<body>
 <div id="main">
 <div id="login">
 <h2>Admin Login</h2>
@@ -34,9 +34,9 @@ header("Location: admin.php");
 
 		  <p id="one">Forgot Password?<a href="#" id="setup" class="setup">Setup Here</a></p>
 
-		</form>	
+		</form>
 	 </div>
-	 
+
 	 <!-- Create div second for Setup password Form-->
 	 <div id="Create">
 	   <h2>Forgot Password</h2>
@@ -52,10 +52,10 @@ header("Location: admin.php");
 <input type="password" name="newpassword" id="newpassword" placeholder="Enter the New Password" required/><br/>
 <input type="submit" id="setuppassword" value=" Setup Password " name="submit"/><br />
 		  <p id="two" >If you know the Password? <a href="#" id="signin" class="signin">Login Here</a></p>
-		</form>  
+		</form>
 	 </div>
-	 
-  </div> 
-  
+
+  </div>
+
 </body>
 </html>
