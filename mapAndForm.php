@@ -387,9 +387,9 @@
                         <div class= "welcomeText" id="greetingtext" style="display:none">
                             <h3 style="">Thank You for visiting Monroe, Lousiana.</h3>
 
-                            <h2><div class="well" id="well"></div></h2>
+                            <h3 style="text-align:center; font-size:30px;"><span class="glyphicon glyphicon-envelope mapicon"></span><div class="well" id="well"></div></h3>
                             <br><br>
-                            <h3>Please help us provide better service by answering few questions.</h4>
+                            <h3>Please help us provide better service by answering few questions.</h3>
                             <form action="thankyou.php" method="post">
                                 <div class="form-group" style="display:none">
                                    <input name="zipCode" id="zip" class="form-control" type="text">
