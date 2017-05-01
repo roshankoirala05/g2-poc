@@ -201,6 +201,7 @@
                             Markercluster insted of mark on Map
              **************************************************************************************/
             gm.event.addListener(markerCluster, "clusterclick", function(cluster) {
+                 cluster.stopPropagation();
                 clusterClicked = true;
             });
 
@@ -581,7 +582,7 @@
 
           <div class="row form-group">
                <div class="col-lg-8">
-                  <input type="checkbox" name="emailYes" id="emailYes" onclick="ShowHideDiv(this)"><p style="font-size:20px;display:inline"> I would like to receive monthly emails about Monroe-West Monroe events. </p>
+                  <input type="checkbox" name="emailYes" id="emailYes" onclick="ShowHideDiv(this)"><p style="font-size:28px;display:inline"> I would like to receive monthly emails about Monroe-West Monroe events. </p>
                </div>
            </div>
 
@@ -671,14 +672,14 @@
                      $('#city').val(city);
 
                     $('#zipCode').val(zipcode);
-                    $('#zip').val(city);
+                    $('#zip').val(zipcode);
 
 
                     $('#stateName').val(state);
                       $('#state').val(state);
 
                     $('#countryName').val(country);
-                     $('#country').val(state);
+                     $('#country').val(country);
 
 
              });

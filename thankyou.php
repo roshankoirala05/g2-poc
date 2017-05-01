@@ -2,6 +2,7 @@
 <?php
 
 include 'DatabaseConnection.php';
+header( "refresh:10;url=index.html" );
 if (isset($_POST["finalsubmit"]) && !empty($_POST["finalsubmit"])) {
 $firstname= ucwords(strtolower($_POST["firstName"]));
 $lastname= ucwords(strtolower($_POST["lastName"]));
@@ -10,6 +11,10 @@ $state=strtoupper($_POST["stateName"]);
 $zipcode=strtoupper($_POST["zipCode"]);
 $country=strtoupper($_POST["countryName"]);
 $noinparty=$_POST["noInParty"];
+if($noinparty==0)
+{
+    $noinparty=1;
+}
 $travelingfor=$_POST["TravelingFor"];
 $howdidyouhear=$_POST["HowDidYouHear"];
 $didyoustay=$_POST["DidYouStay"];
@@ -54,9 +59,19 @@ $date = time();
         }
         else
         {
+             if ($firstname==null && $lastname==null)
+             {
+            $count=1;
+            $query = "INSERT INTO VISITOR (Fname,Lname,City,State,Zipcode,Country,Party,Purpose,Hear,Hotel,Email,Time,Vcount,Lat,Lng) VALUES('$firstname','$lastname', '$city','$state',
+                                                   '$zipcode','$country','$noinparty','$travelingfor','$howdidyouhear','$didyoustay','$email','$date','$count','$latitude','$longitude')";
+            $raj->insertDatabase($query);
+             }
+             else
+             {
             $count=$row["Vcount"]+1;
             $query="UPDATE VISITOR SET Vcount=$count WHERE Fname='$firstname' AND Lname='$lastname' AND  Zipcode='$zipcode' AND City='$city'";
             $raj->insertDatabase($query);
+             }
         }
 /**************************************************************************************
        Inserting Database class if we need

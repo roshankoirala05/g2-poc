@@ -66,7 +66,7 @@ img {
 }
 
 legend {
-    font-size: 29px;
+    font-size: 40px;
     margin-bottom: 10px;
     border-bottom: 1px solid #d4d2d2;
 }
@@ -190,4 +190,18 @@ h3 {
 .popover {
     color: white;
     background-color: red;
+}
+
+input[type=checkbox],
+input[type=radio] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(2);
+    /* IE */
+    -moz-transform: scale(2);
+    /* FF */
+    -webkit-transform: scale(2);
+    /* Safari and Chrome */
+    -o-transform: scale(2);
+    /* Opera */
+    padding: 10px;
 }
