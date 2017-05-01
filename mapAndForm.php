@@ -29,9 +29,10 @@
              var summaryPanel = document.getElementById('addressRefine');
               summaryPanel.innerHTML = "";
                  var gm = google.maps;
+               
             /******** Initialize Map **********/
             var map = new gm.Map(document.getElementById('map_canvas'), {
-                zoom: 4,
+                zoom: 4, minZoom: 3,
                 center: {
                     lat: 39.81528751808606,
                     lng: -99.5625000167638
