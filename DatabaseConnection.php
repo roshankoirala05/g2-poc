@@ -1,5 +1,5 @@
 <?php
-/*                          Database connection class 
+/*                          Database connection class
  Whenever we need to connect database and need to execute query we simple call this class and the method
  */
 class DatabaseConnection
@@ -21,7 +21,7 @@ class DatabaseConnection
       $this->port = 3306;
       $this-> connectDatabase();
     }
-    // Connect database 
+    // Connect database
      public function connectDatabase()
      {
       $this->connection= mysqli_connect($this->localhost, $this->username, $this->password, $this->dbname, $this->port);
@@ -33,7 +33,7 @@ class DatabaseConnection
       }
     }
 
-// Insert values in Database 
+// Insert values in Database
 public function insertDatabase ($query)
 {
   mysqli_query($this->connection, $query);

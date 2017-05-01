@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
        
        $_SESSION['login_user']=$useremail; // Initializing Session
       
-        header("location: profile.php"); // Redirecting To Other Page
+        header("location: admin.php"); // Redirecting To Other Page
 } else {
     $_SESSION['messagelogin'] = "Username and Password is Invalid !!";
     header("location:index.php");
