@@ -38,13 +38,25 @@ include('session.php');
       </script>
 </head>
 <body>
+    <div class = "header">
+        <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>Monroe West Monroe Vistor Admin Site</h2>
+                
+                 </div>
+        </div>
+    </aside>
+        
+    </div>
  <div class="container"> 
+ <div class="well">
         <h1>Welcome <?php  echo $login_session;?></h1>
         
-        <a href = "logout.php"><button id = logoutBtn class="btn btn-danger btn-md">Log Out</button></a>
-        
+        <a id = "logout" href = "logout.php"><button id = logoutBtn class="btn btn-danger btn-md">Log Out</button></a>
+        </div>
         <h3>Type one or more filters !</h3>
-        <br> <br>
+        
         <div class = "well">
             <form method ="post" action = "admin.php">
                  City <input type="text" name="city" value="<?php echo $_POST["city"];?>"/>
@@ -345,8 +357,13 @@ else{
 
 
 
-<a href = "Report.php"><button class="btn btn-primary btn-lg">Generate Report</button></a>
-  <br><br> <br>    
+<a style="float:right; margin-bottom:30px" href = "Report.php"><button class="btn btn-primary btn-lg">Generate Report</button></a>
+    
+    </div>
+    
+    <div class="foot">
+        <p>&copy;2017 Monroe West Monroe Visitor Center</p>
+        
     </div>
 </body>
 </html>

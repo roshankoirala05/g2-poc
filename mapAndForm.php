@@ -555,7 +555,7 @@
                                 </select>
                <input name="countryName" id="countryName" class="form-control" type="text">
          </div>
-         <a href="#nameAndEmail" id='linkToNameAndEmail' class="btn btn-primary btn-lg">Next</a>
+         <a style = "float:right" href="#nameAndEmail" id='linkToNameAndEmail' class="btn btn-primary btn-lg">Next</a>
        </div>
 
        <div class="question eachSection" id='nameAndEmail' style="display:none">
@@ -595,7 +595,7 @@
            </div>
 
             <div id="submitbutton">
-           <button type="submit" id ="finalsubmit" class="btn btn-success btn-lg" name="finalsubmit"  value="clicke">Submit</button>
+           <button style = "float:right" type="submit" id ="finalsubmit" class="btn btn-success btn-lg" name="finalsubmit"  value="clicke">Submit</button>
            </div>
         </div>
     </form>

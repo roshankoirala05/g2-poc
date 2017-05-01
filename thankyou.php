@@ -2,7 +2,7 @@
 <?php
 
 include 'DatabaseConnection.php';
-header( "refresh:7;url=index.html" );
+header( "refresh:5;url=index.html" );
 if (isset($_POST["finalsubmit"]) && !empty($_POST["finalsubmit"])) {
 $firstname= ucwords(strtolower($_POST["firstName"]));
 $lastname= ucwords(strtolower($_POST["lastName"]));

@@ -205,4 +205,5 @@ input[type=radio] {
     -o-transform: scale(2);
     /* Opera */
     padding: 10px;
+    margin:10px;
 }
