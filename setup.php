@@ -1,8 +1,4 @@
 <?php
-/*
-Site : http:www.smarttutorials.net
-Author :muni
-*/
 include 'DatabaseConnection.php';
   $conn = new DatabaseConnection();
  if (isset($_GET['user'])) {
