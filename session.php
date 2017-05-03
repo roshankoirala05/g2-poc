@@ -1,6 +1,8 @@
+
+<!-- Session.php to create session for ADMIN -->
 <?php
-  include 'DatabaseConnection.php';
-     $conn = new DatabaseConnection();
+include 'DatabaseConnection.php';
+$conn = new DatabaseConnection();
 session_start();// Starting Session
 // Storing Session
 $user_check=$_SESSION['login_user'];

@@ -1,3 +1,8 @@
+/*
+ *  Ajax function for Graph
+ */
+
+
 $(function () {
     $.ajax({
 

@@ -1,74 +1,66 @@
-/*html,body {
-    background-size:cover;
-    background-repeat: repeat;
-    background-image: linear-gradient(to bottom, #207cca 0%,#7db9e8 0%,#207cca 63%,#1e5799 100%);
-    background-attachment: fixed;
-}*/
-
-.html, body{
-    background: #d9d9d9; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#f2f2f2, #ffffff); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#f2f2f2, #ffffff); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#f2f2f2, #ffffff); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#f2f2f2, #ffffff); /* Standard syntax (must be last) */
+.html,
+body {
+  background: #d9d9d9;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#f2f2f2, #ffffff);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#f2f2f2, #ffffff);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#f2f2f2, #ffffff);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#f2f2f2, #ffffff);
+  /* Standard syntax (must be last) */
 }
 
-#state{
-  left:10;
-  height:150;
-  width:200px;
+#state {
+  left: 10px;
+  max-width: 200px;
   display: inline;
   position: relative;
+  margin-right: 10px;
 }
 
-#ScrollCB{
-  left:10;
-  height:150;
-  width:200px;
-  overflow:auto;
-   position: absolute;
+#ScrollCB {
+  position: absolute;
+  left: 3px;
+  height: 150px;
+  width: 185px;
+  overflow: auto;
   visibility: hidden;
-  z-index:1;
+  z-index: 1;
   background-color: white;
   border: 1px solid gray;
 }
 
-
-.well{
+.well {
   background-color: white;
   position: relative;
 }
 
-#logout{
+#logout {
   position: absolute;
-  top:35px;
-  right:20px;
+  top: 35px;
+  right: 20px;
 }
 
-
-table{
+table {
   background-color: white;
 }
 
-.bg-dark{
-      background-color:#680000;
-      color: #fff;
-      padding:25px;
+#addandgenerate {
+  position: relative;
+  margin-bottom: 15px;
 }
 
-#logo{
-  max-height: 40%;
-  max-width:40%;
+#reportbutton {
+  position: absolute;
+  right: 2px;
+  top: 0px;
 }
 
-.foot{
-  background-color:#565656;
-      color:#fff;
-      
-      padding:15px;
-      text-align: center;
-  
-}
-.foot>p{
-  opacity:.5;
+#address,
+#miles {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 5px;
 }

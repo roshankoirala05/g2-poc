@@ -1,8 +1,8 @@
 $(document).ready(function () {
     $('#contact_form').bootstrapValidator({
         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-        
-       container:'popover',
+
+        container: 'popover',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok-circle',
             invalid: 'glyphicon glyphicon-remove-circle',
@@ -10,7 +10,7 @@ $(document).ready(function () {
         },
         fields: {
             firstName: {
-                 group: '.col-sm-4',
+                group: '.col-sm-4',
                 validators: {
                     stringLength: {
                         min: 1,
@@ -26,7 +26,7 @@ $(document).ready(function () {
                 }
             },
             lastName: {
-                 group: '.col-sm-4',
+                group: '.col-sm-4',
                 validators: {
                     stringLength: {
                         min: 1,
@@ -81,13 +81,10 @@ $(document).ready(function () {
                     },
                     notEmpty: {
                         message: 'Number of people with you'
-                        }
+                    }
                 }
             },
         },
-        
-        
-        
     })
-   
+
 });
