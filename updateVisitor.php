@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $visitorId =  $_GET['id'];
 if(! (isset($_SESSION['name']))){
