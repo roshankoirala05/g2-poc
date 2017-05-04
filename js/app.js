@@ -1,12 +1,7 @@
-/*
- *  Ajax function for Graph
- */
-
-
 $(function () {
     $.ajax({
 
-        url: '../chart_data.php',
+        url: 'chart_data.php',
         type: 'GET',
         success: function (data) {
             chartData = data;
